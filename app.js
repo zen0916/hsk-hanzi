@@ -25,6 +25,8 @@
   var S = {};
   try { S = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { S = {}; }
   S.cards = S.cards || {};
+  S.saved = S.saved || {}; S.saved.ex = S.saved.ex || {}; S.saved.hz = S.saved.hz || {};
+  S.exCards = S.exCards || {}; S.hzCards = S.hzCards || {};
   S.lv = LEVELS.indexOf(S.lv) >= 0 ? S.lv : 1;
   function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 
@@ -45,7 +47,15 @@
     else if (g === 1) c.box = Math.max(1, c.box);
     else c.box = Math.min(DAYS.length - 1, c.box + 1);
     c.due = g === 0 ? Date.now() : Date.now() + DAYS[c.box] * DAY - 3600000;
+    c.last = g; // 마지막 평가 (몰랐어요 0 / 헷갈려요 1 / 알아요 2) → 단어장 분류에 사용
     S.cards[w] = c; logToday("w"); save();
+  }
+  // 예문·한자 카드용 간격 반복 (store: S.exCards / S.hzCards)
+  function gradeAlt(store, id, g) {
+    var c = store[id] || { box: 0, due: 0 };
+    if (g === 0) c.box = 0; else if (g === 1) c.box = Math.max(1, c.box); else c.box = Math.min(DAYS.length - 1, c.box + 1);
+    c.due = g === 0 ? Date.now() : Date.now() + DAYS[c.box] * DAY - 3600000;
+    c.last = g; store[id] = c; logToday("w"); save();
   }
 
   // ---------- 유틸 ----------
@@ -124,6 +134,7 @@
     if (tab === "home") session ? renderCard() : quiz ? renderQuiz() : renderHome();
     else if (tab === "words") renderWords();
     else if (tab === "stats") renderStats();
+    else if (tab === "book") renderBook();
     else renderHanzi();
   }
 
@@ -199,10 +210,11 @@
     if (session.i >= session.q.length) {
       session = null;
       view.innerHTML = '<div class="panel card stack"><div class="word">很好!</div><p>이번 학습을 마쳤어요.</p><button class="btn" id="back">처음으로</button></div>';
-      $("#back").onclick = function () { renderHome(); };
+      $("#back").onclick = function () { render(); };
       return;
     }
     var x = session.q[session.i];
+    if (x.k === "ex" || x.k === "hz") return renderAltCard(x);
     var done = session.i;
     var html =
       '<div class="stack">' +
@@ -223,13 +235,13 @@
         '<button class="r0" data-g="0">몰랐어요<small>곧 다시</small></button>' +
         '<button class="r1" data-g="1">헷갈려요<small>내일</small></button>' +
         '<button class="r2" data-g="2">알아요<small>' + nextLabel(x.w) + '</small></button>' +
-        '</div><p class="note">카드를 ← 밀면 몰랐어요, → 밀면 알아요</p>';
+        '</div>';
     } else {
-      html += '<button class="btn" id="reveal">정답 보기</button><p class="note">카드를 누르거나 밀어도 정답이 보여요</p>';
+      html += '<button class="btn" id="reveal">정답 보기</button>';
     }
     view.innerHTML = html + '</div>';
     $("#say").onclick = function () { speak(x.w); };
-    $("#quit").onclick = function () { session = null; renderHome(); };
+    $("#quit").onclick = function () { session = null; render(); };
     var reveal = function () { session.open = true; if (S.set.autoSpeak) speak(x.w); renderCard(); };
     var rate = function (g) {
       grade(x.w, g);
@@ -240,26 +252,61 @@
       if (!session.open && (e.key === " " || e.key === "Enter")) { e.preventDefault(); reveal(); }
       else if (session.open && /^[123]$/.test(e.key)) rate(+e.key - 1);
     };
-    // 카드 밀기: 정답 전에는 아무 방향이나 = 정답 보기, 정답 후에는 → 알아요 / ← 몰랐어요
-    var card = $(".card"), sx = null, sy = 0;
-    card.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
-    card.addEventListener("touchmove", function (e) {
-      if (sx == null) return;
-      var dx = e.touches[0].clientX - sx;
-      if (Math.abs(dx) > Math.abs(e.touches[0].clientY - sy)) card.style.transform = "translateX(" + dx * 0.4 + "px) rotate(" + dx * 0.02 + "deg)";
-    }, { passive: true });
-    card.addEventListener("touchend", function (e) {
-      if (sx == null) return;
-      var dx = e.changedTouches[0].clientX - sx; sx = null; card.style.transform = "";
-      if (Math.abs(dx) < 70) return;
-      if (!session.open) reveal(); else rate(dx > 0 ? 2 : 0);
-    });
     if (!session.open) {
       $("#reveal").onclick = reveal;
-      card.onclick = function (e) { if (!e.target.closest("button")) reveal(); };
     } else {
       bindCharTiles(view); bindExtra(view);
       view.querySelectorAll(".rate button").forEach(function (b) { b.onclick = function () { rate(+b.dataset.g); }; });
+    }
+  }
+
+  // 저장한 예문 카드 / 외울 한자 카드
+  function rateButtons(next) {
+    return '<div class="rate sticky"><button class="r0" data-g="0">몰랐어요<small>곧 다시</small></button>' +
+      '<button class="r1" data-g="1">헷갈려요<small>내일</small></button>' +
+      '<button class="r2" data-g="2">알아요<small>' + next + '</small></button></div>';
+  }
+  function renderAltCard(it) {
+    var isEx = it.k === "ex", store = isEx ? S.exCards : S.hzCards, id = isEx ? it.w : it.c;
+    var c = store[id], next = DAYS[Math.min(DAYS.length - 1, (c ? c.box : 0) + 1)] + "일 뒤";
+    var done = session.i, front, back = "", sayText;
+    if (isEx) {
+      var e = EX[it.w] || [], x = BYW[it.w] || {};
+      sayText = e[1];
+      front = '<div class="lvtag">예문</div><div class="ex-zh big">' + esc(e[1]) + '</div>';
+      back = '<div class="ex-py">' + esc(e[3] || "") + '</div><div class="meaning sm">' + esc(e[2]) + '</div>' +
+        '<button class="chip" data-w="' + esc(it.w) + '"><span class="zh">' + esc(it.w) + '</span><span>' + esc(x.p || "") + ' · ' + esc(x.m || "") + '</span></button>';
+    } else {
+      sayText = it.c;
+      front = '<div class="lvtag">한자</div><div class="word">' + esc(it.c) + '</div>';
+      var h = H[it.c];
+      back = h ? '<div class="meaning">' + esc(h.k) + '</div><p class="mn-l">' + esc(h.m) + '</p>'
+        : '<div class="meaning">' + esc(G[it.c] || "") + '</div><p class="mn-l">' + esc(compUsedIn(it.c).slice(0, 8).join(" · ")) + ' 에 들어가는 부품</p>';
+    }
+    view.innerHTML = '<div class="stack">' +
+      '<div class="progress"><span>' + (done + 1) + ' / ' + session.q.length + '</span><div class="bar"><i style="width:' + (done / session.q.length * 100) + '%"></i></div>' +
+      '<button class="speak" id="quit">그만</button></div>' +
+      '<div class="panel card">' + front + '<button class="speak" id="say">🔊 발음 듣기</button>' +
+      (session.open ? back : '<div class="hint">' + (isEx ? '병음과 뜻을 떠올려 보세요' : '훈음과 뜻을 떠올려 보세요') + '</div>') + '</div>' +
+      (session.open ? (isEx ? '' : '<button class="btn ghost" data-c2="' + esc(it.c) + '">자세히 보기</button>') + rateButtons(next)
+        : '<button class="btn" id="reveal">정답 보기</button>') + '</div>';
+    $("#say").onclick = function () { speak(sayText); };
+    $("#quit").onclick = function () { session = null; render(); };
+    var reveal = function () { session.open = true; if (S.set.autoSpeak) speak(sayText); renderCard(); };
+    var rate = function (g) {
+      gradeAlt(store, id, g);
+      if (g === 0) session.q.push(it);
+      session.i++; session.open = false; renderCard(); window.scrollTo(0, 0);
+    };
+    cardKeys = function (e) {
+      if (!session.open && (e.key === " " || e.key === "Enter")) { e.preventDefault(); reveal(); }
+      else if (session.open && /^[123]$/.test(e.key)) rate(+e.key - 1);
+    };
+    if (!session.open) $("#reveal").onclick = reveal;
+    else {
+      view.querySelectorAll(".rate button").forEach(function (b) { b.onclick = function () { rate(+b.dataset.g); }; });
+      view.querySelectorAll("[data-w]").forEach(function (b) { b.onclick = function () { openWord(b.dataset.w); }; });
+      view.querySelectorAll("[data-c2]").forEach(function (b) { b.onclick = function () { openAnyChar(b.dataset.c2); }; });
     }
   }
   function nextLabel(w) {
@@ -277,6 +324,7 @@
   }
   function bindCharTiles(root) {
     root.querySelectorAll("[data-c]").forEach(function (b) { b.onclick = function () { openChar(b.dataset.c); }; });
+    root.querySelectorAll("[data-comp]").forEach(function (b) { b.onclick = function () { openComp(b.dataset.comp); }; });
   }
 
   // ---------- 한자 퀴즈 ----------
@@ -473,8 +521,72 @@
         if (!confirm("지금 기록을 불러온 파일 내용으로 바꿀까요?")) return;
         S = d; S.cards = S.cards || {}; S.hz = S.hz || {}; S.log = S.log || {}; S.lv = LEVELS.indexOf(S.lv) >= 0 ? S.lv : 1;
         S.set = Object.assign({ theme: "auto", big: false, autoSpeak: true, perDay: 10 }, S.set || {});
+        S.saved = S.saved || {}; S.saved.ex = S.saved.ex || {}; S.saved.hz = S.saved.hz || {}; S.exCards = S.exCards || {}; S.hzCards = S.hzCards || {};
         save(); applySettings(); renderStats();
       }).catch(function () { alert("이 파일은 불러올 수 없어요."); });
+    };
+  }
+
+  // ---------- 단어장 (평가로 구분한 단어 / 저장한 예문 / 외울 한자) ----------
+  var bookSeg = "g0";
+  function lastOf(w) { var c = S.cards[w]; if (!c) return -1; return c.last != null ? c.last : (c.box >= 3 ? 2 : c.box >= 1 ? 1 : 0); }
+  function bookLists() {
+    var g = [[], [], []];
+    Object.keys(S.cards).forEach(function (w) { var l = lastOf(w); if (l >= 0 && BYW[w]) g[l].push(BYW[w]); });
+    var byTime = function (store) { return Object.keys(store).sort(function (a, b) { return store[b] - store[a]; }); };
+    return { g0: g[0], g1: g[1], g2: g[2], ex: byTime(S.saved.ex).filter(function (w) { return EX[w]; }), hz: byTime(S.saved.hz) };
+  }
+  function renderBook() {
+    if (session) return renderCard();
+    var L = bookLists();
+    var segs = [["g0", "몰랐어요"], ["g1", "헷갈려요"], ["g2", "알아요"], ["ex", "예문"], ["hz", "한자"]];
+    var list = L[bookSeg], body;
+    if (bookSeg === "ex") {
+      body = list.map(function (w) {
+        var e = EX[w];
+        return '<li class="bk-ex"><button class="row col" data-w="' + esc(w) + '"><span class="ex-zh">' + esc(e[1]) + '</span>' +
+          '<span class="ex-py">' + esc(e[3] || "") + '</span><span class="ex-ko">' + esc(e[2]) + '</span></button>' +
+          '<button class="x" data-unsave="' + esc(w) + '" aria-label="저장 취소">✕</button></li>';
+      }).join("");
+    } else if (bookSeg === "hz") {
+      body = list.map(function (c) {
+        return '<li><button class="row" data-any="' + esc(c) + '"><span class="w">' + esc(c) + '</span><span class="d"><div>' + esc(H[c] ? hunOnly(c) : (G[c] || "")) + '</div><div>' +
+          (H[c] ? 'HSK ' + H[c].lv + '급 한자' : '구성 요소') + '</div></span></button><button class="x" data-unlearn="' + esc(c) + '" aria-label="빼기">✕</button></li>';
+      }).join("");
+    } else {
+      body = list.map(function (x) {
+        return '<li><button class="row" data-w="' + esc(x.w) + '"><span class="w">' + esc(x.w) + '</span><span class="d"><div>' + esc(x.p) + '</div><div>' + esc(x.m) + '</div></span><span class="lvs">' + x.lv + '</span></button></li>';
+      }).join("");
+    }
+    var hint = { g0: "학습 카드에서 ‘몰랐어요’를 누른 단어가 모여요. 다시 ‘알아요’를 누르면 그쪽으로 옮겨 가요.",
+      g1: "‘헷갈려요’를 누른 단어가 모여요.", g2: "‘알아요’를 누른 단어가 모여요.",
+      ex: "예문 옆 ‘☆ 저장’을 누르면 여기에 모여요. 문장을 보고 병음과 뜻을 떠올리며 외워요.",
+      hz: "한자 상세나 구성 요소에서 ‘☆ 이 한자 외우기’를 누르면 여기에 모여요." }[bookSeg];
+    view.innerHTML = '<div class="stack"><div class="seg bk">' + segs.map(function (sg) {
+        return '<button data-b="' + sg[0] + '"' + (sg[0] === bookSeg ? ' class="on"' : '') + '>' + sg[1] + ' <b>' + L[sg[0]].length + '</b></button>';
+      }).join("") + '</div>' +
+      '<p class="small muted" style="margin:0">' + hint + '</p>' +
+      (list.length ? '<button class="btn" id="bstudy">이 단어장 학습하기 · ' + Math.min(list.length, 30) + '개</button><ul class="list">' + body + '</ul>'
+        : '<div class="panel small muted empty">아직 비어 있어요.</div>') + '</div>';
+    view.querySelectorAll(".seg.bk button").forEach(function (b) { b.onclick = function () { bookSeg = b.dataset.b; renderBook(); }; });
+    view.querySelectorAll("[data-w]").forEach(function (b) { b.onclick = function () { openWord(b.dataset.w); }; });
+    view.querySelectorAll("[data-any]").forEach(function (b) { b.onclick = function () { openAnyChar(b.dataset.any); }; });
+    view.querySelectorAll("[data-unsave]").forEach(function (b) { b.onclick = function () { delete S.saved.ex[b.dataset.unsave]; save(); renderBook(); }; });
+    view.querySelectorAll("[data-unlearn]").forEach(function (b) { b.onclick = function () { delete S.saved.hz[b.dataset.unlearn]; save(); renderBook(); }; });
+    var st = $("#bstudy");
+    if (st) st.onclick = function () {
+      // 복습 시기가 된 것부터, 그다음 나머지를 섞어서 최대 30개
+      var store = bookSeg === "ex" ? S.exCards : bookSeg === "hz" ? S.hzCards : S.cards;
+      var keyOf = function (it) { return bookSeg === "ex" || bookSeg === "hz" ? it : it.w; };
+      var now = Date.now();
+      var items = shuffle(list.slice()).sort(function (a, b) {
+        var ca = store[keyOf(a)], cb = store[keyOf(b)];
+        return ((ca && ca.due <= now) || !ca ? 0 : 1) - ((cb && cb.due <= now) || !cb ? 0 : 1);
+      }).slice(0, 30).map(function (it) {
+        return bookSeg === "ex" ? { k: "ex", w: it } : bookSeg === "hz" ? { k: "hz", c: it } : it;
+      });
+      session = { q: items, i: 0, open: false };
+      renderCard(); window.scrollTo(0, 0);
     };
   }
 
@@ -544,7 +656,42 @@
   function partChip(x) {
     return H[x]
       ? '<button class="part" data-c="' + esc(x) + '"><b>' + esc(x) + '</b>' + esc(hunOnly(x)) + ' ›</button>'
-      : '<span class="part"><b>' + esc(x) + '</b>' + esc(G[x] || "") + '</span>';
+      : '<button class="part comp" data-comp="' + esc(x) + '"><b>' + esc(x) + '</b>' + esc(G[x] || "") + ' ›</button>';
+  }
+  // 부품(부수·구성 요소)이 들어 있는 HSK 한자 목록
+  var COMP_IN = {};
+  Object.keys(H).forEach(function (c) { uniq(H[c].p.join("") + H[c].r).forEach(function (p) { if (p !== c) (COMP_IN[p] = COMP_IN[p] || []).push(c); }); });
+  function compUsedIn(p) { return (COMP_IN[p] || []).slice().sort(function (a, b) { return H[a].lv - H[b].lv; }); }
+  function openAnyChar(c) { if (H[c]) openChar(c); else openComp(c); }
+  function learnBtn(c) {
+    var on = !!S.saved.hz[c];
+    return '<button class="speak learn' + (on ? ' on' : '') + '" data-learn="' + esc(c) + '">' + (on ? '★ 외울 한자에 있음' : '☆ 이 한자 외우기') + '</button>';
+  }
+  function bindLearn(root) {
+    root.querySelectorAll("[data-learn]").forEach(function (b) {
+      b.onclick = function () {
+        var c = b.dataset.learn;
+        if (S.saved.hz[c]) delete S.saved.hz[c]; else S.saved.hz[c] = Date.now();
+        save(); b.outerHTML = learnBtn(c); bindLearn(root);
+        toast(S.saved.hz[c] ? "단어장 › 한자에 추가했어요" : "단어장에서 뺐어요");
+      };
+    });
+  }
+  function openComp(p) {
+    var used = compUsedIn(p);
+    openSheet('<div class="stack"><div class="hero"><div class="stk" id="stk"><span class="z">' + esc(p) + '</span></div>' +
+      '<div class="k">' + esc(G[p] || "구성 요소") + '</div><div class="small muted">한자를 이루는 부품 (부수·구성 요소)</div>' +
+      '<div class="btns">' + learnBtn(p) + '</div></div>' +
+      '<div class="memo"><h3>이 부품이 들어간 한자 (' + used.length + ')</h3><p>같은 부품을 가진 한자들은 뜻이나 소리가 비슷한 경우가 많아요.</p></div>' +
+      '<div class="grid">' + used.map(function (c) {
+        return '<button class="cell" data-c="' + esc(c) + '"><span class="z">' + esc(c) + '</span><span class="k">' + esc(hunOnly(c)) + '</span></button>';
+      }).join("") + '</div></div>');
+    bindCharTiles(sheetContent); bindLearn(sheetContent);
+  }
+  var toastT = null;
+  function toast(msg) {
+    var t = $("#toast"); if (!t) { t = document.createElement("div"); t.id = "toast"; t.className = "toast"; document.body.appendChild(t); }
+    t.textContent = msg; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove("show"); }, 1600);
   }
 
   function openChar(c) {
@@ -556,7 +703,7 @@
       '<div class="stack">' +
       '<div class="hero"><div class="stk" id="stk"><span class="z">' + esc(c) + '</span></div><div class="k">' + esc(h.k) + '</div>' +
       '<div class="small muted">HSK ' + h.lv + '급 한자<span id="stkn"></span></div>' +
-      '<div class="btns"><button class="speak" id="sc">🔊 발음 듣기</button><button class="speak" id="replay" hidden>✍️ 획순 다시 보기</button></div></div>' +
+      '<div class="btns"><button class="speak" id="sc">🔊 발음 듣기</button><button class="speak" id="replay" hidden>✍️ 획순 다시 보기</button>' + learnBtn(c) + '</div></div>' +
       (h.m ? '<div class="memo"><h3>연상법</h3><p>' + esc(h.m) + '</p></div>' : '') +
       '<div class="panel stack">' +
       '<dl class="kv"><dt>부수</dt><dd>' + r + '</dd><dt>구성</dt><dd>' + parts + '</dd></dl>' +
@@ -567,7 +714,7 @@
       '<p class="note">유래와 연상법은 AI가 작성했어요. 학설이 여러 가지인 글자는 외우기 쉬운 설명을 골랐어요.</p>' +
       '</div>');
     $("#sc").onclick = function () { speak(c); };
-    bindCharTiles(sheetContent);
+    bindCharTiles(sheetContent); bindLearn(sheetContent);
     sheetContent.querySelectorAll("[data-w]").forEach(function (b) { b.onclick = function () { openWord(b.dataset.w); }; });
     drawStrokes(c, $("#stk"));
   }
@@ -627,17 +774,43 @@
     if (why) out += '<div class="why"><h3>왜 이 한자들일까?</h3><p>' + esc(why) + '</p></div>';
     if (zh) {
       var hi = esc(zh).split(esc(x.w)).join('<mark>' + esc(x.w) + '</mark>');
-      out += '<div class="ex"><div class="ex-h"><h3>예문</h3><button class="speak sm" data-say="' + esc(zh) + '">🔊</button></div>' +
-        '<p class="ex-zh">' + hi + '</p><p class="ex-ko">' + esc(ko) + '</p></div>';
+      out += '<div class="ex"><div class="ex-h"><h3>예문</h3><div class="ex-btns">' +
+        '<button class="speak sm" data-say="' + esc(zh) + '" aria-label="예문 듣기">🔊</button>' +
+        '<button class="speak sm" data-copy="' + esc(x.w) + '">📋 복사</button>' + saveBtn(x.w) + '</div></div>' +
+        '<p class="ex-zh">' + hi + '</p><p class="ex-py">' + esc(e[3] || "") + '</p><p class="ex-ko">' + esc(ko) + '</p></div>';
     }
     return out;
   }
+  function saveBtn(w) {
+    var on = !!S.saved.ex[w];
+    return '<button class="speak sm save' + (on ? ' on' : '') + '" data-save="' + esc(w) + '">' + (on ? '★ 저장됨' : '☆ 저장') + '</button>';
+  }
   function bindExtra(root) {
     root.querySelectorAll("[data-say]").forEach(function (b) { b.onclick = function () { speak(b.dataset.say); }; });
+    root.querySelectorAll("[data-copy]").forEach(function (b) {
+      b.onclick = function () {
+        var e = EX[b.dataset.copy] || [], text = e[1] + "\n" + (e[3] || "") + "\n" + e[2];
+        var done = function () { toast("예문을 복사했어요"); };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); done(); });
+        else { fallbackCopy(text); done(); }
+      };
+    });
+    root.querySelectorAll("[data-save]").forEach(function (b) {
+      b.onclick = function () {
+        var w = b.dataset.save;
+        if (S.saved.ex[w]) delete S.saved.ex[w]; else S.saved.ex[w] = Date.now();
+        save(); b.outerHTML = saveBtn(w); bindExtra(root);
+        toast(S.saved.ex[w] ? "단어장 › 예문에 저장했어요" : "저장을 취소했어요");
+      };
+    });
+  }
+  function fallbackCopy(text) {
+    var ta = document.createElement("textarea"); ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (e) {} ta.remove();
   }
 
   // ---------- 시작 ----------
-  go(["home", "words", "hanzi", "stats"].indexOf(tab) >= 0 ? tab : "home");
+  go(["home", "words", "hanzi", "book", "stats"].indexOf(tab) >= 0 ? tab : "home");
 
   // 오프라인 사용 (http/https에서만 동작)
   if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {

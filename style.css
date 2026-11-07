@@ -238,3 +238,28 @@ body.big .opt { font-size: 18px; }
 .ex-ko { margin: 0; font-size: 14px; color: var(--muted); }
 .rate.sticky { position: sticky; bottom: calc(68px + env(safe-area-inset-bottom)); z-index: 5; padding: 8px 0 4px; background: linear-gradient(to bottom, transparent, var(--bg) 30%); }
 body.big .why p { font-size: 17px; } body.big .ex-zh { font-size: 23px; } body.big .ex-ko { font-size: 16px; }
+
+/* 예문 병음 · 복사 · 저장 */
+.ex-btns { display: flex; gap: 6px; }
+.ex-py { margin: 0 0 4px; font-size: 14px; color: var(--accent); }
+.speak.on, .learn.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.ex-zh.big { font-size: 26px; line-height: 1.5; margin: 6px 0 10px; }
+.meaning.sm { font-size: 16px; margin: 6px 0 10px; }
+.mn-l { font-size: 15px; color: var(--muted); margin: 6px 0 0; }
+.part.comp { border-style: dashed; border-color: var(--accent); }
+.toast { position: fixed; left: 50%; bottom: calc(150px + env(safe-area-inset-bottom)); transform: translate(-50%, 10px); background: var(--text); color: var(--bg); padding: 9px 16px; border-radius: 99px; font-size: 14px; opacity: 0; transition: opacity .2s, transform .2s; z-index: 50; pointer-events: none; white-space: nowrap; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* 단어장 */
+.seg.bk { overflow-x: auto; scrollbar-width: none; }
+.seg.bk button { flex: none; white-space: nowrap; }
+.seg.bk b { font-weight: 700; margin-left: 2px; }
+.list li { display: flex; align-items: stretch; }
+.list li .row { flex: 1; min-width: 0; }
+.row.col { flex-direction: column; align-items: flex-start; gap: 2px; }
+.row.col .ex-zh { font-size: 18px; margin: 0; }
+.row.col .ex-ko { font-size: 13px; }
+.x { border: 0; background: none; color: var(--muted); padding: 0 14px; font-size: 14px; }
+.empty { text-align: center; padding: 28px 16px; }
+.tabs .ti { font-size: 20px; }
+body.big .ex-py { font-size: 16px; }
