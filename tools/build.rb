@@ -33,6 +33,9 @@ files.each do |f|
     end
   end
 end
+# 단어 구성 풀이·예문: src/ex-L*.txt  (단어|왜 이 한자들인지|예문|예문 번역)
+EX = {}
+Dir[src("ex-L*.txt")].sort.each { |ef| File.foreach(ef) { |l| l = l.chomp; next if l.strip.empty? || l.start_with?("#"); w, why, zh, ko = l.split("|", 4); EX[w] = [why.to_s, zh.to_s, ko.to_s] } }
 GL = {}
 File.foreach(src("gloss.txt")) { |l| a, b = l.chomp.split("|", 2); GL[a] = b if b }
 
@@ -99,9 +102,11 @@ js << "window.LEVELS = #{(1..max_lv).to_a.to_json};\n"
 js << "window.WORDS = [\n" << out_words.map(&:to_json).join(",\n") << "\n];\n"
 js << "window.HANZI = {\n" << out_h.map { |c, h| "#{c.to_json}:#{h.to_json}" }.join(",\n") << "\n};\n"
 js << "window.GLOSS = #{gl.to_json};\n"
+ex = EX.select { |w, _| out_words.any? { |x| x[0] == w } }
+js << "window.EX = {\n" << ex.map { |w, v| "#{w.to_json}:#{v.to_json}" }.join(",\n") << "\n};\n"
 File.write(File.join(ROOT, "data.js"), js)
 
-puts "급수 1~#{max_lv}: 단어 #{out_words.size}개, 한자 #{out_h.size}자"
+puts "급수 1~#{max_lv}: 단어 #{out_words.size}개, 한자 #{out_h.size}자, 예문 #{ex.size}개"
 (max_lv + 1..5).each { |lv| puts "  #{lv}급 뜻 없는 단어 #{missing[lv].size}개" unless missing[lv].empty? }
 puts "  내용 없는 한자: #{miss_c.join}" unless miss_c.empty?
 puts "  풀이 없는 구성요소: #{need_gloss.keys.join(' ')}" unless need_gloss.empty?

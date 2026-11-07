@@ -31,7 +31,6 @@
   // 간격 반복: 단계별 다음 복습까지의 일수
   var DAYS = [0, 1, 3, 7, 14, 30];
   var DAY = 86400000;
-  var NEW_PER_SESSION = 8;
   function known(w) { var c = S.cards[w]; if (!c) return 0; return c.box >= 3 ? 2 : 1; }
   function inLv(lv) { return function (x) { return x.lv === lv; }; }
   function dueList() { var now = Date.now(); return WORDS.filter(function (x) { var c = S.cards[x.w]; return c && c.due <= now; }); }
@@ -40,6 +39,7 @@
       .sort(function (a, b) { return ORDER[a.w] - ORDER[b.w]; });
   }
   function grade(w, g) {
+    if (!S.cards[w]) logToday("n"); // 오늘 처음 배운 새 단어 수
     var c = S.cards[w] || { box: 0, due: 0 };
     if (g === 0) c.box = 0;
     else if (g === 1) c.box = Math.max(1, c.box);
@@ -76,7 +76,7 @@
   }
 
   // ---------- 설정 (화면 테마, 글자 크기, 자동 발음) ----------
-  S.set = Object.assign({ theme: "auto", big: false, autoSpeak: true }, S.set || {});
+  S.set = Object.assign({ theme: "auto", big: false, autoSpeak: true, perDay: 10 }, S.set || {});
   var cardKeys = null;
   document.addEventListener("keydown", function (e) {
     if (tab === "home" && session && sheet.hidden && cardKeys && !(e.target.closest && e.target.closest("input"))) cardKeys(e);
@@ -144,8 +144,10 @@
     var lvWords = WORDS.filter(inLv(lv));
     var learned = lvWords.filter(function (x) { return known(x.w) === 2; }).length;
     var seen = lvWords.filter(function (x) { return S.cards[x.w]; }).length;
-    var due = dueList().length, fresh = Math.min(NEW_PER_SESSION, newList(lv).length);
+    var perDay = S.set.perDay, doneToday = newToday();
+    var due = dueList().length, fresh = Math.max(0, Math.min(perDay - doneToday, newList(lv).length));
     var total = due + fresh;
+    var leftAll = newList(lv).length;
     var lvChars = Object.keys(H).filter(function (c) { return H[c].lv === lv; }).length;
     view.innerHTML =
       '<div class="stack">' + modeSeg() +
@@ -157,9 +159,14 @@
       '<div class="stat"><b>' + learned + '</b><span>외운 단어</span></div>' +
       '<div class="stat"><b>' + due + '</b><span>오늘 복습</span></div>' +
       '<div class="stat"><b>' + (lvWords.length - seen) + '</b><span>남은 새 단어</span></div>' +
-      '</div></div>' +
+      '</div>' +
+      '<div class="goal"><div class="goal-h"><span>하루 새 단어</span><b>오늘 ' + Math.min(doneToday, perDay) + ' / ' + perDay + '개</b></div>' +
+      '<div class="seg per">' + [5, 10, 15, 20, 30].map(function (n) {
+        return '<button data-n="' + n + '"' + (n === perDay ? ' class="on"' : '') + '>' + n + '개</button>';
+      }).join("") + '</div></div></div>' +
       '<button class="btn" id="start"' + (total ? "" : " disabled") + '>' +
-      (total ? "학습 시작 · " + (due ? "복습 " + Math.min(due, 20) + " + " : "") + "새 단어 " + fresh : "오늘 학습 완료 🎉") + '</button>' +
+      (total ? "학습 시작 · " + (due ? "복습 " + Math.min(due, 50) + (fresh ? " + " : "") : "") + (fresh ? "새 단어 " + fresh : "") : "오늘 목표 완료 🎉") + '</button>' +
+      (!fresh && leftAll ? '<button class="btn ghost" id="more5">새 단어 5개 더 하기</button>' : '') +
       '<div class="panel small muted">' +
       '<b style="color:var(--text)">이렇게 공부해요</b><br>' +
       '① 단어를 보고 뜻을 떠올려 보세요.<br>' +
@@ -171,14 +178,21 @@
       '</div>';
     bindSeg(view, function (v) { S.lv = v; save(); renderHome(); });
     bindMode();
-    var s = $("#start");
-    if (s) s.onclick = function () {
-      var q = dueList().slice(0, 20).concat(newList(S.lv).slice(0, NEW_PER_SESSION));
+    view.querySelectorAll(".seg.per button").forEach(function (b) {
+      b.onclick = function () { S.set.perDay = +b.dataset.n; save(); renderHome(); };
+    });
+    var begin = function (nNew) {
+      var q = dueList().slice(0, 50).concat(newList(S.lv).slice(0, nNew));
       if (!q.length) return;
       session = { q: q, i: 0, open: false };
       renderCard();
     };
+    var s = $("#start");
+    if (s) s.onclick = function () { begin(fresh); };
+    var m5 = $("#more5");
+    if (m5) m5.onclick = function () { begin(5); };
   }
+  function newToday() { var e = S.log[today()]; return (e && e.n) || 0; }
 
   // ---------- 학습 카드 ----------
   function renderCard() {
@@ -203,8 +217,9 @@
         : '<div class="hint">뜻과 발음을 떠올려 보세요</div>') +
       '</div>';
     if (session.open) {
-      html += '<div class="chars">' + charTiles(x.w) + '</div>' +
-        '<div class="rate">' +
+      var ex = wordExtra(x);
+      html += '<div class="chars">' + charTiles(x.w) + '</div>' + ex +
+        '<div class="rate sticky">' +
         '<button class="r0" data-g="0">몰랐어요<small>곧 다시</small></button>' +
         '<button class="r1" data-g="1">헷갈려요<small>내일</small></button>' +
         '<button class="r2" data-g="2">알아요<small>' + nextLabel(x.w) + '</small></button>' +
@@ -243,7 +258,7 @@
       $("#reveal").onclick = reveal;
       card.onclick = function (e) { if (!e.target.closest("button")) reveal(); };
     } else {
-      bindCharTiles(view);
+      bindCharTiles(view); bindExtra(view);
       view.querySelectorAll(".rate button").forEach(function (b) { b.onclick = function () { rate(+b.dataset.g); }; });
     }
   }
@@ -457,7 +472,7 @@
         if (!d || typeof d.cards !== "object") throw new Error("형식");
         if (!confirm("지금 기록을 불러온 파일 내용으로 바꿀까요?")) return;
         S = d; S.cards = S.cards || {}; S.hz = S.hz || {}; S.log = S.log || {}; S.lv = LEVELS.indexOf(S.lv) >= 0 ? S.lv : 1;
-        S.set = Object.assign({ theme: "auto", big: false, autoSpeak: true }, S.set || {});
+        S.set = Object.assign({ theme: "auto", big: false, autoSpeak: true, perDay: 10 }, S.set || {});
         save(); applySettings(); renderStats();
       }).catch(function () { alert("이 파일은 불러올 수 없어요."); });
     };
@@ -598,9 +613,27 @@
       '<div class="hero"><div class="word">' + esc(x.w) + '</div><div class="pinyin">' + esc(x.p) + '</div><div class="meaning">' + esc(x.m) + '</div>' +
       '<div class="small muted">HSK ' + x.lv + '급</div>' +
       '<button class="speak" id="sw">🔊 발음 듣기</button></div>' +
+      wordExtra(x) +
       '<div class="chars">' + charTiles(x.w) + '</div></div>');
     $("#sw").onclick = function () { speak(x.w); };
-    bindCharTiles(sheetContent);
+    bindCharTiles(sheetContent); bindExtra(sheetContent);
+  }
+
+  // ---------- 단어 구성 풀이 + 예문 ----------
+  var EX = window.EX || {};
+  function wordExtra(x) {
+    var e = EX[x.w]; if (!e) return "";
+    var why = e[0], zh = e[1], ko = e[2], out = "";
+    if (why) out += '<div class="why"><h3>왜 이 한자들일까?</h3><p>' + esc(why) + '</p></div>';
+    if (zh) {
+      var hi = esc(zh).split(esc(x.w)).join('<mark>' + esc(x.w) + '</mark>');
+      out += '<div class="ex"><div class="ex-h"><h3>예문</h3><button class="speak sm" data-say="' + esc(zh) + '">🔊</button></div>' +
+        '<p class="ex-zh">' + hi + '</p><p class="ex-ko">' + esc(ko) + '</p></div>';
+    }
+    return out;
+  }
+  function bindExtra(root) {
+    root.querySelectorAll("[data-say]").forEach(function (b) { b.onclick = function () { speak(b.dataset.say); }; });
   }
 
   // ---------- 시작 ----------

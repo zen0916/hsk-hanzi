@@ -219,3 +219,22 @@ body.big .row .w { font-size: 26px; }
 body.big .row .d div { font-size: 16px !important; }
 body.big .cell .k { font-size: 12px; }
 body.big .opt { font-size: 18px; }
+
+/* 하루 목표 */
+.goal { border-top: 1px solid var(--line); padding-top: 12px; display: grid; gap: 8px; }
+.goal-h { display: flex; justify-content: space-between; font-size: 14px; }
+.goal-h b { font-weight: 600; color: var(--accent); }
+.seg.per button { flex: 1; padding: 7px 0; }
+
+/* 단어 구성 풀이 · 예문 */
+.why, .ex { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+.why { border-left: 4px solid var(--accent); }
+.why h3, .ex h3 { margin: 0 0 4px; font-size: 13px; color: var(--muted); font-weight: 600; }
+.why p { margin: 0; font-size: 15px; }
+.ex-h { display: flex; justify-content: space-between; align-items: center; }
+.speak.sm { margin: 0; padding: 3px 10px; font-size: 13px; }
+.ex-zh { font-family: var(--zh); font-size: 20px; margin: 6px 0 2px; line-height: 1.5; }
+.ex-zh mark { background: var(--accent-soft); color: var(--accent); border-radius: 4px; padding: 0 2px; }
+.ex-ko { margin: 0; font-size: 14px; color: var(--muted); }
+.rate.sticky { position: sticky; bottom: calc(68px + env(safe-area-inset-bottom)); z-index: 5; padding: 8px 0 4px; background: linear-gradient(to bottom, transparent, var(--bg) 30%); }
+body.big .why p { font-size: 17px; } body.big .ex-zh { font-size: 23px; } body.big .ex-ko { font-size: 16px; }
