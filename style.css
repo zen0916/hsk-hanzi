@@ -263,3 +263,9 @@ body.big .why p { font-size: 17px; } body.big .ex-zh { font-size: 23px; } body.b
 .empty { text-align: center; padding: 28px 16px; }
 .tabs .ti { font-size: 20px; }
 body.big .ex-py { font-size: 16px; }
+
+/* 정답 가림 */
+.veil { position: relative; cursor: pointer; border-radius: 14px; -webkit-tap-highlight-color: transparent; }
+.veil-in { filter: blur(9px); opacity: .55; pointer-events: none; user-select: none; -webkit-user-select: none; }
+.veil-label { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; background: var(--surface); border: 1px solid var(--accent); color: var(--accent); font-weight: 600; font-size: 14px; padding: 7px 14px; border-radius: 99px; white-space: nowrap; box-shadow: var(--shadow); }
+.card .veil { margin-top: 10px; min-height: 64px; }
