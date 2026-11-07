@@ -105,8 +105,8 @@
     openSheet('<div class="stack"><h2 class="sh">설정</h2>' +
       '<div class="setrow"><span>화면 테마</span>' + seg("theme", [["auto", "자동"], ["light", "밝게"], ["dark", "어둡게"]]) + '</div>' +
       '<div class="setrow"><span>글자 크기</span>' + seg("big", [["false", "보통"], ["true", "크게"]]) + '</div>' +
-      '<div class="setrow"><span>정답 볼 때 발음 자동 재생</span>' + seg("autoSpeak", [["true", "켜기"], ["false", "끄기"]]) + '</div>' +
-      '<p class="note">컴퓨터에서는 스페이스로 정답 보기, 1·2·3으로 평가할 수 있어요.</p></div>');
+      '<div class="setrow"><span>카드가 나올 때 발음 자동 재생</span>' + seg("autoSpeak", [["true", "켜기"], ["false", "끄기"]]) + '</div>' +
+      '<p class="note">컴퓨터에서는 1·2·3 키로 평가할 수 있어요.</p></div>');
     sheetContent.querySelectorAll(".seg.set button").forEach(function (b) {
       b.onclick = function () {
         var k = b.parentNode.dataset.k, v = b.dataset.v;
@@ -214,6 +214,12 @@
       return;
     }
     var x = session.q[session.i];
+    // '정답 보기' 단계 없이 카드가 나오자마자 정답과 평가 버튼을 함께 보여 준다
+    session.open = true;
+    if (S.set.autoSpeak && session.spoke !== session.i) {
+      session.spoke = session.i;
+      speak(x.k === "ex" ? (EX[x.w] || [])[1] : x.k === "hz" ? x.c : x.w);
+    }
     if (x.k === "ex" || x.k === "hz") return renderAltCard(x);
     var done = session.i;
     var html =
