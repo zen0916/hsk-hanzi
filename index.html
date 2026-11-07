@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>한자 연상 HSK</title>
+<meta name="description" content="한자의 유래와 부수로 연상하며 외우는 HSK 단어장">
+<meta name="theme-color" content="#b23a2e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="한자연상">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1 id="title">한자 연상 HSK</h1>
+  <button class="gear" id="gear" aria-label="설정">⚙︎</button>
+</header>
+<main id="view"></main>
+<nav class="tabs" aria-label="메뉴">
+  <button data-tab="home" class="on"><span class="ti">学</span>학습</button>
+  <button data-tab="words"><span class="ti">词</span>단어</button>
+  <button data-tab="hanzi"><span class="ti">字</span>한자</button>
+  <button data-tab="stats"><span class="ti">记</span>기록</button>
+</nav>
+<div id="sheet" class="sheet" hidden>
+  <div class="sheet-bg" data-close></div>
+  <div class="sheet-body" role="dialog" aria-modal="true">
+    <button class="sheet-x" data-close aria-label="닫기">✕</button>
+    <div id="sheet-content"></div>
+  </div>
+</div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
