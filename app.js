@@ -105,9 +105,9 @@
     openSheet('<div class="stack"><h2 class="sh">설정</h2>' +
       '<div class="setrow"><span>화면 테마</span>' + seg("theme", [["auto", "자동"], ["light", "밝게"], ["dark", "어둡게"]]) + '</div>' +
       '<div class="setrow"><span>글자 크기</span>' + seg("big", [["false", "보통"], ["true", "크게"]]) + '</div>' +
-      '<div class="setrow"><span>학습 카드의 정답 가리기 (눌러서 보기)</span>' + seg("hide", [["true", "가리기"], ["false", "바로 보기"]]) + '</div>' +
+      '<div class="setrow"><span>학습 카드의 정답 가리기 (몰랐어요·헷갈려요를 누르면 공개)</span>' + seg("hide", [["true", "가리기"], ["false", "바로 보기"]]) + '</div>' +
       '<div class="setrow"><span>카드가 나올 때 발음 자동 재생</span>' + seg("autoSpeak", [["true", "켜기"], ["false", "끄기"]]) + '</div>' +
-      '<p class="note">컴퓨터에서는 1·2·3 키로 평가할 수 있어요.</p></div>');
+      '<p class="note">컴퓨터에서는 1·2·3 키로 평가하고, 정답이 보일 때 Enter로 다음 단어로 넘어가요.</p></div>');
     sheetContent.querySelectorAll(".seg.set button").forEach(function (b) {
       b.onclick = function () {
         var k = b.parentNode.dataset.k, v = b.dataset.v;
@@ -231,7 +231,7 @@
       '<div class="lvtag">HSK ' + x.lv + '</div>' +
       '<div class="word">' + esc(x.w) + '</div>' +
       '<button class="speak" id="say">🔊 발음 듣기</button>' +
-      veil('<div class="pinyin">' + esc(x.p) + '</div><div class="meaning">' + esc(x.m) + '</div>', "눌러서 정답 보기") +
+      veil('<div class="pinyin">' + esc(x.p) + '</div><div class="meaning">' + esc(x.m) + '</div>', "몰랐어요·헷갈려요를 누르면 정답이 보여요") +
       '</div>';
     if (session.open) {
       var ex = wordExtra(x);
@@ -251,10 +251,9 @@
     var rate = function (g) {
       grade(x.w, g);
       if (g === 0) session.q.push(x); // 모르면 이번 학습 끝에 한 번 더
-      session.i++; session.open = false; renderCard(); window.scrollTo(0, 0);
+      afterRate(g);
     };
     cardKeys = veilKeys(rate);
-    bindVeil();
     if (!session.open) {
       $("#reveal").onclick = reveal;
     } else {
@@ -263,11 +262,25 @@
     }
   }
 
-  // 정답 가림: 설정에서 켜 두면 정답 부분을 흐리게 가리고, 누르면 보여 준다 (평가 버튼은 항상 보임)
+  // 정답 가림: 정답은 가려 두고, '몰랐어요/헷갈려요'를 누르면 정답을 보여 준 뒤 '다음'으로,
+  // '알아요'를 누르면 바로 다음 카드로 넘어간다. (설정에서 끄면 정답이 처음부터 보이고 모든 버튼이 바로 넘어감)
   function veiled() { return S.set.hide && session && session.shown !== session.i; }
   function veil(html, label) {
-    return veiled() ? '<div class="veil" role="button" tabindex="0" aria-label="정답 보기">' +
-      (label ? '<span class="veil-label">👆 ' + label + '</span>' : '') + '<div class="veil-in">' + html + '</div></div>' : html;
+    return veiled() ? '<div class="veil">' +
+      (label ? '<span class="veil-label">' + label + '</span>' : '') + '<div class="veil-in">' + html + '</div></div>' : html;
+  }
+  function nextCard() { session.i++; session.open = false; renderCard(); window.scrollTo(0, 0); }
+  function afterRate(g) {
+    if (g === 2 || !view.querySelector(".veil")) return nextCard();
+    showVeil();
+    var r = view.querySelector(".rate");
+    r.className = "rate sticky one";
+    r.innerHTML = '<button class="next" id="next">' + (g === 0 ? '몰랐어요' : '헷갈려요') + ' · 정답 확인 후 <b>다음 단어 →</b></button>';
+    $("#next").onclick = nextCard;
+    cardKeys = function (e) { if (/^(Enter| |[123])$/.test(e.key)) { e.preventDefault(); nextCard(); } };
+    bindCharTiles(view); bindExtra(view);
+    view.querySelectorAll("[data-w]").forEach(function (b) { if (!b.dataset.save && !b.dataset.copy) b.onclick = function () { openWord(b.dataset.w); }; });
+    view.querySelectorAll("[data-c2]").forEach(function (b) { b.onclick = function () { openAnyChar(b.dataset.c2); }; });
   }
   function showVeil() {
     if (!session) return;
@@ -278,11 +291,9 @@
       v.remove();
     });
   }
-  function bindVeil() { view.querySelectorAll(".veil").forEach(function (v) { v.onclick = showVeil; }); }
   function veilKeys(rate) {
     return function (e) {
-      if ((e.key === " " || e.key === "Enter") && view.querySelector(".veil")) { e.preventDefault(); showVeil(); }
-      else if (/^[123]$/.test(e.key)) rate(+e.key - 1);
+      if (/^[123]$/.test(e.key)) rate(+e.key - 1);
     };
   }
 
@@ -313,7 +324,7 @@
       '<div class="progress"><span>' + (done + 1) + ' / ' + session.q.length + '</span><div class="bar"><i style="width:' + (done / session.q.length * 100) + '%"></i></div>' +
       '<button class="speak" id="quit">그만</button></div>' +
       '<div class="panel card">' + front + '<button class="speak" id="say">🔊 발음 듣기</button>' +
-      veil(back, "눌러서 정답 보기") + '</div>' +
+      veil(back, "몰랐어요·헷갈려요를 누르면 정답이 보여요") + '</div>' +
       (session.open ? (isEx ? '' : '<button class="btn ghost" data-c2="' + esc(it.c) + '">자세히 보기</button>') + rateButtons(next)
         : '<button class="btn" id="reveal">정답 보기</button>') + '</div>';
     $("#say").onclick = function () { speak(sayText); };
@@ -322,10 +333,9 @@
     var rate = function (g) {
       gradeAlt(store, id, g);
       if (g === 0) session.q.push(it);
-      session.i++; session.open = false; renderCard(); window.scrollTo(0, 0);
+      afterRate(g);
     };
     cardKeys = veilKeys(rate);
-    bindVeil();
     if (!session.open) $("#reveal").onclick = reveal;
     else {
       view.querySelectorAll(".rate button").forEach(function (b) { b.onclick = function () { rate(+b.dataset.g); }; });

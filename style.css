@@ -269,3 +269,10 @@ body.big .ex-py { font-size: 16px; }
 .veil-in { filter: blur(9px); opacity: .55; pointer-events: none; user-select: none; -webkit-user-select: none; }
 .veil-label { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; background: var(--surface); border: 1px solid var(--accent); color: var(--accent); font-weight: 600; font-size: 14px; padding: 7px 14px; border-radius: 99px; white-space: nowrap; box-shadow: var(--shadow); }
 .card .veil { margin-top: 10px; min-height: 64px; }
+
+/* 정답 공개 후 다음 단어 */
+.veil { cursor: default; }
+.veil-label { font-size: 12px; font-weight: 500; border-color: var(--line); color: var(--muted); white-space: normal; text-align: center; width: max-content; max-width: 86%; }
+.rate.one { grid-template-columns: 1fr; }
+.rate .next { border: 0; border-radius: 14px; padding: 16px; font-size: 15px; color: #fff; background: var(--text); }
+.rate .next b { font-weight: 700; }
