@@ -986,10 +986,29 @@
       '<div class="hero"><div class="word">' + esc(x.w) + '</div><div class="pinyin">' + esc(x.p) + '</div><div class="meaning">' + esc(x.m) + '</div>' +
       '<div class="small muted">HSK ' + x.lv + '급</div>' +
       '<button class="speak" id="sw">🔊 발음 듣기</button></div>' +
+      '<div class="mv" id="mv"></div>' +
       wordExtra(x) +
       '<div class="chars">' + charTiles(x.w) + '</div></div>');
     $("#sw").onclick = function () { speak(x.w); };
+    drawMove(x.w);
     bindCharTiles(sheetContent); bindExtra(sheetContent);
+  }
+  // 단어장 분류 옮기기: 몰랐어요 / 헷갈려요 / 알아요
+  var MV = [["0", "몰랐어요"], ["1", "헷갈려요"], ["2", "알아요"]];
+  function drawMove(w) {
+    var el = $("#mv"); if (!el) return;
+    var c = S.cards[w], cur = c && c.last != null ? String(c.last) : "";
+    el.innerHTML = '<span class="mv-h">' + (cur ? '단어장 분류 옮기기' : '단어장에 넣기') + '</span><div class="mv-b">' + MV.map(function (m) {
+      return '<button class="r' + m[0] + (m[0] === cur ? ' on' : '') + '" data-mv="' + m[0] + '">' + (m[0] === cur ? '✓ ' : '') + m[1] + '</button>';
+    }).join("") + '</div>';
+    el.querySelectorAll("[data-mv]").forEach(function (b) {
+      b.onclick = function () {
+        if (b.dataset.mv === cur) return;
+        grade(w, +b.dataset.mv); drawMove(w);
+        toast("‘" + MV[+b.dataset.mv][1] + "’로 옮겼어요");
+        if (tab === "book" && !session) renderBook();
+      };
+    });
   }
 
   // ---------- 단어 구성 풀이 + 예문 ----------

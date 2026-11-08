@@ -332,3 +332,9 @@ body.big .tip p { font-size: 15px; }
 .picks button span { color: var(--muted); font-size: 13px; }
 .picks button.on { border-color: var(--accent); background: var(--accent-soft); }
 .picks button.on b { color: var(--accent); }
+.mv { display: grid; gap: 6px; }
+.mv-h { font-size: 13px; color: var(--muted); font-weight: 600; }
+.mv-b { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.mv-b button { border: 1.5px solid var(--line); background: var(--surface); border-radius: 99px; padding: 9px 4px; font-size: 14px; font-weight: 700; color: var(--muted); }
+.mv-b button.on { color: #fff; border-color: transparent; }
+.mv-b .r0.on { background: var(--bad); } .mv-b .r1.on { background: var(--warn); } .mv-b .r2.on { background: var(--good); }
