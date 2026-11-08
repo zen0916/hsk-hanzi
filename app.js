@@ -62,17 +62,41 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
   var view = $("#view");
+  // ---------- 발음 (기기의 중국어 음성 중 가장 자연스러운 것을 골라 씀) ----------
+  var FEMALE = /flo|sandy|shelley|grandma|tingting|ting-ting|lili|lilian|yu-?shu|tian-?tian|meijia|mei-jia|sinji|xiao|huihui|yaoyao|hiumaan|hsiaochen|hsiaoyu|google|ccc|cce|ssa/i;
+  var MALE = /eddy|reed|rocko|grandpa|li-?mu|yun|kangkang|zhiwei|wanlung|ccd|ccf|cmn-cn-x-cc[dh]/i;
+  function voiceGender(v) { var n = v.name; return MALE.test(n) ? "m" : FEMALE.test(n) ? "f" : ""; }
+  function voiceScore(v) {
+    var n = v.name, sc = 0;
+    if (/zh[-_]CN/i.test(v.lang)) sc += 50; else if (/zh[-_](TW|HK)/i.test(v.lang)) sc += 5;
+    if (/natural|neural|online/i.test(n)) sc += 40;
+    if (/premium|高品质|高音质/i.test(n)) sc += 30;
+    if (/enhanced|增强|優化|优化/i.test(n)) sc += 20;
+    if (/google/i.test(n)) sc += 10;
+    if (/compact|eloquence|eddy|grandma|grandpa|rocko|shelley|flo|reed|sandy/i.test(n)) sc -= 60;
+    return sc;
+  }
+  function zhVoices() {
+    if (!("speechSynthesis" in window)) return [];
+    return speechSynthesis.getVoices().filter(function (v) { return /^(zh|cmn)/i.test(v.lang); })
+      .sort(function (a, b) { return voiceScore(b) - voiceScore(a); });
+  }
+  function voiceLabel(v) {
+    var g = voiceGender(v), q = voiceScore(v) >= 70 ? " · 고음질" : "";
+    var reg = /TW/i.test(v.lang) ? " · 대만" : /HK/i.test(v.lang) ? " · 홍콩" : "";
+    return v.name.replace(/^Microsoft\s+|\s*\(.*\)\s*$|\s+Online|\s*-\s*Chinese.*$/g, "") + (g ? (g === "f" ? " (여성)" : " (남성)") : "") + reg + q;
+  }
   var zhVoice = null;
   function pickVoice() {
-    if (!("speechSynthesis" in window)) return;
-    var vs = speechSynthesis.getVoices();
-    zhVoice = vs.find(function (v) { return /zh[-_]CN/i.test(v.lang); }) || vs.find(function (v) { return /^zh/i.test(v.lang); }) || null;
+    var vs = zhVoices(); zhVoice = null;
+    if (S.set.voiceName) zhVoice = vs.find(function (v) { return v.name === S.set.voiceName; }) || null;
+    if (!zhVoice) zhVoice = vs.find(function (v) { return voiceGender(v) === S.set.voiceG; }) || vs[0] || null;
   }
-  if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
   function speak(t) {
     if (!("speechSynthesis" in window)) return;
     speechSynthesis.cancel();
-    var u = new SpeechSynthesisUtterance(t); u.lang = "zh-CN"; u.rate = 0.8;
+    var u = new SpeechSynthesisUtterance(t);
+    u.lang = zhVoice ? zhVoice.lang : "zh-CN"; u.rate = +S.set.rate || 0.85;
     if (zhVoice) u.voice = zhVoice;
     speechSynthesis.speak(u);
   }
@@ -86,7 +110,8 @@
   }
 
   // ---------- 설정 (화면 테마, 글자 크기, 자동 발음) ----------
-  S.set = Object.assign({ theme: "auto", big: false, autoSpeak: true, perDay: 10, hide: true, ddOn: true, examLv: "3", exam: "" }, S.set || {});
+  S.set = Object.assign({ theme: "auto", big: false, autoSpeak: true, perDay: 10, hide: true, ddOn: true, examLv: "3", exam: "", voiceG: "f", voiceName: "", rate: "0.85" }, S.set || {});
+  if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged = function () { pickVoice(); if (sheet && !sheet.hidden && $("#voice-sec")) openSettings(true); }; }
   var cardKeys = null;
   document.addEventListener("keydown", function (e) {
     if (tab === "home" && session && sheet.hidden && cardKeys && !(e.target.closest && e.target.closest("input"))) cardKeys(e);
@@ -118,7 +143,8 @@
     el.innerHTML = '<span class="dl">HSK ' + esc(lvName(S.set.examLv)) + '</span><b>' + (n > 0 ? "D-" + n : n === 0 ? "D-DAY" : "시험 끝") + '</b>';
     el.setAttribute("aria-label", "HSK " + lvName(S.set.examLv) + " 시험 " + dateKo(S.set.exam, true) + (n > 0 ? ", " + n + "일 남음" : ""));
   }
-  function openSettings() {
+  function openSettings(keep) {
+    var st = keep && !sheet.hidden ? $(".sheet-body").scrollTop : 0;
     var seg = function (key, opts) {
       return '<div class="seg set" data-k="' + key + '">' + opts.map(function (o) {
         return '<button data-v="' + o[0] + '"' + (String(S.set[key]) === o[0] ? ' class="on"' : '') + '>' + o[1] + '</button>';
@@ -129,23 +155,45 @@
       '<div class="setrow"><span>글자 크기</span>' + seg("big", [["false", "보통"], ["true", "크게"]]) + '</div>' +
       '<div class="setrow"><span>학습 카드의 정답 가리기 (평가 버튼을 누르면 공개)</span>' + seg("hide", [["true", "가리기"], ["false", "바로 보기"]]) + '</div>' +
       '<div class="setrow"><span>카드가 나올 때 발음 자동 재생</span>' + seg("autoSpeak", [["true", "켜기"], ["false", "끄기"]]) + '</div>' +
+      voiceSection(seg) +
       examSection() +
       '<p class="note">컴퓨터에서는 1·2·3 키로 평가하고, 정답이 보일 때 Enter로 다음 단어로 넘어가요.</p></div>');
+    var vsel = $("#voice-name");
+    if (vsel) vsel.onchange = function () { S.set.voiceName = vsel.value; save(); pickVoice(); speak("你好，我们一起学习汉语吧。"); openSettings(true); };
+    var vt = $("#voice-test"); if (vt) vt.onclick = function () { speak("你好，我们一起学习汉语吧。"); };
     var es = $("#exam-date"), ec = $("#exam-custom");
     es.onchange = function () {
       if (es.value === "custom") { ec.hidden = false; ec.focus(); return; }
       S.set.exam = es.value; save(); renderDday(); openSettings(); scrollToExam();
     };
     ec.onchange = function () { if (ec.value) { S.set.exam = ec.value; save(); renderDday(); openSettings(); scrollToExam(); } };
+    if (st) $(".sheet-body").scrollTop = st;
     sheetContent.querySelectorAll(".seg.set button").forEach(function (b) {
       b.onclick = function () {
         var k = b.parentNode.dataset.k, v = b.dataset.v;
         S.set[k] = v === "true" ? true : v === "false" ? false : v;
         if (k === "examLv" && S.set.exam && EXAM_DATES[v === "7-9" ? "adv" : "std"].indexOf(S.set.exam) < 0 && EXAM_DATES[v === "7-9" ? "std" : "adv"].indexOf(S.set.exam) >= 0) S.set.exam = "";
-        save(); applySettings(); renderDday(); openSettings();
+        save(); applySettings(); renderDday(); openSettings(true);
         if (/^(ddOn|examLv)$/.test(k)) scrollToExam();
+        if (/^(voiceG|rate)$/.test(k)) { if (k === "voiceG") { S.set.voiceName = ""; save(); pickVoice(); openSettings(true); } speak("你好，我们一起学习汉语吧。"); }
       };
     });
+  }
+  function voiceSection(seg) {
+    var vs = zhVoices(), g = S.set.voiceG;
+    var hasG = vs.some(function (v) { return voiceGender(v) === g; });
+    var opts = vs.map(function (v) {
+      return '<option value="' + esc(v.name) + '"' + (zhVoice && v.name === zhVoice.name ? " selected" : "") + '>' + esc(voiceLabel(v)) + '</option>';
+    }).join("");
+    return '<div class="stack" id="voice-sec" style="gap:10px">' +
+      '<div class="setrow"><span>목소리</span>' + seg("voiceG", [["f", "여성"], ["m", "남성"]]) + '</div>' +
+      '<div class="setrow"><span>말하기 속도</span>' + seg("rate", [["0.7", "느리게"], ["0.85", "조금 느리게"], ["1", "보통"]]) + '</div>' +
+      (vs.length ? '<div class="setrow"><span>이 기기의 중국어 음성 (' + vs.length + '개, 자연스러운 순)</span>' +
+        '<div style="display:flex;gap:8px"><select id="voice-name" class="sel" style="flex:1;margin:0">' + opts + '</select><button class="speak" id="voice-test" style="flex:none">🔊 들어보기</button></div></div>' : '') +
+      (!vs.length ? '<p class="small muted" style="margin:0">이 기기에서 중국어 음성을 찾지 못했어요.</p>' :
+        !hasG ? '<p class="small muted" style="margin:0">이 기기에는 ' + (g === "m" ? "남성" : "여성") + ' 중국어 음성이 없어 다른 음성으로 읽어요.</p>' : '') +
+      '<p class="note" style="text-align:left;margin:0">💡 더 자연스러운 목소리: iPhone은 <b>설정 › 손쉬운 사용 › 읽고 말하기 › 음성 › 중국어(중국 본토)</b>에서 ' +
+      '<b>Lili(고음질, 여성)</b>나 <b>Li-Mu(남성)</b>를 내려받으면 여기 목록에 나타나요. 컴퓨터는 Edge 브라우저의 Xiaoxiao(여)·Yunxi(남) 음성이 가장 자연스러워요.</p></div>';
   }
   function scrollToExam() { var e = $("#exam-sec"); if (e) e.scrollIntoView({ block: "start" }); }
   function examSection() {
@@ -630,7 +678,7 @@
         if (!d || typeof d.cards !== "object") throw new Error("형식");
         if (!confirm("지금 기록을 불러온 파일 내용으로 바꿀까요?")) return;
         S = d; S.cards = S.cards || {}; S.hz = S.hz || {}; S.log = S.log || {}; S.lv = LEVELS.indexOf(S.lv) >= 0 ? S.lv : 1;
-        S.set = Object.assign({ theme: "auto", big: false, autoSpeak: true, perDay: 10, hide: true, ddOn: true, examLv: "3", exam: "" }, S.set || {});
+        S.set = Object.assign({ theme: "auto", big: false, autoSpeak: true, perDay: 10, hide: true, ddOn: true, examLv: "3", exam: "", voiceG: "f", voiceName: "", rate: "0.85" }, S.set || {});
         S.saved = S.saved || {}; S.saved.ex = S.saved.ex || {}; S.saved.hz = S.saved.hz || {}; S.exCards = S.exCards || {}; S.hzCards = S.hzCards || {};
         save(); applySettings(); renderStats();
       }).catch(function () { alert("이 파일은 불러올 수 없어요."); });
