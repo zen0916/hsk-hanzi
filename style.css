@@ -338,3 +338,10 @@ body.big .tip p { font-size: 15px; }
 .mv-b button { border: 1.5px solid var(--line); background: var(--surface); border-radius: 99px; padding: 9px 4px; font-size: 14px; font-weight: 700; color: var(--muted); }
 .mv-b button.on { color: #fff; border-color: transparent; }
 .mv-b .r0.on { background: var(--bad); } .mv-b .r1.on { background: var(--warn); } .mv-b .r2.on { background: var(--good); }
+.addw { display: grid; gap: 8px; }
+#myres { display: grid; gap: 6px; }
+.res { display: flex; align-items: stretch; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.res .row { flex: 1; min-width: 0; border: 0; background: none; }
+.addb { flex: none; border: 0; margin: 8px 8px 8px 0; border-radius: 99px; padding: 0 14px; font-weight: 700; font-size: 14px; background: var(--accent); color: #fff; }
+.addb.done { background: var(--surface-2); color: var(--muted); }
+.custom { background: var(--accent-soft); border-radius: 14px; padding: 12px; gap: 8px; font-size: 14px; }

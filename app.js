@@ -27,6 +27,17 @@
   S.cards = S.cards || {};
   S.saved = S.saved || {}; S.saved.ex = S.saved.ex || {}; S.saved.hz = S.saved.hz || {};
   S.exCards = S.exCards || {}; S.hzCards = S.hzCards || {};
+  S.saved.my = S.saved.my || {};   // 내가 직접 추가한 단어 (모의고사 등에서 찾은 단어)
+  S.custom = S.custom || {};       // HSK 목록에 없는 단어: { 단어: { p: 병음, m: 뜻 } }
+  var CUSTOM = [];
+  function regCustom(w) {
+    var c = S.custom[w]; if (!c || BYW[w] && !BYW[w].custom) return;
+    var x = { w: w, p: c.p || "", m: c.m || "", lv: 0, custom: true };
+    if (!BYW[w]) CUSTOM.push(x); else CUSTOM[CUSTOM.indexOf(BYW[w])] = x;
+    BYW[w] = x;
+  }
+  Object.keys(S.custom).forEach(regCustom);
+  function lvTag(x) { return x.lv ? "HSK " + x.lv : "내 단어"; }
   S.lv = LEVELS.indexOf(S.lv) >= 0 ? S.lv : 1;
   function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 
@@ -35,7 +46,7 @@
   var DAY = 86400000;
   function known(w) { var c = S.cards[w]; if (!c) return 0; return c.box >= 3 ? 2 : 1; }
   function inLv(lv) { return function (x) { return x.lv === lv; }; }
-  function dueList() { var now = Date.now(); return WORDS.filter(function (x) { var c = S.cards[x.w]; return c && c.due <= now; }); }
+  function dueList() { var now = Date.now(); return WORDS.concat(CUSTOM).filter(function (x) { var c = S.cards[x.w]; return c && c.due <= now; }); }
   function newList(lv) {
     return WORDS.filter(function (x) { return x.lv === lv && !S.cards[x.w]; })
       .sort(function (a, b) { return ORDER[a.w] - ORDER[b.w]; });
@@ -353,7 +364,7 @@
       '<div class="progress"><span>' + (done + 1) + ' / ' + session.q.length + '</span><div class="bar"><i style="width:' + (done / session.q.length * 100) + '%"></i></div>' +
       '<button class="speak" id="quit">그만</button></div>' +
       '<div class="panel card">' +
-      '<div class="lvtag">HSK ' + x.lv + '</div>' +
+      '<div class="lvtag">' + lvTag(x) + '</div>' +
       '<div class="word">' + esc(x.w) + '</div>' +
       '<button class="speak" id="say">🔊 발음 듣기</button>' +
       veil('<div class="pinyin">' + esc(x.p) + '</div><div class="meaning">' + esc(x.m) + '</div>', "") +
@@ -680,7 +691,7 @@
         if (!confirm("지금 기록을 불러온 파일 내용으로 바꿀까요?")) return;
         S = d; S.cards = S.cards || {}; S.hz = S.hz || {}; S.log = S.log || {}; S.lv = LEVELS.indexOf(S.lv) >= 0 ? S.lv : 1;
         S.set = Object.assign({ theme: "auto", big: false, autoSpeak: true, perDay: 10, hide: true, ddOn: true, examLv: "3", exam: "", voiceG: "f", voiceName: "", rate: "0.85" }, S.set || {});
-        S.saved = S.saved || {}; S.saved.ex = S.saved.ex || {}; S.saved.hz = S.saved.hz || {}; S.exCards = S.exCards || {}; S.hzCards = S.hzCards || {};
+        S.saved = S.saved || {}; S.saved.ex = S.saved.ex || {}; S.saved.hz = S.saved.hz || {}; S.exCards = S.exCards || {}; S.hzCards = S.hzCards || {}; S.saved.my = S.saved.my || {}; S.custom = S.custom || {}; Object.keys(S.custom).forEach(regCustom);
         save(); applySettings(); renderStats();
       }).catch(function () { alert("이 파일은 불러올 수 없어요."); });
     };
@@ -693,12 +704,13 @@
     var g = [[], [], []];
     Object.keys(S.cards).forEach(function (w) { var l = lastOf(w); if (l >= 0 && BYW[w]) g[l].push(BYW[w]); });
     var byTime = function (store) { return Object.keys(store).sort(function (a, b) { return store[b] - store[a]; }); };
-    return { g0: g[0], g1: g[1], g2: g[2], ex: byTime(S.saved.ex).filter(function (w) { return EX[w]; }), hz: byTime(S.saved.hz) };
+    var my = byTime(S.saved.my).map(function (w) { return BYW[w]; }).filter(Boolean);
+    return { my: my, g0: g[0], g1: g[1], g2: g[2], ex: byTime(S.saved.ex).filter(function (w) { return EX[w]; }), hz: byTime(S.saved.hz) };
   }
   function renderBook() {
     if (session) return renderCard();
     var L = bookLists();
-    var segs = [["g0", "몰랐어요"], ["g1", "헷갈려요"], ["g2", "알아요"], ["ex", "예문"], ["hz", "한자"]];
+    var segs = [["my", "내 단어"], ["g0", "몰랐어요"], ["g1", "헷갈려요"], ["g2", "알아요"], ["ex", "예문"], ["hz", "한자"]];
     var list = L[bookSeg], body;
     if (bookSeg === "ex") {
       body = list.map(function (w) {
@@ -714,10 +726,12 @@
       }).join("");
     } else {
       body = list.map(function (x) {
-        return '<li><button class="row" data-w="' + esc(x.w) + '"><span class="w">' + esc(x.w) + '</span><span class="d"><div>' + esc(x.p) + '</div><div>' + esc(x.m) + '</div></span><span class="lvs">' + x.lv + '</span></button></li>';
+        return '<li><button class="row" data-w="' + esc(x.w) + '"><span class="w">' + esc(x.w) + '</span><span class="d"><div>' + esc(x.p) + '</div><div>' + esc(x.m) + '</div></span><span class="lvs">' + (x.lv || "내") + '</span></button>' +
+          (bookSeg === "my" ? '<button class="x" data-unmy="' + esc(x.w) + '" aria-label="내 단어에서 빼기">✕</button>' : '') + '</li>';
       }).join("");
     }
-    var hint = { g0: "학습 카드에서 ‘몰랐어요’를 누른 단어가 모여요. 다시 ‘알아요’를 누르면 그쪽으로 옮겨 가요.",
+    var hint = { my: "모의고사나 교재에서 모르는 단어를 찾으면 검색해서 추가하세요. HSK 목록에 없는 단어도 직접 넣을 수 있어요.",
+      g0: "학습 카드에서 ‘몰랐어요’를 누른 단어가 모여요. 다시 ‘알아요’를 누르면 그쪽으로 옮겨 가요.",
       g1: "‘헷갈려요’를 누른 단어가 모여요.", g2: "‘알아요’를 누른 단어가 모여요.",
       ex: "예문 옆 ‘☆ 저장’을 누르면 여기에 모여요. 문장을 보고 병음과 뜻을 떠올리며 외워요.",
       hz: "한자 상세나 구성 요소에서 ‘☆ 이 한자 외우기’를 누르면 여기에 모여요." }[bookSeg];
@@ -725,12 +739,15 @@
         return '<button data-b="' + sg[0] + '"' + (sg[0] === bookSeg ? ' class="on"' : '') + '>' + sg[1] + ' <b>' + L[sg[0]].length + '</b></button>';
       }).join("") + '</div>' +
       '<p class="small muted" style="margin:0">' + hint + '</p>' +
+      (bookSeg === "my" ? '<div class="addw"><input class="search" id="myq" type="search" placeholder="추가할 단어 검색 (한자·병음·뜻)" value="' + esc(myQuery) + '" autocomplete="off"><div id="myres"></div></div>' : '') +
       (list.length ? '<button class="btn" id="bstudy">이 단어장 학습하기 · ' + Math.min(list.length, 30) + '개</button><ul class="list">' + body + '</ul>'
         : '<div class="panel small muted empty">아직 비어 있어요.</div>') + '</div>';
     view.querySelectorAll(".seg.bk button").forEach(function (b) { b.onclick = function () { bookSeg = b.dataset.b; renderBook(); }; });
     view.querySelectorAll("[data-w]").forEach(function (b) { b.onclick = function () { openWord(b.dataset.w); }; });
     view.querySelectorAll("[data-any]").forEach(function (b) { b.onclick = function () { openAnyChar(b.dataset.any); }; });
     view.querySelectorAll("[data-unsave]").forEach(function (b) { b.onclick = function () { delete S.saved.ex[b.dataset.unsave]; save(); renderBook(); }; });
+    view.querySelectorAll("[data-unmy]").forEach(function (b) { b.onclick = function () { delete S.saved.my[b.dataset.unmy]; save(); renderBook(); }; });
+    if (bookSeg === "my") bindMySearch();
     view.querySelectorAll("[data-unlearn]").forEach(function (b) { b.onclick = function () { delete S.saved.hz[b.dataset.unlearn]; save(); renderBook(); }; });
     var st = $("#bstudy");
     if (st) st.onclick = function () {
@@ -747,6 +764,70 @@
       session = { q: items, i: 0, open: false };
       renderCard(); window.scrollTo(0, 0);
     };
+  }
+
+  // ---------- 내 단어 추가 (검색 → 추가, 없으면 직접 입력) ----------
+  var myQuery = "";
+  function plainPy(s) { return String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[\s'·]/g, ""); }
+  function searchWords(t) {
+    t = t.trim().toLowerCase(); if (!t) return [];
+    var pt = plainPy(t), exact = [], rest = [];
+    WORDS.concat(CUSTOM).forEach(function (x) {
+      if (x.w === t || plainPy(x.p) === pt) exact.push(x);
+      else if (x.w.indexOf(t) >= 0 || x.m.indexOf(t) >= 0 || (pt && /^[a-z]+$/.test(pt) && plainPy(x.p).indexOf(pt) === 0)) rest.push(x);
+    });
+    rest.sort(function (a, b) { return a.w.length - b.w.length || a.lv - b.lv; });
+    return exact.concat(rest).slice(0, 15);
+  }
+  function autoPinyin(w) { return Array.from(w).map(function (c) { return H[c] && H[c].y || ""; }).join(""); }
+  function addMy(w) { S.saved.my[w] = Date.now(); save(); toast("‘" + w + "’를 내 단어에 추가했어요"); }
+  function drawMyResults() {
+    var box = $("#myres"); if (!box) return;
+    var t = myQuery.trim(); if (!t) { box.innerHTML = ""; return; }
+    var res = searchWords(t);
+    var han = /^[㐀-鿿]+$/.test(t);
+    var html = res.map(function (x) {
+      var has = !!S.saved.my[x.w];
+      return '<div class="res"><button class="row" data-w="' + esc(x.w) + '"><span class="w">' + esc(x.w) + '</span><span class="d"><div>' + esc(x.p) + '</div><div>' + esc(x.m) + '</div></span><span class="lvs">' + (x.lv || "내") + '</span></button>' +
+        '<button class="addb' + (has ? ' done' : '') + '" data-add="' + esc(x.w) + '">' + (has ? '✓ 추가됨' : '+ 추가') + '</button></div>';
+    }).join("");
+    if (han && !BYW[t]) {
+      html += '<div class="custom stack"><b>‘' + esc(t) + '’는 HSK 1~5급 목록에 없어요. 직접 추가할까요?</b>' +
+        '<input class="search" id="cp" placeholder="병음 (예: nǐ hǎo 또는 ni3 hao3)" value="' + esc(autoPinyin(t)) + '">' +
+        '<input class="search" id="cm" placeholder="뜻 (예: 안녕하세요)">' +
+        '<button class="btn" id="cadd">+ 내 단어로 추가</button></div>';
+    } else if (!res.length) {
+      html = '<p class="small muted" style="margin:4px 0">검색 결과가 없어요. 한자로 입력하면 목록에 없는 단어도 직접 추가할 수 있어요.</p>';
+    }
+    box.innerHTML = html;
+    box.querySelectorAll("[data-w]").forEach(function (b) { b.onclick = function () { openWord(b.dataset.w); }; });
+    box.querySelectorAll("[data-add]").forEach(function (b) {
+      b.onclick = function () { if (S.saved.my[b.dataset.add]) return; addMy(b.dataset.add); myQuery = ""; renderBook(); };
+    });
+    var ca = $("#cadd");
+    if (ca) ca.onclick = function () {
+      var m = $("#cm").value.trim(), p = numToTone($("#cp").value.trim());
+      if (!m) { $("#cm").focus(); toast("뜻을 입력해 주세요"); return; }
+      S.custom[t] = { p: p, m: m }; regCustom(t); addMy(t); myQuery = ""; renderBook();
+    };
+  }
+  // ni3 hao3 → nǐ hǎo (숫자 성조 입력도 받아 줌)
+  function numToTone(s) {
+    var M = { a: "āáǎà", e: "ēéěè", i: "īíǐì", o: "ōóǒò", u: "ūúǔù", "ü": "ǖǘǚǜ" };
+    return s.replace(/v/g, "ü").replace(/([a-zü]+)([1-5])/gi, function (all, syl, n) {
+      n = +n; if (n === 5) return syl;
+      var lower = syl.toLowerCase(), idx = -1;
+      if (/a/.test(lower)) idx = lower.indexOf("a"); else if (/e/.test(lower)) idx = lower.indexOf("e");
+      else if (/ou/.test(lower)) idx = lower.indexOf("o");
+      else for (var k = lower.length - 1; k >= 0; k--) if ("aeiouü".indexOf(lower[k]) >= 0) { idx = k; break; }
+      if (idx < 0) return syl;
+      var v = lower[idx]; return syl.slice(0, idx) + M[v][n - 1] + syl.slice(idx + 1);
+    });
+  }
+  function bindMySearch() {
+    var q = $("#myq"); if (!q) return;
+    q.oninput = function () { myQuery = q.value; drawMyResults(); };
+    drawMyResults();
   }
 
   // ---------- 단어 목록 ----------
@@ -984,7 +1065,7 @@
     openSheet(
       '<div class="stack">' +
       '<div class="hero"><div class="word">' + esc(x.w) + '</div><div class="pinyin">' + esc(x.p) + '</div><div class="meaning">' + esc(x.m) + '</div>' +
-      '<div class="small muted">HSK ' + x.lv + '급</div>' +
+      '<div class="small muted">' + (x.lv ? 'HSK ' + x.lv + '급' : '내가 추가한 단어') + '</div>' +
       '<button class="speak" id="sw">🔊 발음 듣기</button></div>' +
       '<div class="mv" id="mv"></div>' +
       wordExtra(x) +
