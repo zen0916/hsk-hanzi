@@ -127,7 +127,7 @@
     openSheet('<div class="stack"><h2 class="sh">설정</h2>' +
       '<div class="setrow"><span>화면 테마</span>' + seg("theme", [["auto", "자동"], ["light", "밝게"], ["dark", "어둡게"]]) + '</div>' +
       '<div class="setrow"><span>글자 크기</span>' + seg("big", [["false", "보통"], ["true", "크게"]]) + '</div>' +
-      '<div class="setrow"><span>학습 카드의 정답 가리기 (몰랐어요·헷갈려요를 누르면 공개)</span>' + seg("hide", [["true", "가리기"], ["false", "바로 보기"]]) + '</div>' +
+      '<div class="setrow"><span>학습 카드의 정답 가리기 (평가 버튼을 누르면 공개)</span>' + seg("hide", [["true", "가리기"], ["false", "바로 보기"]]) + '</div>' +
       '<div class="setrow"><span>카드가 나올 때 발음 자동 재생</span>' + seg("autoSpeak", [["true", "켜기"], ["false", "끄기"]]) + '</div>' +
       examSection() +
       '<p class="note">컴퓨터에서는 1·2·3 키로 평가하고, 정답이 보일 때 Enter로 다음 단어로 넘어가요.</p></div>');
@@ -233,8 +233,8 @@
       '<div class="panel small muted">' +
       '<b style="color:var(--text)">이렇게 공부해요</b><br>' +
       '① 단어를 보고 뜻을 떠올려 보세요.<br>' +
-      '② 정답을 열면 단어를 이루는 한자와 연상법이 나와요. 한자를 누르면 유래와 부수, 같은 한자가 쓰인 다른 단어를 볼 수 있어요.<br>' +
-      '③ 얼마나 알았는지 고르면 알맞은 때에 다시 복습시켜 드려요.<br>' +
+      '② 알았는지 고르면 정답과 함께 단어를 이루는 한자와 연상법이 나와요. 한자를 누르면 유래와 부수, 같은 한자가 쓰인 다른 단어를 볼 수 있어요.<br>' +
+      '③ 고른 결과에 따라 알맞은 때에 다시 복습시켜 드려요.<br>' +
       '④ 새 단어는 같은 한자로 시작하는 단어끼리 이어서 나와요.' +
       '</div>' +
       '<p class="note">HSK 3.0 (2026 개정) 기준 · 단어 목록: complete-hsk-vocabulary (MIT) · 한자 분해·획순: Make Me a Hanzi (LGPL·Arphic) · 뜻·유래·연상법은 AI가 작성</p>' +
@@ -307,7 +307,7 @@
       '<div class="lvtag">HSK ' + x.lv + '</div>' +
       '<div class="word">' + esc(x.w) + '</div>' +
       '<button class="speak" id="say">🔊 발음 듣기</button>' +
-      veil('<div class="pinyin">' + esc(x.p) + '</div><div class="meaning">' + esc(x.m) + '</div>', "몰랐어요·헷갈려요를 누르면 정답이 보여요") +
+      veil('<div class="pinyin">' + esc(x.p) + '</div><div class="meaning">' + esc(x.m) + '</div>', "") +
       '</div>';
     if (session.open) {
       var ex = wordExtra(x);
@@ -338,8 +338,8 @@
     }
   }
 
-  // 정답 가림: 정답은 가려 두고, '몰랐어요/헷갈려요'를 누르면 정답을 보여 준 뒤 '다음'으로,
-  // '알아요'를 누르면 바로 다음 카드로 넘어간다. (설정에서 끄면 정답이 처음부터 보이고 모든 버튼이 바로 넘어감)
+  // 정답 가림: 정답은 가려 두고, 평가 버튼(몰랐어요/헷갈려요/알아요)을 누르면 정답을 보여 준 뒤 '다음 단어'로.
+  // (설정에서 끄면 정답이 처음부터 보이고 평가하면 바로 다음 카드로 넘어감)
   function veiled() { return S.set.hide && session && session.shown !== session.i; }
   function veil(html, label) {
     return veiled() ? '<div class="veil">' +
@@ -347,7 +347,7 @@
   }
   function nextCard() { session.i++; session.open = false; renderCard(); window.scrollTo(0, 0); }
   function afterRate(g) {
-    if (g === 2 || !view.querySelector(".veil")) return nextCard();
+    if (!view.querySelector(".veil")) return nextCard();
     showVeil();
     var r = view.querySelector(".rate");
     r.className = "rate sticky one";
@@ -400,7 +400,7 @@
       '<div class="progress"><span>' + (done + 1) + ' / ' + session.q.length + '</span><div class="bar"><i style="width:' + (done / session.q.length * 100) + '%"></i></div>' +
       '<button class="speak" id="quit">그만</button></div>' +
       '<div class="panel card">' + front + '<button class="speak" id="say">🔊 발음 듣기</button>' +
-      veil(back, "몰랐어요·헷갈려요를 누르면 정답이 보여요") + '</div>' +
+      veil(back, "") + '</div>' +
       (session.open ? (isEx ? '' : '<button class="btn ghost" data-c2="' + esc(it.c) + '">자세히 보기</button>') + rateButtons(next)
         : '<button class="btn" id="reveal">정답 보기</button>') + '</div>';
     $("#say").onclick = function () { speak(sayText); };
