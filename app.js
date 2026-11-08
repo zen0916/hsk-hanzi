@@ -193,7 +193,8 @@
       (!vs.length ? '<p class="small muted" style="margin:0">이 기기에서 중국어 음성을 찾지 못했어요.</p>' :
         !hasG ? '<p class="small muted" style="margin:0">이 기기에는 ' + (g === "m" ? "남성" : "여성") + ' 중국어 음성이 없어 다른 음성으로 읽어요.</p>' : '') +
       '<p class="note" style="text-align:left;margin:0">💡 더 자연스러운 목소리: iPhone은 <b>설정 › 손쉬운 사용 › 읽고 말하기 › 음성 › 중국어(중국 본토)</b>에서 ' +
-      '<b>Lili(고음질, 여성)</b>나 <b>Li-Mu(남성)</b>를 내려받으면 여기 목록에 나타나요. 컴퓨터는 Edge 브라우저의 Xiaoxiao(여)·Yunxi(남) 음성이 가장 자연스러워요.</p></div>';
+      '<b>Lili(고음질, 여성)</b>나 <b>Li-Mu(남성)</b>를 내려받으면 여기 목록에 나타나요. 컴퓨터는 Edge 브라우저의 Xiaoxiao(여)·Yunxi(남) 음성이 가장 자연스러워요.</p>' +
+      '<a class="btn ghost" href="voice-test.html" style="text-align:center;text-decoration:none">🎧 AI 음성 미리 듣기 (테스트)</a></div>';
   }
   function scrollToExam() { var e = $("#exam-sec"); if (e) e.scrollIntoView({ block: "start" }); }
   function examSection() {

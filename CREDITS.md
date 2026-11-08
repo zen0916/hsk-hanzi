@@ -4,3 +4,6 @@
 - **한자 분해·부수·유래 힌트** — [Make Me a Hanzi](https://github.com/skishore/makemeahanzi) `dictionary.txt` (GNU LGPL v3 이상). → `src/hanzi-decomp.json`
 - **획순 데이터** — Make Me a Hanzi `graphics.txt` (Arphic Public License, Arphic PL KaitiM GB / UKai 글꼴에서 파생). → `strokes/*.json`
 - **한국어 뜻·훈음·유래 설명·연상법** — Claude(AI) 작성. → `src/ko-*.txt`, `src/gloss.txt`
+
+## AI 음성 (테스트 샘플)
+- `audio-sample/` 의 음성은 Kokoro-82M-v1.1-zh (hexgrad, Apache License 2.0) 모델을 sherpa-onnx (k2-fsa, Apache License 2.0)로 실행해 만들었습니다.
