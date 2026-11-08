@@ -313,9 +313,9 @@
       var ex = wordExtra(x);
       html += veil('<div class="chars">' + charTiles(x.w) + '</div>' + ex, "") +
         '<div class="rate sticky">' +
-        '<button class="r0" data-g="0">몰랐어요<small>곧 다시</small></button>' +
-        '<button class="r1" data-g="1">헷갈려요<small>내일</small></button>' +
-        '<button class="r2" data-g="2">알아요<small>' + nextLabel(x.w) + '</small></button>' +
+        '<button class="r0" data-g="0">몰랐어요</button>' +
+        '<button class="r1" data-g="1">헷갈려요</button>' +
+        '<button class="r2" data-g="2">알아요</button>' +
         '</div>';
     } else {
       html += '<button class="btn" id="reveal">정답 보기</button>';
@@ -375,9 +375,9 @@
 
   // 저장한 예문 카드 / 외울 한자 카드
   function rateButtons(next) {
-    return '<div class="rate sticky"><button class="r0" data-g="0">몰랐어요<small>곧 다시</small></button>' +
-      '<button class="r1" data-g="1">헷갈려요<small>내일</small></button>' +
-      '<button class="r2" data-g="2">알아요<small>' + next + '</small></button></div>';
+    return '<div class="rate sticky"><button class="r0" data-g="0">몰랐어요</button>' +
+      '<button class="r1" data-g="1">헷갈려요</button>' +
+      '<button class="r2" data-g="2">알아요</button></div>';
   }
   function renderAltCard(it) {
     var isEx = it.k === "ex", store = isEx ? S.exCards : S.hzCards, id = isEx ? it.w : it.c;
