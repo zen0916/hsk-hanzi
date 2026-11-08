@@ -275,7 +275,7 @@
     showVeil();
     var r = view.querySelector(".rate");
     r.className = "rate sticky one";
-    r.innerHTML = '<button class="next" id="next">' + (g === 0 ? '몰랐어요' : '헷갈려요') + ' · 정답 확인 후 <b>다음 단어 →</b></button>';
+    r.innerHTML = '<button class="next" id="next">다음 단어 →</button>';
     $("#next").onclick = nextCard;
     cardKeys = function (e) { if (/^(Enter| |[123])$/.test(e.key)) { e.preventDefault(); nextCard(); } };
     bindCharTiles(view); bindExtra(view);
