@@ -318,7 +318,7 @@ body.big .tip p { font-size: 15px; }
 .sel { width: 100%; font: inherit; font-size: 15px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--text); margin-top: 6px; }
 .dday[hidden], .sel[hidden] { display: none; }
 .fbar { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.fpill { display: flex; align-items: center; gap: 8px; text-align: left; border: 1.5px solid var(--accent); background: var(--accent-soft); border-radius: 14px; padding: 10px 12px; color: var(--text); box-shadow: 0 1px 0 rgba(17,45,78,.06); }
+.fpill { display: flex; align-items: center; gap: 8px; text-align: left; border: 1.5px solid var(--accent); background: var(--accent-soft); border-radius: 99px; padding: 8px 14px 8px 20px; color: var(--text); box-shadow: 0 1px 0 rgba(17,45,78,.06); }
 .fpill .fic { width: 18px; height: 18px; color: var(--accent); flex: none; }
 .fpill .fv { display: grid; line-height: 1.25; flex: 1; min-width: 0; }
 .fpill .fv small { font-size: 11px; color: var(--muted); font-weight: 600; }

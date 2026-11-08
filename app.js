@@ -257,8 +257,8 @@
   function filterBar(lv, perDay) {
     var car = '<svg class="car" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     return '<div class="fbar">' +
-      '<button class="fpill" id="f-lv" aria-label="급수 바꾸기">' + FUNNEL + '<span class="fv"><small>급수</small><b>HSK ' + lv + '급</b></span>' + car + '</button>' +
-      '<button class="fpill" id="f-per" aria-label="하루 새 단어 수 바꾸기">' + FUNNEL + '<span class="fv"><small>하루 새 단어</small><b>' + perDay + '개</b></span>' + car + '</button></div>';
+      '<button class="fpill" id="f-lv" aria-label="급수 바꾸기"><span class="fv"><small>급수</small><b>HSK ' + lv + '급</b></span>' + car + '</button>' +
+      '<button class="fpill" id="f-per" aria-label="하루 새 단어 수 바꾸기"><span class="fv"><small>하루 새 단어</small><b>' + perDay + '개</b></span>' + car + '</button></div>';
   }
   function pick(title, opts, cur, fn) {
     openSheet('<div class="stack"><h2 class="sh">' + title + '</h2><div class="picks">' + opts.map(function (o) {
