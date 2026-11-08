@@ -711,15 +711,70 @@
       };
     });
   }
+  // ---------- 외우는 법: 뜻 부분 + 소리 부분, 소리 가족·뜻 가족 ----------
+  var COMP = window.COMP || {};
+  var BY_PHO = {}, BY_SEM = {};
+  Object.keys(H).forEach(function (c) {
+    if (H[c].f) (BY_PHO[H[c].f] = BY_PHO[H[c].f] || []).push(c);
+    if (H[c].s) (BY_SEM[H[c].s] = BY_SEM[H[c].s] || []).push(c);
+  });
+  function lvSort(a, b) { return H[a].lv - H[b].lv; }
+  function nameOf(x) { return H[x] ? hunOnly(x) : (G[x] || "").replace(/\s*\(.*\)$/, ""); }
+  function pyOf(x) { return H[x] ? (H[x].y || "") : ((COMP[x] || {}).y || ""); }
+  // 구성 요소 하나를 '역할' 표시와 함께 보여 주는 칩
+  function roleChip(x, role) {
+    var attr = H[x] ? 'data-c="' + esc(x) + '"' : 'data-comp="' + esc(x) + '"';
+    return '<button class="fx ' + (role || "") + '" ' + attr + '><span class="fx-z">' + esc(x) + '</span>' +
+      '<span class="fx-n">' + esc(nameOf(x)) + '</span>' +
+      (role === "sem" ? '<span class="fx-r">뜻</span>' : role === "pho" ? '<span class="fx-r">소리 ' + esc(pyOf(x)) + '</span>' : '') + '</button>';
+  }
+  // 熬 = 灬(불·뜻) + 敖(거만할 오·소리 áo)
+  function formula(c) {
+    var h = H[c], parts;
+    if (h.s && h.f) parts = [roleChip(h.s, "sem"), roleChip(h.f, "pho")];
+    else if (h.p.length) parts = h.p.map(function (x) { return roleChip(x, ""); });
+    else return '<p class="muted small" style="margin:0">더 나누지 않는 기본 글자 — 모양 자체가 뜻을 그린 그림이에요.</p>';
+    return '<div class="formula">' + parts.join('<span class="op">+</span>') +
+      '<span class="op">=</span><span class="fx res"><span class="fx-z">' + esc(c) + '</span><span class="fx-n">' + esc(hunOnly(c)) + '</span>' +
+      (h.y ? '<span class="fx-r">' + esc(h.y) + '</span>' : '') + '</span></div>';
+  }
+  function famRow(list, me) {
+    return '<div class="fam">' + list.map(function (x) {
+      return '<button class="fam-c' + (x === me ? ' me' : '') + '" data-c="' + esc(x) + '"><span class="z">' + esc(x) + '</span>' +
+        '<span class="py">' + esc(H[x].y || "") + '</span><span class="k">' + esc(hunOnly(x)) + '</span></button>';
+    }).join("") + '</div>';
+  }
+  // 소리 가족 / 뜻 가족 섹션
+  function families(c, asPart) {
+    var h = H[c] || {}, out = "";
+    if (!asPart && h.f && (BY_PHO[h.f] || []).length > 1) {
+      out += '<div class="sec"><h3>🔊 소리 가족 — ' + esc(h.f) + '(' + esc(pyOf(h.f)) + ') 들어가면 소리가 비슷해요</h3>' + famRow(BY_PHO[h.f].slice().sort(lvSort), c) + '</div>';
+    }
+    if (!asPart && h.s && (BY_SEM[h.s] || []).length > 1) {
+      var sl = BY_SEM[h.s].slice().sort(lvSort);
+      out += '<div class="sec"><h3>💡 뜻 가족 — ' + esc(h.s) + '(' + esc(nameOf(h.s)) + ') 들어가면 뜻이 이어져요</h3>' + famRow(sl.slice(0, 12), c) +
+        (sl.length > 12 ? '<p class="small muted" style="margin:4px 0 0">외 ' + (sl.length - 12) + '자</p>' : '') + '</div>';
+    }
+    // 이 글자 자체가 다른 한자의 소리/뜻 부분으로 쓰일 때
+    var asPho = (BY_PHO[c] || []).slice().sort(lvSort), asSem = (BY_SEM[c] || []).slice().sort(lvSort);
+    if (asPho.length) out += '<div class="sec"><h3>🔊 ' + esc(c) + ' → 소리를 빌려 간 한자 (' + asPho.length + ')</h3>' + famRow(asPho) + '</div>';
+    if (asSem.length) out += '<div class="sec"><h3>💡 ' + esc(c) + ' → 뜻을 빌려 간 한자 (' + asSem.length + ')</h3>' + famRow(asSem.slice(0, 12)) +
+      (asSem.length > 12 ? '<p class="small muted" style="margin:4px 0 0">외 ' + (asSem.length - 12) + '자</p>' : '') + '</div>';
+    return out;
+  }
   function openComp(p) {
-    var used = compUsedIn(p);
+    var cm = COMP[p] || {}, used = compUsedIn(p);
+    var others = used.filter(function (c) { return H[c].f !== p && H[c].s !== p; });
     openSheet('<div class="stack"><div class="hero"><div class="stk" id="stk"><span class="z">' + esc(p) + '</span></div>' +
-      '<div class="k">' + esc(G[p] || "구성 요소") + '</div><div class="small muted">한자를 이루는 부품 (부수·구성 요소)</div>' +
+      '<div class="k">' + esc(G[p] || "구성 요소") + '</div><div class="small muted">한자를 이루는 부품' + (cm.y ? ' · ' + esc(cm.y) : '') + '</div>' +
       '<div class="btns">' + learnBtn(p) + '</div></div>' +
-      '<div class="memo"><h3>이 부품이 들어간 한자 (' + used.length + ')</h3><p>같은 부품을 가진 한자들은 뜻이나 소리가 비슷한 경우가 많아요.</p></div>' +
-      '<div class="grid">' + used.map(function (c) {
-        return '<button class="cell" data-c="' + esc(c) + '"><span class="z">' + esc(c) + '</span><span class="k">' + esc(hunOnly(c)) + '</span></button>';
-      }).join("") + '</div></div>');
+      (cm.m ? '<div class="memo"><h3>외우는 법</h3><p>' + esc(cm.m) + '</p></div>' : '') +
+      (cm.o || (cm.p || []).length ? '<div class="panel stack">' +
+        ((cm.p || []).length ? '<div class="sec"><h3>구성</h3><div class="formula">' + cm.p.map(function (x) { return roleChip(x, ""); }).join('<span class="op">+</span>') + '</div></div>' : '') +
+        (cm.o ? '<div class="sec"><h3>유래</h3><p>' + esc(cm.o) + '</p></div>' : '') + '</div>' : '') +
+      families(p, true) +
+      (others.length ? '<div class="sec"><h3>' + esc(p) + ' 부품이 들어간 다른 한자 (' + others.length + ')</h3>' + famRow(others.slice(0, 16)) + '</div>' : '') +
+      '</div>');
     bindCharTiles(sheetContent); bindLearn(sheetContent);
   }
   var toastT = null;
@@ -731,17 +786,21 @@
   function openChar(c) {
     var h = H[c]; if (!h) return;
     var words = (CHAR_WORDS[c] || []).slice().sort(function (a, b) { return a.lv - b.lv || a.w.length - b.w.length; });
-    var parts = h.p.length ? '<div class="parts">' + h.p.map(partChip).join("") + '</div>' : '<span class="muted">더 나누지 않는 기본 글자</span>';
     var r = h.r === c ? '<b class="zh">' + esc(c) + '</b> (자기 자신이 부수)' : partChip(h.r);
+    // 형성자는 소리 부분의 뜻까지 이어서 풀어 준다 (예: 熬 = 불(灬) + 敖 → 敖의 외우는 법)
+    var phoTip = h.f && !H[h.f] && COMP[h.f] && COMP[h.f].m ? COMP[h.f].m : "";
     openSheet(
       '<div class="stack">' +
-      '<div class="hero"><div class="stk" id="stk"><span class="z">' + esc(c) + '</span></div><div class="k">' + esc(h.k) + '</div>' +
+      '<div class="hero"><div class="stk" id="stk"><span class="z">' + esc(c) + '</span></div><div class="k">' + esc(h.k) + (h.y ? ' <span class="py-s">' + esc(h.y) + '</span>' : '') + '</div>' +
       '<div class="small muted">HSK ' + h.lv + '급 한자<span id="stkn"></span></div>' +
       '<div class="btns"><button class="speak" id="sc">🔊 발음 듣기</button><button class="speak" id="replay" hidden>✍️ 획순 다시 보기</button>' + learnBtn(c) + '</div></div>' +
+      '<div class="panel stack"><div class="sec"><h3>외우는 법</h3>' + formula(c) + '</div>' +
       (h.m ? '<div class="memo"><h3>연상법</h3><p>' + esc(h.m) + '</p></div>' : '') +
-      '<div class="panel stack">' +
-      '<dl class="kv"><dt>부수</dt><dd>' + r + '</dd><dt>구성</dt><dd>' + parts + '</dd></dl>' +
-      (h.o ? '<div class="sec"><h3>유래</h3><p>' + esc(h.o) + '</p></div>' : '') + '</div>' +
+      (h.s && h.f ? '<p class="small muted" style="margin:0">💡 ' + esc(h.s) + '(' + esc(nameOf(h.s)) + ')로 <b>뜻</b>을, ' + esc(h.f) + '(' + esc(pyOf(h.f)) + ')로 <b>소리</b>를 나타내요. 중국 한자의 80% 이상이 이렇게 만들어졌어요.</p>' : '') +
+      (phoTip ? '<div class="sec"><h3>소리 부분 ' + esc(h.f) + '(' + esc(nameOf(h.f)) + ')는?</h3><p>' + esc(phoTip) + '</p></div>' : '') +
+      (h.o ? '<div class="sec"><h3>유래</h3><p>' + esc(h.o) + '</p></div>' : '') +
+      '<dl class="kv"><dt>부수</dt><dd>' + r + '</dd></dl></div>' +
+      families(c, false) +
       '<div class="sec"><h3>이 한자가 쓰인 단어 (' + words.length + ')</h3><div class="chips">' +
       words.map(function (x) { return '<button class="chip" data-w="' + esc(x.w) + '"><span class="zh">' + esc(x.w) + '</span><span>' + esc(x.m) + ' · ' + x.lv + '급</span></button>'; }).join("") +
       '</div></div>' +

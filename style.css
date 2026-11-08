@@ -276,3 +276,23 @@ body.big .ex-py { font-size: 16px; }
 .rate.one { grid-template-columns: 1fr; }
 .rate .next { border: 0; border-radius: 14px; padding: 16px; font-size: 15px; color: #fff; background: var(--text); }
 .rate .next b { font-weight: 700; }
+
+/* 외우는 법 공식 · 가족 */
+.formula { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.formula .op { font-size: 18px; color: var(--muted); font-weight: 600; }
+.fx { display: inline-flex; flex-direction: column; align-items: center; min-width: 64px; padding: 6px 8px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); }
+.fx.sem { border-color: #2f7d4f; background: color-mix(in srgb, var(--good) 10%, var(--surface)); }
+.fx.pho { border-color: #b7791f; background: color-mix(in srgb, var(--warn) 12%, var(--surface)); }
+.fx.res { border-color: var(--accent); background: var(--accent-soft); }
+.fx-z { font-family: var(--zh); font-size: 26px; line-height: 1.2; }
+.fx-n { font-size: 11px; color: var(--muted); white-space: nowrap; }
+.fx-r { font-size: 11px; font-weight: 700; margin-top: 1px; }
+.fx.sem .fx-r { color: var(--good); } .fx.pho .fx-r { color: var(--warn); } .fx.res .fx-r { color: var(--accent); }
+.py-s { color: var(--accent); font-weight: 500; font-size: 15px; }
+.fam { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 6px; }
+.fam-c { display: flex; flex-direction: column; align-items: center; padding: 6px 4px; border: 1px solid var(--line); background: var(--surface); border-radius: 12px; }
+.fam-c.me { border-color: var(--accent); background: var(--accent-soft); }
+.fam-c .z { font-family: var(--zh); font-size: 24px; line-height: 1.2; }
+.fam-c .py { font-size: 12px; color: var(--accent); }
+.fam-c .k { font-size: 10px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.sec h3 { line-height: 1.4; }

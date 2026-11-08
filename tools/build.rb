@@ -90,7 +90,8 @@ chars.each do |c, lv|
   o = kc["o"].to_s.empty? ? auto_origin(d, KC) : kc["o"]
   r = d["r"] || c
   ([r] + parts + [d["sem"], d["pho"]].compact).each { |x| need_gloss[x] = 1 unless x == c || KC[x] || GL[x] }
-  out_h[c] = { "k" => "#{t} #{kc['k']}", "r" => r, "p" => parts, "o" => o.to_s, "m" => kc["m"].to_s, "lv" => lv }
+  out_h[c] = { "k" => "#{t} #{kc['k']}", "r" => r, "p" => parts, "o" => o.to_s, "m" => kc["m"].to_s, "lv" => lv,
+               "s" => d["sem"], "f" => d["pho"], "y" => (d["py"] || []).first }.compact
 end
 gl = {}
 out_h.each_value { |h| ([h["r"]] + h["p"]).each { |x| gl[x] = GL[x] if GL[x] && !out_h[x] } }
@@ -102,6 +103,20 @@ js << "window.LEVELS = #{(1..max_lv).to_a.to_json};\n"
 js << "window.WORDS = [\n" << out_words.map(&:to_json).join(",\n") << "\n];\n"
 js << "window.HANZI = {\n" << out_h.map { |c, h| "#{c.to_json}:#{h.to_json}" }.join(",\n") << "\n};\n"
 js << "window.GLOSS = #{gl.to_json};\n"
+# 구성 요소(부수·부품) 정보: 병음·분해·유래·외우는 법
+CD = JSON.parse(File.read(src("comp-decomp.json")))
+CK = {}
+File.foreach(src("comp-ko.txt")) do |l|
+  next if l.start_with?("#") || l.strip.empty?
+  c, o, m = l.chomp.split("|", 3); CK[c] = [o, m]
+end
+comp = {}
+CD.each do |c, v|
+  parts = v["dec"].to_s.gsub(/[⿰-⿻？]/, "").chars.uniq.reject { |x| x == c }
+  comp[c] = { "y" => v["py"], "p" => parts, "o" => (CK[c] || [])[0], "m" => (CK[c] || [])[1] }.compact
+end
+missing_ck = CD.keys - CK.keys
+js << "window.COMP = #{comp.to_json};\n"
 ex = EX.select { |w, _| out_words.any? { |x| x[0] == w } }
 
 # ---- 예문 병음: HSK 단어 목록으로 가장 긴 단어부터 맞춰 나누고, 나머지는 글자 병음 ----
@@ -183,4 +198,5 @@ File.write(File.join(ROOT, "data.js"), js)
 puts "급수 1~#{max_lv}: 단어 #{out_words.size}개, 한자 #{out_h.size}자, 예문 #{ex.size}개"
 (max_lv + 1..5).each { |lv| puts "  #{lv}급 뜻 없는 단어 #{missing[lv].size}개" unless missing[lv].empty? }
 puts "  내용 없는 한자: #{miss_c.join}" unless miss_c.empty?
+puts "  설명 없는 부품: #{missing_ck.join}" unless missing_ck.empty?
 puts "  풀이 없는 구성요소: #{need_gloss.keys.join(' ')}" unless need_gloss.empty?

@@ -1,0 +1,3188 @@
+{
+  "爫": {
+    "py": "zhǎo",
+    "dec": "？",
+    "def": "claws, nails, talons",
+    "type": "pictographic",
+    "hint": "A bird's talons; compare 爪",
+    "sem": null,
+    "pho": null
+  },
+  "冖": {
+    "py": "mì",
+    "dec": "？",
+    "def": "cover",
+    "type": "pictographic",
+    "hint": "A cover-cloth",
+    "sem": null,
+    "pho": null
+  },
+  "丷": {
+    "py": "ha",
+    "dec": "⿰丶？",
+    "def": "kwukyel",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "勹": {
+    "py": "bāo",
+    "dec": "⿰丿？",
+    "def": "wrap",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "巳": {
+    "py": "sì",
+    "dec": "⿻乚？",
+    "def": "the hours from 9 to 11; 6th terrestrial branch",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "辶": {
+    "py": "chuò",
+    "dec": "？",
+    "def": "to walk; walking",
+    "type": "pictographic",
+    "hint": "A foot stepping",
+    "sem": null,
+    "pho": null
+  },
+  "亻": {
+    "py": "rén",
+    "dec": "？",
+    "def": "man, person; people",
+    "type": "ideographic",
+    "hint": "Visual abbreviation of 人",
+    "sem": null,
+    "pho": null
+  },
+  "宀": {
+    "py": "gài",
+    "dec": "⿱丶冖",
+    "def": "roof; house",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "疒": {
+    "py": "nè",
+    "dec": "⿻广冫",
+    "def": "sickness, disease",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "丙": {
+    "py": "bǐng",
+    "dec": "⿱一内",
+    "def": "third; 3rd heavenly stem",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "覀": {
+    "py": "xī",
+    "dec": "？",
+    "def": "west, western, westward",
+    "type": "ideographic",
+    "hint": "A bird settling into its nest, representing sunset; compare 東",
+    "sem": null,
+    "pho": null
+  },
+  "艹": {
+    "py": "cǎo",
+    "dec": "？",
+    "def": "grass, weed, plant, herb",
+    "type": "pictographic",
+    "hint": "Simplified form of 艸; grass sprouting",
+    "sem": null,
+    "pho": null
+  },
+  "昌": {
+    "py": "chāng",
+    "dec": "⿱日曰",
+    "def": "sunlight; good, proper; prosperous",
+    "type": "ideographic",
+    "hint": "Speaking 曰 in the daytime 日",
+    "sem": null,
+    "pho": null
+  },
+  "亠": {
+    "py": "tóu",
+    "dec": "⿱丶一",
+    "def": "lid, cover; head",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "乞": {
+    "py": "qǐ",
+    "dec": "⿱？乙",
+    "def": "to beg; to request",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "凵": {
+    "py": "qiǎn",
+    "dec": "？",
+    "def": "container; receptacle",
+    "type": "pictographic",
+    "hint": "A tray",
+    "sem": null,
+    "pho": null
+  },
+  "屮": {
+    "py": "chè",
+    "dec": "⿻凵丨",
+    "def": "sprout",
+    "type": "pictographic",
+    "hint": "A sprout",
+    "sem": null,
+    "pho": null
+  },
+  "禾": {
+    "py": "hé",
+    "dec": "⿱丿木",
+    "def": "cereal, grain, rice; plant, stalk",
+    "type": "pictographic",
+    "hint": "A plant stalk with a sagging head",
+    "sem": null,
+    "pho": null
+  },
+  "穴": {
+    "py": "xué",
+    "dec": "⿱宀八",
+    "def": "cave, den, hole",
+    "type": "pictographic",
+    "hint": "The mouth of a cave",
+    "sem": null,
+    "pho": null
+  },
+  "扌": {
+    "py": "shǒu",
+    "dec": "⿻二亅",
+    "def": "hand",
+    "type": "pictographic",
+    "hint": "A hand with the fingers splayed; compare 手",
+    "sem": null,
+    "pho": null
+  },
+  "丁": {
+    "py": "dīng",
+    "dec": "一",
+    "def": "male adult; robust, vigorous; 4th heavenly stem",
+    "type": "pictographic",
+    "hint": "A nail",
+    "sem": null,
+    "pho": null
+  },
+  "曰": {
+    "py": "yuē",
+    "dec": "⿴口一",
+    "def": "to speak; to say",
+    "type": "ideographic",
+    "hint": "Picture of an open 一 mouth 口",
+    "sem": null,
+    "pho": null
+  },
+  "乚": {
+    "py": "gōu",
+    "dec": "？",
+    "def": "secret, hidden, mysterious; small, minute; to conceal",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "讠": {
+    "py": "yán",
+    "dec": "⿻？？",
+    "def": "words, speech; to speak, to say",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "舌": {
+    "py": "shé",
+    "dec": "⿱千口",
+    "def": "tongue; bell clapper",
+    "type": "pictographic",
+    "hint": "A tongue 千 sticking out of a mouth 口",
+    "sem": null,
+    "pho": null
+  },
+  "豕": {
+    "py": "shǐ",
+    "dec": "⿱一⿰勿？",
+    "def": "pig, boar",
+    "type": "pictographic",
+    "hint": "A pig drawn on its side",
+    "sem": null,
+    "pho": null
+  },
+  "⺍": {
+    "py": null,
+    "dec": "？",
+    "def": null,
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "刂": {
+    "py": "dāo",
+    "dec": "⿰丨亅",
+    "def": "knife",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "弓": {
+    "py": "gōng",
+    "dec": "？",
+    "def": "bow; curved, arched",
+    "type": "pictographic",
+    "hint": "A bow aimed to the left",
+    "sem": null,
+    "pho": null
+  },
+  "⺮": {
+    "py": "zhú",
+    "dec": "？",
+    "def": "bamboo; flute",
+    "type": "pictographic",
+    "hint": "Two stalks of bamboo; see 竹",
+    "sem": null,
+    "pho": null
+  },
+  "灬": {
+    "py": "huǒ",
+    "dec": "？",
+    "def": "fire",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "⺼": {
+    "py": null,
+    "dec": "？",
+    "def": "meat, flesh; organic compound",
+    "type": "pictographic",
+    "hint": "Meat on the ribs of an animal; compare 肉",
+    "sem": null,
+    "pho": null
+  },
+  "礻": {
+    "py": "shì",
+    "dec": "⿱？卜",
+    "def": "spirit",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "彡": {
+    "py": "shān",
+    "dec": "⿳丿丿丿",
+    "def": "hair; sunlight",
+    "type": "pictographic",
+    "hint": "Tufts of hair",
+    "sem": null,
+    "pho": null
+  },
+  "阝": {
+    "py": "yì",
+    "dec": "⿻丨？",
+    "def": "place, town, city",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "兀": {
+    "py": "wù",
+    "dec": "⿱一儿",
+    "def": "weak; lame",
+    "type": "ideographic",
+    "hint": "Cutting 一 off the feet 儿",
+    "sem": null,
+    "pho": null
+  },
+  "囗": {
+    "py": "wéi",
+    "dec": "⿱冂一",
+    "def": "enclosure; border",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "丨": {
+    "py": "shù",
+    "dec": "？",
+    "def": "number one; line",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "寸": {
+    "py": "cùn",
+    "dec": "？",
+    "def": "inch; small, tiny",
+    "type": "ideographic",
+    "hint": "A hand with a dot indicating where the pulse can be felt, about an inch up the wrist",
+    "sem": null,
+    "pho": null
+  },
+  "丿": {
+    "py": "piě",
+    "dec": "？",
+    "def": "slash",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "饣": {
+    "py": "shí",
+    "dec": "⿱？乚",
+    "def": "food; to eat",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "尚": {
+    "py": "shàng",
+    "dec": "⿵⿱⺌冂口",
+    "def": "still, yet; even; fairly, rather",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "钅": {
+    "py": "jīn",
+    "dec": "⿱？？",
+    "def": "gold, metal; money",
+    "type": "pictographic",
+    "hint": "A cast-iron bell; compare 金",
+    "sem": null,
+    "pho": null
+  },
+  "冋": {
+    "py": "jiōng",
+    "dec": "⿵冂口",
+    "def": "desert; border",
+    "type": "ideographic",
+    "hint": "A plot of land 口 surrounded by a border 冂; 冂 also provides the pronunciation",
+    "sem": null,
+    "pho": null
+  },
+  "纟": {
+    "py": "sī",
+    "dec": "⿱？一",
+    "def": "silk; thread",
+    "type": "pictographic",
+    "hint": "A twisted strand of silk; see 糸",
+    "sem": null,
+    "pho": null
+  },
+  "丄": {
+    "py": "shàng",
+    "dec": "⿱丨一",
+    "def": "above",
+    "type": "ideographic",
+    "hint": "One stroke on top of another; variant of 上",
+    "sem": null,
+    "pho": null
+  },
+  "乍": {
+    "py": "zhà",
+    "dec": "⿸丿⿻下一",
+    "def": "first time, for the first time, suddenly",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "厶": {
+    "py": "sī",
+    "dec": "？",
+    "def": "private, secret",
+    "type": "pictographic",
+    "hint": "A silk cocoon",
+    "sem": null,
+    "pho": null
+  },
+  "犭": {
+    "py": "quǎn",
+    "dec": "⿻？？",
+    "def": "dog",
+    "type": "pictographic",
+    "hint": "A dog turned to the side",
+    "sem": null,
+    "pho": null
+  },
+  "亥": {
+    "py": "hài",
+    "dec": "⿱亠？",
+    "def": "12th terrestrial branch; used in transliterations",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "氵": {
+    "py": "shuǐ",
+    "dec": "⿱？？",
+    "def": "water",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "吾": {
+    "py": "wú",
+    "dec": "⿱五口",
+    "def": "I, my, our; to resist, to impede",
+    "type": "pictophonetic",
+    "hint": "mouth",
+    "sem": "口",
+    "pho": "五"
+  },
+  "王": {
+    "py": "wáng",
+    "dec": "⿱一土",
+    "def": "king, ruler; royal; surname",
+    "type": "ideographic",
+    "hint": "A man 十 bridging heaven and earth (both 一)",
+    "sem": null,
+    "pho": null
+  },
+  "丂": {
+    "py": "kǎo",
+    "dec": "⿱一？",
+    "def": "obstruction of breath (qi); variant of 考",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "曷": {
+    "py": "hé",
+    "dec": "⿱日？",
+    "def": "what, why, where, which, how",
+    "type": "ideographic",
+    "hint": "Variant of 何",
+    "sem": null,
+    "pho": null
+  },
+  "彳": {
+    "py": "chì",
+    "dec": "⿱？丨",
+    "def": "to step with the left foot",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "艮": {
+    "py": "gěn",
+    "dec": "⿸？？",
+    "def": "blunt; tough, chewy",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "疋": {
+    "py": "pǐ",
+    "dec": "？",
+    "def": "roll, bolt of cloth; foot",
+    "type": "pictographic",
+    "hint": "A foot 止 with a leg on top",
+    "sem": null,
+    "pho": null
+  },
+  "丩": {
+    "py": "jiū",
+    "dec": "⿰？丨",
+    "def": "to connect, to join; vine",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "廾": {
+    "py": "gǒng",
+    "dec": "？",
+    "def": "two hands",
+    "type": "ideographic",
+    "hint": "Two hands 十 side by side",
+    "sem": null,
+    "pho": null
+  },
+  "冂": {
+    "py": "jiōng",
+    "dec": "⿰丨？",
+    "def": "wide",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "夬": {
+    "py": "guài",
+    "dec": "⿻大？",
+    "def": "decisive, certain; parted; fork",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "耂": {
+    "py": "lǎo",
+    "dec": "⿻土丿",
+    "def": "old, aged; experienced",
+    "type": "ideographic",
+    "hint": "A person bent over with long hair",
+    "sem": null,
+    "pho": null
+  },
+  "匕": {
+    "py": "bǐ",
+    "dec": "⿺乚丿",
+    "def": "spoon, ladle; knife, dirk",
+    "type": "pictographic",
+    "hint": "A spoon",
+    "sem": null,
+    "pho": null
+  },
+  "帀": {
+    "py": "zā",
+    "dec": "⿱一巾",
+    "def": "to rotate, to revolve, to make a circuit",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "亅": {
+    "py": "jué",
+    "dec": "？",
+    "def": "hook",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "乛": {
+    "py": "ya",
+    "dec": "？",
+    "def": "kwukyel",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "冫": {
+    "py": "bīng",
+    "dec": "⿱丶？",
+    "def": "ice",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "田": {
+    "py": "tián",
+    "dec": "⿵冂土",
+    "def": "field, farm, arable land; cultivated",
+    "type": "pictographic",
+    "hint": "The plots of a rice paddy",
+    "sem": null,
+    "pho": null
+  },
+  "忄": {
+    "py": "xīn",
+    "dec": "⿻八丨",
+    "def": "heart; mind; soul",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "亡": {
+    "py": "wáng",
+    "dec": "⿱亠？",
+    "def": "death, destruction; to lose; to perish",
+    "type": "ideographic",
+    "hint": "A man 人 in a coffin; see 亾",
+    "sem": null,
+    "pho": null
+  },
+  "苗": {
+    "py": "miáo",
+    "dec": "⿱艹田",
+    "def": "sprouts; Miao nationality",
+    "type": "ideographic",
+    "hint": "Grass 艹 growing in a field 田",
+    "sem": null,
+    "pho": null
+  },
+  "糸": {
+    "py": "mì",
+    "dec": "⿱幺小",
+    "def": "silk; thread",
+    "type": "pictographic",
+    "hint": "A twisted strand of silk",
+    "sem": null,
+    "pho": null
+  },
+  "ナ": {
+    "py": null,
+    "dec": null,
+    "def": null,
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "夂": {
+    "py": "zhǐ",
+    "dec": "⿻丿又",
+    "def": "to go",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "尼": {
+    "py": "ní",
+    "dec": "⿸尸匕",
+    "def": "Buddhist nun; used in transliterations",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "乃": {
+    "py": "nǎi",
+    "dec": "⿹？丿",
+    "def": "then; really, indeed, after all",
+    "type": "ideographic",
+    "hint": "A pregnant woman; compare 孕",
+    "sem": null,
+    "pho": null
+  },
+  "䒑": {
+    "py": null,
+    "dec": null,
+    "def": null,
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "戋": {
+    "py": "jiān",
+    "dec": "⿻戈一",
+    "def": "small, narrow; tiny, little",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "冏": {
+    "py": "jiǒng",
+    "dec": "⿵冂⿱八口",
+    "def": "bright, brilliant; clear; hot",
+    "type": "ideographic",
+    "hint": "Archaic form of 炯",
+    "sem": null,
+    "pho": null
+  },
+  "彐": {
+    "py": "jì",
+    "dec": "⿹？二",
+    "def": "snout",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "隹": {
+    "py": "zhuī",
+    "dec": "⿰亻？",
+    "def": "short-tailed bird; sparrow",
+    "type": "pictographic",
+    "hint": "A bird facing left; compare 鳥",
+    "sem": null,
+    "pho": null
+  },
+  "垂": {
+    "py": "chuí",
+    "dec": "⿻⿱？士卄",
+    "def": "to hang, to dangle; to hand down, to bequeath; almost, near",
+    "type": "pictographic",
+    "hint": "A tree with drooping branches",
+    "sem": null,
+    "pho": null
+  },
+  "兑": {
+    "py": "duì",
+    "dec": "⿱丷兄",
+    "def": "cash, check; to exchange",
+    "type": "ideographic",
+    "hint": "A beast 兄 with two horns 丷",
+    "sem": null,
+    "pho": null
+  },
+  "丶": {
+    "py": "diǎn",
+    "dec": "？",
+    "def": "dot",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "卜": {
+    "py": "bo",
+    "dec": "⿻丨丶",
+    "def": "divination, fortune-telling; prophecy",
+    "type": "pictographic",
+    "hint": "A crack on an oracle bone",
+    "sem": null,
+    "pho": null
+  },
+  "畏": {
+    "py": "wèi",
+    "dec": "⿳田一？",
+    "def": "fear, dread, awe, reverence",
+    "type": "pictographic",
+    "hint": "A monster with a scary head 田",
+    "sem": null,
+    "pho": null
+  },
+  "戈": {
+    "py": "gē",
+    "dec": "？",
+    "def": "spear, lance, halberd",
+    "type": "pictographic",
+    "hint": "A spear pointing to the bottom-right",
+    "sem": null,
+    "pho": null
+  },
+  "壴": {
+    "py": "zhù",
+    "dec": "⿱土口",
+    "def": "drum",
+    "type": "pictographic",
+    "hint": "A drum 口 on a stand with feathers 土 on top",
+    "sem": null,
+    "pho": null
+  },
+  "射": {
+    "py": "shè",
+    "dec": "⿰身寸",
+    "def": "to shoot, to eject, to emit",
+    "type": "pictographic",
+    "hint": "A bow 身 being drawn by a hand 寸",
+    "sem": null,
+    "pho": null
+  },
+  "匸": {
+    "py": "xì",
+    "dec": "？",
+    "def": "box",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "匚": {
+    "py": "fāng",
+    "dec": "⿱一？",
+    "def": "box; basket",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "矢": {
+    "py": "shǐ",
+    "dec": "⿻丿天",
+    "def": "arrow, dart; to vow, to swear",
+    "type": "pictographic",
+    "hint": "An arrow pointing upwards",
+    "sem": null,
+    "pho": null
+  },
+  "冉": {
+    "py": "rǎn",
+    "dec": "⿻冂土",
+    "def": "tender; weak; to proceed gradually",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "乂": {
+    "py": "yì",
+    "dec": "⿻丿？",
+    "def": "to govern; to control; to nurture",
+    "type": "ideographic",
+    "hint": "Shears, for cultivating a garden",
+    "sem": null,
+    "pho": null
+  },
+  "⺈": {
+    "py": null,
+    "dec": "？",
+    "def": null,
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "邦": {
+    "py": "bāng",
+    "dec": "⿰丰阝",
+    "def": "country, nation, state",
+    "type": "ideographic",
+    "hint": "A bountiful 丰 place 阝",
+    "sem": null,
+    "pho": null
+  },
+  "昔": {
+    "py": "xī",
+    "dec": "⿱廿日",
+    "def": "past, former; ancient",
+    "type": "ideographic",
+    "hint": "Twenty 廿 days ago 日",
+    "sem": null,
+    "pho": null
+  },
+  "寺": {
+    "py": "sì",
+    "dec": "⿱土寸",
+    "def": "court, office; temple, monastery",
+    "type": "ideographic",
+    "hint": "An offering 土 in your hand 寸",
+    "sem": null,
+    "pho": null
+  },
+  "董": {
+    "py": "dǒng",
+    "dec": "⿱艹重",
+    "def": "to direct, to supervise; surname",
+    "type": "pictophonetic",
+    "hint": "plant",
+    "sem": "艹",
+    "pho": "重"
+  },
+  "官": {
+    "py": "guān",
+    "dec": "⿱宀㠯",
+    "def": "official, public servant",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "斥": {
+    "py": "chì",
+    "dec": "⿸斤丶",
+    "def": "to scold, to upbraid; to accuse, to blame; to reproach",
+    "type": "ideographic",
+    "hint": "Someone scolded for cutting themselves 丶 with an axe 斤",
+    "sem": null,
+    "pho": null
+  },
+  "勿": {
+    "py": "wù",
+    "dec": "⿹勹⿰丿丿",
+    "def": "must not, do not; without, never",
+    "type": "ideographic",
+    "hint": "A knife 勹 cutting fragments 丿 off",
+    "sem": null,
+    "pho": null
+  },
+  "攵": {
+    "py": "pū",
+    "dec": "⿱？乂",
+    "def": "to rap, to tap; script; to let go",
+    "type": "pictographic",
+    "hint": "A fist made with one's right hand",
+    "sem": null,
+    "pho": null
+  },
+  "孝": {
+    "py": "xiào",
+    "dec": "⿸耂子",
+    "def": "filial piety, obedience; mourning",
+    "type": "ideographic",
+    "hint": "A young man 子 carrying an older man 耂",
+    "sem": null,
+    "pho": null
+  },
+  "井": {
+    "py": "jǐng",
+    "dec": "⿻二？",
+    "def": "well, mine shaft, pit",
+    "type": "pictographic",
+    "hint": "A mine or well",
+    "sem": null,
+    "pho": null
+  },
+  "酉": {
+    "py": "yǒu",
+    "dec": "⿻兀日",
+    "def": "wine; wine vessel; chemical",
+    "type": "pictographic",
+    "hint": "A vessel half-filled with wine",
+    "sem": null,
+    "pho": null
+  },
+  "尢": {
+    "py": "yóu",
+    "dec": "⿸？乚",
+    "def": "weak, lame",
+    "type": "ideographic",
+    "hint": "Cutting 一 off the feet 儿; compare 兀",
+    "sem": null,
+    "pho": null
+  },
+  "衤": {
+    "py": "yī",
+    "dec": "？",
+    "def": "cloth",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "监": {
+    "py": "jiān",
+    "dec": "⿱？皿",
+    "def": "to supervise, to direct, to control; to inspect; prison, jail",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "禸": {
+    "py": "róu",
+    "dec": "⿻冂厶",
+    "def": "rump",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "凶": {
+    "py": "xiōng",
+    "dec": "⿶凵乂",
+    "def": "culprit; murder; bad, sad",
+    "type": "ideographic",
+    "hint": "A container 凵 of wickedness 乂",
+    "sem": null,
+    "pho": null
+  },
+  "娄": {
+    "py": "lóu",
+    "dec": "⿱米女",
+    "def": "a constellation; to wear; surname",
+    "type": "ideographic",
+    "hint": "A woman 女 looking up at a star 米",
+    "sem": null,
+    "pho": null
+  },
+  "斿": {
+    "py": "yóu",
+    "dec": "⿰方⿱？子",
+    "def": "to swim; to move freely",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "曼": {
+    "py": "màn",
+    "dec": "⿱日⿱罒又",
+    "def": "long, extended, vast; beautiful",
+    "type": "ideographic",
+    "hint": "Two hands 日, 又 pulling an eye open 罒",
+    "sem": null,
+    "pho": null
+  },
+  "仌": {
+    "py": "bīng",
+    "dec": "⿱人人",
+    "def": "frozen; ice-cold",
+    "type": "ideographic",
+    "hint": "Old variant of 冰 (\"ice-water\")",
+    "sem": null,
+    "pho": null
+  },
+  "予": {
+    "py": "yǔ",
+    "dec": "⿱？丁",
+    "def": "to give; to award",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "肰": {
+    "py": "rán",
+    "dec": "⿰⺼犬",
+    "def": "dog meat",
+    "type": "ideographic",
+    "hint": "Dog 犬 meat ⺼",
+    "sem": null,
+    "pho": null
+  },
+  "兆": {
+    "py": "zhào",
+    "dec": "⿻儿？",
+    "def": "omen; mega-, million",
+    "type": "pictographic",
+    "hint": "Cracks in oracle bones used in fortune-telling",
+    "sem": null,
+    "pho": null
+  },
+  "舛": {
+    "py": "chuǎn",
+    "dec": "⿰夕？",
+    "def": "mistaken; to be contrary; to deviate",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "無": {
+    "py": "wú",
+    "dec": "⿱？灬",
+    "def": "no, not; lacking, -less",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "⺀": {
+    "py": null,
+    "dec": "？",
+    "def": "ice",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "夭": {
+    "py": "yāo",
+    "dec": "⿱丿大",
+    "def": "young, energetic; to die young",
+    "type": "pictographic",
+    "hint": "A person with head tilted - leaning forward, running, energetic",
+    "sem": null,
+    "pho": null
+  },
+  "彦": {
+    "py": "yàn",
+    "dec": "⿱产彡",
+    "def": "elegant",
+    "type": "pictophonetic",
+    "hint": "hair",
+    "sem": "彡",
+    "pho": "产"
+  },
+  "卩": {
+    "py": "jié",
+    "dec": "⿰丨？",
+    "def": "seal; kneeling person",
+    "type": "pictographic",
+    "hint": "A rolled-up scroll or kneeling person",
+    "sem": null,
+    "pho": null
+  },
+  "夷": {
+    "py": "yí",
+    "dec": "⿻大弓",
+    "def": "ancient barbarian tribes",
+    "type": "ideographic",
+    "hint": "A man 大 armed with a bow 弓",
+    "sem": null,
+    "pho": null
+  },
+  "委": {
+    "py": "wěi",
+    "dec": "⿱禾女",
+    "def": "to appoint, to commission, to send",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "亦": {
+    "py": "yì",
+    "dec": "⿱亠？",
+    "def": "also, too; likewise",
+    "type": "ideographic",
+    "hint": "A man standing with arrows pointing to his armpits",
+    "sem": null,
+    "pho": null
+  },
+  "扁": {
+    "py": "biǎn",
+    "dec": "⿸户？",
+    "def": "flat; board, sign, tablet",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "寅": {
+    "py": "yín",
+    "dec": "⿱宀⿱⿱一由八",
+    "def": "to respect, to revere; respectfully; 3rd terrestrial branch",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "兵": {
+    "py": "bīng",
+    "dec": "⿱丘八",
+    "def": "soldier; troops, an army; warlike",
+    "type": "ideographic",
+    "hint": "Two hands 八 holding an axe 丘",
+    "sem": null,
+    "pho": null
+  },
+  "亍": {
+    "py": "chù",
+    "dec": "⿱一丁",
+    "def": "to take small steps; Korean place name",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "尸": {
+    "py": "shī",
+    "dec": "⿰丿？",
+    "def": "body, corpse",
+    "type": "pictographic",
+    "hint": "A man keeled over",
+    "sem": null,
+    "pho": null
+  },
+  "⺌": {
+    "py": null,
+    "dec": "？",
+    "def": null,
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "舟": {
+    "py": "zhōu",
+    "dec": "⿻？？",
+    "def": "boat, ship",
+    "type": "pictographic",
+    "hint": "A boat",
+    "sem": null,
+    "pho": null
+  },
+  "卅": {
+    "py": "sà",
+    "dec": "⿻一川",
+    "def": "thirty, thirtieth",
+    "type": "ideographic",
+    "hint": "Three tally marks; compare ten 十 and twenty 廿",
+    "sem": null,
+    "pho": null
+  },
+  "羔": {
+    "py": "gāo",
+    "dec": "⿱羊灬",
+    "def": "lamb",
+    "type": "pictophonetic",
+    "hint": "sheep",
+    "sem": "羊",
+    "pho": "灬"
+  },
+  "殳": {
+    "py": "shū",
+    "dec": "⿱几又",
+    "def": "tool, weapon",
+    "type": "ideographic",
+    "hint": "A hand 又 holding a weapon 几",
+    "sem": null,
+    "pho": null
+  },
+  "柬": {
+    "py": "jiǎn",
+    "dec": "⿻束八",
+    "def": "card, letter, invitation, note",
+    "type": "ideographic",
+    "hint": "A bound 束 package",
+    "sem": null,
+    "pho": null
+  },
+  "尧": {
+    "py": "yáo",
+    "dec": "⿱戈兀",
+    "def": "a legendary ancient emperor-sage",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "叚": {
+    "py": "jiǎ",
+    "dec": "⿰？⿱？又",
+    "def": "false",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "圭": {
+    "py": "guī",
+    "dec": "⿱土土",
+    "def": "jade tablet",
+    "type": "ideographic",
+    "hint": "A stack of tablets",
+    "sem": null,
+    "pho": null
+  },
+  "夊": {
+    "py": "suī",
+    "dec": "？",
+    "def": "to go slowly",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "冈": {
+    "py": "gāng",
+    "dec": "⿵冂乂",
+    "def": "ridge or crest of hill",
+    "type": "pictographic",
+    "hint": "Simplified form of 岡, clouds 网 forming over a mountain 山",
+    "sem": null,
+    "pho": null
+  },
+  "亼": {
+    "py": "jí",
+    "dec": "⿱人一",
+    "def": "to assemble, to gather together",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "昭": {
+    "py": "zhāo",
+    "dec": "⿰日召",
+    "def": "bright, luminous; clear, manifest",
+    "type": "pictophonetic",
+    "hint": "sun",
+    "sem": "日",
+    "pho": "召"
+  },
+  "奂": {
+    "py": "huàn",
+    "dec": "⿱⺈央",
+    "def": "numerous; brilliant",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "卬": {
+    "py": "áng",
+    "dec": "⿰匕卩",
+    "def": "lofty; high; to raise; high-priced, expensive",
+    "type": "ideographic",
+    "hint": "A person kneeling 卩 before a person (a king) sitting 匕",
+    "sem": null,
+    "pho": null
+  },
+  "刍": {
+    "py": "chú",
+    "dec": "⿱⺈彐",
+    "def": "to mow, to cut grass; hay, fodder",
+    "type": "pictophonetic",
+    "hint": "knife",
+    "sem": "⺈",
+    "pho": "彐"
+  },
+  "佥": {
+    "py": "qiān",
+    "dec": "⿳亼⺍一",
+    "def": "all, together, unanimous",
+    "type": "ideographic",
+    "hint": "Many people gathered 亼 under one roof",
+    "sem": null,
+    "pho": null
+  },
+  "隶": {
+    "py": "lì",
+    "dec": "⿱彐氺",
+    "def": "subservient; servant",
+    "type": "ideographic",
+    "hint": "A hand 彐 threshing rice",
+    "sem": null,
+    "pho": null
+  },
+  "妾": {
+    "py": "qiè",
+    "dec": "⿱辛女",
+    "def": "concubine",
+    "type": "ideographic",
+    "hint": "A woman 女 branded 辛 as a slave",
+    "sem": null,
+    "pho": null
+  },
+  "吉": {
+    "py": "jí",
+    "dec": "⿱士口",
+    "def": "lucky, propitious, good",
+    "type": "ideographic",
+    "hint": "The words 口 of a scholar 士",
+    "sem": null,
+    "pho": null
+  },
+  "昏": {
+    "py": "hūn",
+    "dec": "⿱氏日",
+    "def": "dusk, nightfall, twilight, dark; to faint, to lose consciousness",
+    "type": "ideographic",
+    "hint": "Th sun 日 setting behind a village 氏",
+    "sem": null,
+    "pho": null
+  },
+  "犬": {
+    "py": "quǎn",
+    "dec": "⿻大丶",
+    "def": "dog",
+    "type": "pictographic",
+    "hint": "A dog turned to the side",
+    "sem": null,
+    "pho": null
+  },
+  "卯": {
+    "py": "mǎo",
+    "dec": "⿰？卩",
+    "def": "4th terrestrial branch; period from 5-7 a.m.",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "乇": {
+    "py": "tuō",
+    "dec": "⿱丿七",
+    "def": "to depend on, to entrust with",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "奴": {
+    "py": "nú",
+    "dec": "⿰女又",
+    "def": "slave, servant",
+    "type": "ideographic",
+    "hint": "A woman 女 standing by her master's right hand 又; 女 also provides the pronunciation",
+    "sem": null,
+    "pho": null
+  },
+  "爪": {
+    "py": "zhǎo",
+    "dec": "⿵？丨",
+    "def": "claws, nails, talons",
+    "type": "pictographic",
+    "hint": "A bird's talons",
+    "sem": null,
+    "pho": null
+  },
+  "皿": {
+    "py": "mǐn",
+    "dec": "⿱？一",
+    "def": "dish, vessel; shallow container",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "卑": {
+    "py": "bēi",
+    "dec": "⿱白十",
+    "def": "humble, low, inferior; to despise",
+    "type": "ideographic",
+    "hint": "A hand 又(altered) holding an empty shell 甲 (altered)",
+    "sem": null,
+    "pho": null
+  },
+  "瓦": {
+    "py": "wǎ",
+    "dec": "？",
+    "def": "tile; pottery, earthenware",
+    "type": "pictographic",
+    "hint": "An interlocking roof tile",
+    "sem": null,
+    "pho": null
+  },
+  "甘": {
+    "py": "gān",
+    "dec": "⿵卄二",
+    "def": "sweet, tasty; willing",
+    "type": "ideographic",
+    "hint": "Picture of a tongue with 一 marking the sweet spot",
+    "sem": null,
+    "pho": null
+  },
+  "圣": {
+    "py": "shèng",
+    "dec": "⿱又土",
+    "def": "holy, sacred; sage, saint",
+    "type": "ideographic",
+    "hint": "Simplified form of 聖; a king 王 of listening 耳  and speaking口",
+    "sem": null,
+    "pho": null
+  },
+  "君": {
+    "py": "jūn",
+    "dec": "⿸尹口",
+    "def": "sovereign, ruler, prince, monarch, chief",
+    "type": "ideographic",
+    "hint": "A leader 尹 giving orders 口",
+    "sem": null,
+    "pho": null
+  },
+  "谷": {
+    "py": "gǔ",
+    "dec": "⿱八⿱人口",
+    "def": "valley, gorge, ravine",
+    "type": "ideographic",
+    "hint": "Water flowing 人 from a spring 口 through a valley 八",
+    "sem": null,
+    "pho": null
+  },
+  "廿": {
+    "py": "niàn",
+    "dec": "⿻廾一",
+    "def": "twenty, twentieth",
+    "type": "ideographic",
+    "hint": "Two tens 十 side by side",
+    "sem": null,
+    "pho": null
+  },
+  "叟": {
+    "py": "sǒu",
+    "dec": "⿱⿻臼丨又",
+    "def": "old man; elder",
+    "type": "ideographic",
+    "hint": "A hand 又 holding up a candle, representing failing vision",
+    "sem": null,
+    "pho": null
+  },
+  "唐": {
+    "py": "táng",
+    "dec": "⿸广⿱肀口",
+    "def": "the Tang dynasty; Chinese; empty, exaggerated; surname",
+    "type": "ideographic",
+    "hint": "Children learning how to read 口 and write 肀 in school 广",
+    "sem": null,
+    "pho": null
+  },
+  "廷": {
+    "py": "tíng",
+    "dec": "⿺廴壬",
+    "def": "courtyard",
+    "type": "pictophonetic",
+    "hint": "place",
+    "sem": "廴",
+    "pho": null
+  },
+  "宛": {
+    "py": "wǎn",
+    "dec": "⿱宀夗",
+    "def": "to seem; as if; crooked",
+    "type": "pictophonetic",
+    "hint": "roof",
+    "sem": "宀",
+    "pho": "夗"
+  },
+  "贯": {
+    "py": "guàn",
+    "dec": "⿱毌贝",
+    "def": "to pierce, to string up; a string of 1000 coins",
+    "type": "pictophonetic",
+    "hint": "money",
+    "sem": "贝",
+    "pho": "毌"
+  },
+  "喿": {
+    "py": "zào",
+    "dec": "⿱品木",
+    "def": "the sound of birds chirping",
+    "type": "ideographic",
+    "hint": "Several birds 品 chirping in a tree 木",
+    "sem": null,
+    "pho": null
+  },
+  "焦": {
+    "py": "jiāo",
+    "dec": "⿱隹灬",
+    "def": "burned, scorched; anxious, vexed",
+    "type": "ideographic",
+    "hint": "A bird 隹 getting its tail singed 灬",
+    "sem": null,
+    "pho": null
+  },
+  "氺": {
+    "py": "shui",
+    "dec": "⿻亅？",
+    "def": null,
+    "type": "ideographic",
+    "hint": "A river running between two banks; compare 川 and 水",
+    "sem": null,
+    "pho": null
+  },
+  "禺": {
+    "py": "yú",
+    "dec": "⿱日禸",
+    "def": "district; mountain in Zhejiang",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "戉": {
+    "py": "yuè",
+    "dec": "⿰？戈",
+    "def": "halberd, battle-axe",
+    "type": "pictographic",
+    "hint": "An axe swinging to the left",
+    "sem": null,
+    "pho": null
+  },
+  "庄": {
+    "py": "zhuāng",
+    "dec": "⿸广土",
+    "def": "village, hamlet; villa, manor",
+    "type": "pictophonetic",
+    "hint": "house",
+    "sem": "广",
+    "pho": "壯"
+  },
+  "厄": {
+    "py": "è",
+    "dec": "⿸厂㔾",
+    "def": "adversity, difficulty, distress",
+    "type": "ideographic",
+    "hint": "A person 㔾 being crushed under pressure 厂",
+    "sem": null,
+    "pho": null
+  },
+  "觜": {
+    "py": "zī",
+    "dec": "⿱此角",
+    "def": "beak",
+    "type": "pictophonetic",
+    "hint": "horn",
+    "sem": "角",
+    "pho": "此"
+  },
+  "奉": {
+    "py": "fèng",
+    "dec": "⿱⿻？大？",
+    "def": "to offer, to respect, to server; to receive",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "呆": {
+    "py": "dāi",
+    "dec": "⿱口木",
+    "def": "dull, simple, stupid",
+    "type": "ideographic",
+    "hint": "One with wooden 木 speech 口",
+    "sem": null,
+    "pho": null
+  },
+  "兼": {
+    "py": "jiān",
+    "dec": "⿱丷⿱彐⿰禾禾",
+    "def": "both, and; at the same time; to unite, to combine",
+    "type": "ideographic",
+    "hint": "A hand holding two sheafs of grain 禾",
+    "sem": null,
+    "pho": null
+  },
+  "咅": {
+    "py": "pǒu",
+    "dec": "⿱立口",
+    "def": "to spit out",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "畀": {
+    "py": "bì",
+    "dec": "⿱田丌",
+    "def": "to give",
+    "type": "pictophonetic",
+    "hint": "farm",
+    "sem": "田",
+    "pho": "丌"
+  },
+  "昜": {
+    "py": "yáng",
+    "dec": "⿱旦勿",
+    "def": "bright, glorious; to expand, to open up",
+    "type": "ideographic",
+    "hint": "Bright and open, like the dawn 旦",
+    "sem": null,
+    "pho": null
+  },
+  "尃": {
+    "py": "fū",
+    "dec": "⿱甫寸",
+    "def": "to announce, to state",
+    "type": "pictophonetic",
+    "hint": null,
+    "sem": null,
+    "pho": "甫"
+  },
+  "仑": {
+    "py": "lún",
+    "dec": "⿱人匕",
+    "def": "logical reasons, logical order",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "歺": {
+    "py": "è",
+    "dec": "⿱⺊夕",
+    "def": "evil, depraved, wicked",
+    "type": "ideographic",
+    "hint": "A corpse; compare 歹",
+    "sem": null,
+    "pho": null
+  },
+  "囱": {
+    "py": "cōng",
+    "dec": "⿴囗夂",
+    "def": "chimney",
+    "type": "ideographic",
+    "hint": "A fire 夂 burning and giving off smoke",
+    "sem": null,
+    "pho": null
+  },
+  "吴": {
+    "py": "wú",
+    "dec": "⿱口天",
+    "def": "one of several warring states; surname",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "異": {
+    "py": "yì",
+    "dec": "⿱田共",
+    "def": "different, strange, unusual; foreign; surprising",
+    "type": "pictographic",
+    "hint": "A person with a scary face 田",
+    "sem": null,
+    "pho": null
+  },
+  "氐": {
+    "py": "dī",
+    "dec": "⿱氏丶",
+    "def": "the name of an ancient tribe",
+    "type": "pictophonetic",
+    "hint": "clan",
+    "sem": "氏",
+    "pho": null
+  },
+  "癶": {
+    "py": "bō",
+    "dec": "⿰？？",
+    "def": "legs",
+    "type": "pictographic",
+    "hint": "Two feet",
+    "sem": null,
+    "pho": null
+  },
+  "昷": {
+    "py": "wēn",
+    "dec": "⿱日皿",
+    "def": "warm, a warm meal",
+    "type": "ideographic",
+    "hint": "A warm 日 meal 皿",
+    "sem": null,
+    "pho": null
+  },
+  "卓": {
+    "py": "zhuō",
+    "dec": "⿱⺊早",
+    "def": "profound, lofty, brilliant",
+    "type": "ideographic",
+    "hint": "To foresee ⺊ the dawn 早 coming; 早 also provides the pronunciation",
+    "sem": null,
+    "pho": null
+  },
+  "屯": {
+    "py": "tún",
+    "dec": "⿻一屮",
+    "def": "village, hamlet; camp; station",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "聿": {
+    "py": "yù",
+    "dec": "⿱肀？",
+    "def": "writing brush, pencil; thereupon",
+    "type": "pictographic",
+    "hint": "A hand 彐 holding a brush; compare 肀",
+    "sem": null,
+    "pho": null
+  },
+  "弋": {
+    "py": "yì",
+    "dec": "？",
+    "def": "to catch, to arrest; to shoot with a bow",
+    "type": "pictographic",
+    "hint": "Picture of an arrow shot from a bow",
+    "sem": null,
+    "pho": null
+  },
+  "弗": {
+    "py": "fú",
+    "dec": "⿻弓⿰丨丨",
+    "def": "not, negative",
+    "type": "ideographic",
+    "hint": "Two arrows 丨 pulled across a bow",
+    "sem": null,
+    "pho": null
+  },
+  "畐": {
+    "py": "fú",
+    "dec": "⿳一口田",
+    "def": "to fill; a roll of cloth",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "龶": {
+    "py": null,
+    "dec": "？",
+    "def": null,
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "玨": {
+    "py": "jué",
+    "dec": "⿰王王",
+    "def": "guitar strings; variant of 珏",
+    "type": "pictographic",
+    "hint": "Two guitar strings bound across frets",
+    "sem": null,
+    "pho": null
+  },
+  "勾": {
+    "py": "gōu",
+    "dec": "⿹勹厶",
+    "def": "to hook, to join, to connect; to entice",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "耤": {
+    "py": "jí",
+    "dec": "⿰耒昔",
+    "def": "to plow; to rely on",
+    "type": "pictophonetic",
+    "hint": "plow",
+    "sem": "耒",
+    "pho": "昔"
+  },
+  "呈": {
+    "py": "chéng",
+    "dec": "⿱口王",
+    "def": "to petition, to submit; to appear, to show",
+    "type": "ideographic",
+    "hint": "To speak 口 before a king 王",
+    "sem": null,
+    "pho": null
+  },
+  "欶": {
+    "py": "shuò",
+    "dec": "⿰束欠",
+    "def": "to suck, to drink",
+    "type": "pictophonetic",
+    "hint": "yawn",
+    "sem": "欠",
+    "pho": "束"
+  },
+  "亢": {
+    "py": "kàng",
+    "dec": "⿱亠几",
+    "def": "high, proud; violent, excessive; skilled; surname",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "犾": {
+    "py": "yín",
+    "dec": "⿰犭犬",
+    "def": null,
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "丬": {
+    "py": "qiáng",
+    "dec": "⿰冫丨",
+    "def": "half of tree trunk",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "敫": {
+    "py": "jiǎo",
+    "dec": "⿰⿱白方攵",
+    "def": "ancient musical instrument",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "吏": {
+    "py": "lì",
+    "dec": "⿻丈口",
+    "def": "government official, magistrate",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "旡": {
+    "py": "jì",
+    "dec": "？",
+    "def": "to choke on something",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "幺": {
+    "py": "yāo",
+    "dec": "？",
+    "def": "one; tiny, small",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "廴": {
+    "py": "yǐn",
+    "dec": "？",
+    "def": "to walk, to go; a place",
+    "type": "pictographic",
+    "hint": "A man walking to the left",
+    "sem": null,
+    "pho": null
+  },
+  "夅": {
+    "py": "jiàng",
+    "dec": "⿱夂？",
+    "def": "to descend, to fall; to drop, to lower",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "洛": {
+    "py": "luò",
+    "dec": "⿰氵各",
+    "def": "a river in the Shanxi province; a city",
+    "type": "pictophonetic",
+    "hint": "water",
+    "sem": "氵",
+    "pho": "各"
+  },
+  "㐬": {
+    "py": "liú",
+    "dec": "⿳亠厶川",
+    "def": "pennant; wild, barren, uncultivated",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "甬": {
+    "py": "yǒng",
+    "dec": "⿱？用",
+    "def": "path; river in Ningbo; Ningbo",
+    "type": "pictophonetic",
+    "hint": null,
+    "sem": null,
+    "pho": "用"
+  },
+  "乔": {
+    "py": "qiáo",
+    "dec": "⿱夭？",
+    "def": "tall, lofty; proud, stately",
+    "type": "ideographic",
+    "hint": "A person 夭 on stilts",
+    "sem": null,
+    "pho": null
+  },
+  "敖": {
+    "py": "áo",
+    "dec": "⿰？攵",
+    "def": "to ramble, to play about; leisurely; surname",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "釆": {
+    "py": "biàn",
+    "dec": "⿱丿米",
+    "def": "to distinguish; to pick, to gather, to collect",
+    "type": "ideographic",
+    "hint": "Rice 米 ready to be picked",
+    "sem": null,
+    "pho": null
+  },
+  "祭": {
+    "py": "jì",
+    "dec": "⿱⿰⺼寸示",
+    "def": "to sacrifice to, to worship",
+    "type": "ideographic",
+    "hint": "Hand 寸 holding meat ⺼ over an altar 示",
+    "sem": null,
+    "pho": null
+  },
+  "乑": {
+    "py": "yín",
+    "dec": "⿱丿？",
+    "def": "to stand side by side",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "虍": {
+    "py": "hū",
+    "dec": "⿸？七",
+    "def": "tiger",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "巩": {
+    "py": "gǒng",
+    "dec": "⿰工凡",
+    "def": "to bind, to guard, to strengthen; firm, secure, strong",
+    "type": "pictophonetic",
+    "hint": "all",
+    "sem": "凡",
+    "pho": "工"
+  },
+  "赖": {
+    "py": "lài",
+    "dec": "⿰剌贝",
+    "def": "to depend on, to rely on; to bilk, to deny; poor",
+    "type": "pictophonetic",
+    "hint": "money",
+    "sem": "贝",
+    "pho": "剌"
+  },
+  "豸": {
+    "py": "zhì",
+    "dec": "⿱爫犭",
+    "def": "badger; legendary beast",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "皃": {
+    "py": "mào",
+    "dec": "⿱白儿",
+    "def": "countenance, appearance",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "歹": {
+    "py": "dǎi",
+    "dec": "⿱一夕",
+    "def": "corpse; death; evil, depraved, wicked",
+    "type": "pictographic",
+    "hint": "A corpse",
+    "sem": null,
+    "pho": null
+  },
+  "宓": {
+    "py": "mì",
+    "dec": "⿱宀必",
+    "def": "quiet, silent, still; in good health",
+    "type": "pictophonetic",
+    "hint": "roof",
+    "sem": "宀",
+    "pho": "必"
+  },
+  "恩": {
+    "py": "ēn",
+    "dec": "⿱因心",
+    "def": "kindness, mercy, charity",
+    "type": "pictophonetic",
+    "hint": "heart",
+    "sem": "心",
+    "pho": "因"
+  },
+  "爰": {
+    "py": "yuán",
+    "dec": "⿱爫⿱一友",
+    "def": "to lead on to; then, therefore, as a consequence",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "攴": {
+    "py": "pū",
+    "dec": "⿱⺊又",
+    "def": "to rap, to tap",
+    "type": "pictographic",
+    "hint": "A hand 又 wielding a stick ⺊",
+    "sem": null,
+    "pho": null
+  },
+  "丘": {
+    "py": "qiū",
+    "dec": "⿱斤一",
+    "def": "mound, hill; surname",
+    "type": "pictographic",
+    "hint": "Two hills",
+    "sem": null,
+    "pho": null
+  },
+  "匍": {
+    "py": "pú",
+    "dec": "⿹勹甫",
+    "def": "to crawl; to lie prostrate",
+    "type": "pictophonetic",
+    "hint": "wrap",
+    "sem": "勹",
+    "pho": "甫"
+  },
+  "匋": {
+    "py": "táo",
+    "dec": "⿹勹缶",
+    "def": "pottery",
+    "type": "pictophonetic",
+    "hint": "pottery",
+    "sem": "缶",
+    "pho": "勹"
+  },
+  "並": {
+    "py": "bìng",
+    "dec": "⿱丷亚",
+    "def": "to combine, to annex; also, what's more",
+    "type": "ideographic",
+    "hint": "Two people sitting side-by-side; compare 竝",
+    "sem": null,
+    "pho": null
+  },
+  "戊": {
+    "py": "wù",
+    "dec": "⿰丿戈",
+    "def": "5th heavenly stem",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "尗": {
+    "py": "shū",
+    "dec": "⿱上小",
+    "def": "younger brother; father's younger brother",
+    "type": "ideographic",
+    "hint": "The smaller 小 of two brothers",
+    "sem": null,
+    "pho": null
+  },
+  "肖": {
+    "py": "xiào",
+    "dec": "⿱⺌⺼",
+    "def": "to resemble, to look like; to be like",
+    "type": "pictophonetic",
+    "hint": "flesh - \"in the flesh\"",
+    "sem": "⺼",
+    "pho": "⺌"
+  },
+  "缶": {
+    "py": "fǒu",
+    "dec": "⿱？山",
+    "def": "earthen crock or jar; pottery",
+    "type": "pictographic",
+    "hint": "An earthen jar",
+    "sem": null,
+    "pho": null
+  },
+  "壬": {
+    "py": "rén",
+    "dec": "⿱丿士",
+    "def": "9th heavenly stem",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "聂": {
+    "py": "niè",
+    "dec": "⿱耳双",
+    "def": "to whisper; surname",
+    "type": "ideographic",
+    "hint": "A pair 双 of ears 耳",
+    "sem": null,
+    "pho": null
+  },
+  "罙": {
+    "py": "mí",
+    "dec": "⿱⺳木",
+    "def": "deep",
+    "type": "pictophonetic",
+    "hint": null,
+    "sem": null,
+    "pho": "木"
+  },
+  "俞": {
+    "py": "yú",
+    "dec": "⿱亼刖",
+    "def": "to consent, to approve; surname",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "孰": {
+    "py": "shú",
+    "dec": "⿰享丸",
+    "def": "who? which? what? which one?",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "川": {
+    "py": "chuān",
+    "dec": "⿲丿丨丨",
+    "def": "stream, river",
+    "type": "ideographic",
+    "hint": "A river's flow; compare 巛",
+    "sem": null,
+    "pho": null
+  },
+  "朔": {
+    "py": "shuò",
+    "dec": "⿰屰月",
+    "def": "beginning; the first day of the lunar month",
+    "type": "pictophonetic",
+    "hint": "moon",
+    "sem": "月",
+    "pho": "月"
+  },
+  "夋": {
+    "py": "qūn",
+    "dec": "⿳厶八夂",
+    "def": "to dawdle; the emperor Yao's father",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "迶": {
+    "py": "yòu",
+    "dec": "⿺辶有",
+    "def": "to walk",
+    "type": "pictophonetic",
+    "hint": "walk",
+    "sem": "辶",
+    "pho": "有"
+  },
+  "炎": {
+    "py": "yán",
+    "dec": "⿱火火",
+    "def": "flame, blaze; hot",
+    "type": "ideographic",
+    "hint": "Two fires 火 burning",
+    "sem": null,
+    "pho": null
+  },
+  "亭": {
+    "py": "tíng",
+    "dec": "⿱⿳亠口冖丁",
+    "def": "pavilion; erect",
+    "type": "pictographic",
+    "hint": "亠, 口, and 冖 form a picture of a pavilion; 丁 provides the pronunciation",
+    "sem": null,
+    "pho": null
+  },
+  "镸": {
+    "py": "cháng",
+    "dec": "⿱？厶",
+    "def": "long; lasting; to excel in",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "㔾": {
+    "py": "xiān",
+    "dec": "？",
+    "def": "seal; kneeling person",
+    "type": "pictographic",
+    "hint": "A rolled-up scroll or kneeling person; compare 卩",
+    "sem": null,
+    "pho": null
+  },
+  "厃": {
+    "py": "wěi",
+    "dec": "⿱⺈厂",
+    "def": "to look upward",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "氿": {
+    "py": "guǐ",
+    "dec": "⿰氵九",
+    "def": "spring",
+    "type": "pictophonetic",
+    "hint": "water",
+    "sem": "氵",
+    "pho": "九"
+  },
+  "⺗": {
+    "py": null,
+    "dec": "？",
+    "def": "heart; mind; soul",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "莫": {
+    "py": "mò",
+    "dec": "⿱艹旲",
+    "def": "cannot; do not; is not; negative",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "攸": {
+    "py": "yōu",
+    "dec": "⿲亻丨攵",
+    "def": "distant, far; adverbial prefix",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "州": {
+    "py": "zhōu",
+    "dec": "⿻川？",
+    "def": "state, province, prefecture",
+    "type": "ideographic",
+    "hint": "Islands within a river 川",
+    "sem": null,
+    "pho": null
+  },
+  "圤": {
+    "py": "pǔ",
+    "dec": "⿰土卜",
+    "def": null,
+    "type": "pictophonetic",
+    "hint": null,
+    "sem": null,
+    "pho": "土"
+  },
+  "甹": {
+    "py": "pīng",
+    "dec": "⿱由丂",
+    "def": "chivalrous knight",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "吂": {
+    "py": "máng",
+    "dec": "⿱亡口",
+    "def": null,
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "斩": {
+    "py": "zhǎn",
+    "dec": "⿰车斤",
+    "def": "to chop, to cut, to sever; to behead",
+    "type": "pictophonetic",
+    "hint": "axe",
+    "sem": "斤",
+    "pho": "车"
+  },
+  "辰": {
+    "py": "chén",
+    "dec": "⿸厂⿱二？",
+    "def": "early morning; fortune, good luck; 5th terrestrial branch",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "敕": {
+    "py": "chì",
+    "dec": "⿰束攵",
+    "def": "an imperial order or decree",
+    "type": "pictophonetic",
+    "hint": "script",
+    "sem": "攵",
+    "pho": "束"
+  },
+  "旨": {
+    "py": "zhǐ",
+    "dec": "⿱匕日",
+    "def": "aim, intention, purpose, will",
+    "type": "ideographic",
+    "hint": "A spoon 匕 aimed for the mouth 日",
+    "sem": null,
+    "pho": null
+  },
+  "韦": {
+    "py": "wéi",
+    "dec": "⿻三丨",
+    "def": "tanned leather; surname",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "壮": {
+    "py": "zhuàng",
+    "dec": "⿰丬士",
+    "def": "big, large; robust, strong; the name of a tribe",
+    "type": "pictophonetic",
+    "hint": "soldier",
+    "sem": "士",
+    "pho": "丬"
+  },
+  "酋": {
+    "py": "qiú",
+    "dec": "⿱丷酉",
+    "def": "chief of tribe, chieftain",
+    "type": "pictographic",
+    "hint": "A feathered crown",
+    "sem": null,
+    "pho": null
+  },
+  "艾": {
+    "py": "ài",
+    "dec": "⿱艹乂",
+    "def": "mugwort, Artemisia vulgaris; used in transliterations",
+    "type": "pictophonetic",
+    "hint": "grass",
+    "sem": "艹",
+    "pho": "乂"
+  },
+  "矣": {
+    "py": "yǐ",
+    "dec": "⿱厶矢",
+    "def": "particle of completed action",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "尉": {
+    "py": "wèi",
+    "dec": "⿰⿸尸示寸",
+    "def": "officer, military rank",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "溥": {
+    "py": "pǔ",
+    "dec": "⿰氵尃",
+    "def": "big, great, vast; extensive, pervading, widespread",
+    "type": "pictophonetic",
+    "hint": "water",
+    "sem": "氵",
+    "pho": "尃"
+  },
+  "夗": {
+    "py": "yuàn",
+    "dec": "⿰夕㔾",
+    "def": "to turn over when asleep",
+    "type": "ideographic",
+    "hint": "A person 㔾 curled up at night 夕",
+    "sem": null,
+    "pho": null
+  },
+  "辟": {
+    "py": "pì",
+    "dec": "⿰⿸尸口辛",
+    "def": "law, rule; to open up, to develop",
+    "type": "ideographic",
+    "hint": "A body 尸 decapitated 口 by a sword 辛 , representing the law",
+    "sem": null,
+    "pho": null
+  },
+  "臧": {
+    "py": "zāng",
+    "dec": "⿵戕臣",
+    "def": "good, right; generous; to command",
+    "type": "pictophonetic",
+    "hint": "minister",
+    "sem": "臣",
+    "pho": "戕"
+  },
+  "臿": {
+    "py": "chā",
+    "dec": "⿻千臼",
+    "def": "to separate the grain from the husk",
+    "type": "ideographic",
+    "hint": "A mortar 臼 and pestle 千",
+    "sem": null,
+    "pho": null
+  },
+  "龺": {
+    "py": "gān",
+    "dec": "⿳十日十",
+    "def": "sunlight; the rays of the sun",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "呙": {
+    "py": "guō",
+    "dec": "⿱口内",
+    "def": "to chat, to gossip, to jaw, to talk; mouth",
+    "type": "ideographic",
+    "hint": "Words 内 coming from a mouth 口",
+    "sem": null,
+    "pho": null
+  },
+  "冗": {
+    "py": "rǒng",
+    "dec": "⿱冖几",
+    "def": "excessive; superfluous",
+    "type": "ideographic",
+    "hint": "A cover-cloth 冖 on a table 几",
+    "sem": null,
+    "pho": null
+  },
+  "兟": {
+    "py": "shēn",
+    "dec": "⿰先先",
+    "def": "to advance",
+    "type": "ideographic",
+    "hint": "Two people 先 marching; 先 also provides the pronunciation",
+    "sem": null,
+    "pho": null
+  },
+  "仓": {
+    "py": "cāng",
+    "dec": "⿱人㔾",
+    "def": "granary, barn; cabin, berth",
+    "type": "ideographic",
+    "hint": "Simplified form of 倉; grains 食 kept in storage 口",
+    "sem": null,
+    "pho": null
+  },
+  "朿": {
+    "py": "cì",
+    "dec": "⿻木冂",
+    "def": "thorn, sting, prickle; to stab; to assassinate",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "崔": {
+    "py": "cuī",
+    "dec": "⿱山隹",
+    "def": "high, lofty, towering; surname",
+    "type": "ideographic",
+    "hint": "A bird 隹 faced with a mountain 山",
+    "sem": null,
+    "pho": null
+  },
+  "㐌": {
+    "py": "yí",
+    "dec": "⿱亻也",
+    "def": "a tribe of savages in South China",
+    "type": "pictophonetic",
+    "hint": "people",
+    "sem": "亻",
+    "pho": "也"
+  },
+  "刑": {
+    "py": "xíng",
+    "dec": "⿰开刂",
+    "def": "punishment, penalty; law",
+    "type": "ideographic",
+    "hint": "A man 刂 in jail 开",
+    "sem": null,
+    "pho": null
+  },
+  "罒": {
+    "py": "wǎng",
+    "dec": "⿻口？",
+    "def": "net, network",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "央": {
+    "py": "yāng",
+    "dec": "⿻冂大",
+    "def": "central; to beg; to run out",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "氾": {
+    "py": "fàn",
+    "dec": "⿰氵㔾",
+    "def": "to flood, to inundate, to overflow",
+    "type": "pictophonetic",
+    "hint": "water",
+    "sem": "氵",
+    "pho": "㔾"
+  },
+  "鬲": {
+    "py": "gé",
+    "dec": "⿳一口⿵冂⿱丷？",
+    "def": "earthen pot, iron cauldron",
+    "type": "pictographic",
+    "hint": "A cauldron 口 with three legs 冂丷",
+    "sem": null,
+    "pho": null
+  },
+  "衮": {
+    "py": "gǔn",
+    "dec": "⿻衣公",
+    "def": "imperial robe; ceremonial dress",
+    "type": "ideographic",
+    "hint": "A duke 公 in his robes 衣",
+    "sem": null,
+    "pho": null
+  },
+  "侯": {
+    "py": "hóu",
+    "dec": "⿰亻矦",
+    "def": "marquis, lord; target in archery",
+    "type": "pictographic",
+    "hint": "A person 亻 who might be a target 矦",
+    "sem": null,
+    "pho": null
+  },
+  "枼": {
+    "py": "yè",
+    "dec": "⿱世木",
+    "def": "table; flat pieces of wood; a slip, a leaf",
+    "type": "pictophonetic",
+    "hint": "wood",
+    "sem": "木",
+    "pho": "世"
+  },
+  "骨": {
+    "py": "gǔ",
+    "dec": "⿵冎⺼",
+    "def": "bone; skeleton; frame, framework",
+    "type": "ideographic",
+    "hint": "Flesh ⺼ and bones 冎",
+    "sem": null,
+    "pho": null
+  },
+  "玄": {
+    "py": "xuán",
+    "dec": "⿱亠幺",
+    "def": "deep, profound, abstruse",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "㐱": {
+    "py": "zhěn",
+    "dec": "⿱人彡",
+    "def": "bushy, black hair; variant of 鬒",
+    "type": "pictophonetic",
+    "hint": "hair",
+    "sem": "彡",
+    "pho": "人"
+  },
+  "哉": {
+    "py": "zāi",
+    "dec": "⿹？口",
+    "def": "final exclamatory particle",
+    "type": "pictophonetic",
+    "hint": "mouth",
+    "sem": "口",
+    "pho": null
+  },
+  "堇": {
+    "py": "jǐn",
+    "dec": "⿱黄土",
+    "def": "yellow loam; clay; season; few",
+    "type": "ideographic",
+    "hint": "Yellow 黄 earth 土",
+    "sem": null,
+    "pho": null
+  },
+  "吕": {
+    "py": "lǚ",
+    "dec": "⿱口口",
+    "def": "a musical note; surname",
+    "type": "ideographic",
+    "hint": "Two mouths 口 in harmony",
+    "sem": null,
+    "pho": null
+  },
+  "矞": {
+    "py": "yù",
+    "dec": "⿱矛冏",
+    "def": "to bore with an awl; bright, charming",
+    "type": "ideographic",
+    "hint": "To bore a hole with an awl 矛",
+    "sem": null,
+    "pho": null
+  },
+  "肙": {
+    "py": "yuàn",
+    "dec": "⿱口⺼",
+    "def": "a small worm; to twist; to surround; empty",
+    "type": "ideographic",
+    "hint": "A head 口 on a long body ⺼",
+    "sem": null,
+    "pho": null
+  },
+  "苋": {
+    "py": "xiàn",
+    "dec": "⿱艹见",
+    "def": "amaranth",
+    "type": "pictophonetic",
+    "hint": "plant",
+    "sem": "艹",
+    "pho": "见"
+  },
+  "波": {
+    "py": "bō",
+    "dec": "⿰氵皮",
+    "def": "waves, ripples, breakers; undulations",
+    "type": "pictophonetic",
+    "hint": "water",
+    "sem": "氵",
+    "pho": "皮"
+  },
+  "闰": {
+    "py": "rùn",
+    "dec": "⿵门王",
+    "def": "intercalary; extra, surplus",
+    "type": "pictophonetic",
+    "hint": "royal decree",
+    "sem": "王",
+    "pho": "门"
+  },
+  "刘": {
+    "py": "liú",
+    "dec": "⿰文刂",
+    "def": "to kill, to destroy; surname",
+    "type": "pictophonetic",
+    "hint": "knife",
+    "sem": "刂",
+    "pho": "文"
+  },
+  "屚": {
+    "py": "lòu",
+    "dec": "⿸尸雨",
+    "def": null,
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "击": {
+    "py": "jī",
+    "dec": "⿱？凵",
+    "def": "to strike, to hit, to beat; to attack, to fight",
+    "type": "ideographic",
+    "hint": "Simplified form of 擊; 手 provides the meaning",
+    "sem": null,
+    "pho": null
+  },
+  "罗": {
+    "py": "luō",
+    "dec": "⿱罒夕",
+    "def": "gauze, net; to collect, to display",
+    "type": "pictophonetic",
+    "hint": "net",
+    "sem": "罒",
+    "pho": null
+  },
+  "咠": {
+    "py": "qì",
+    "dec": "⿱口耳",
+    "def": "to whisper, to slander, to blame",
+    "type": "ideographic",
+    "hint": "To whisper 口 in someone's ear 耳",
+    "sem": null,
+    "pho": null
+  },
+  "鬼": {
+    "py": "guǐ",
+    "dec": "⿸？⿺乚厶",
+    "def": "ghost; demon; sly, mischievous",
+    "type": "pictographic",
+    "hint": "A ghost with a scary face",
+    "sem": null,
+    "pho": null
+  },
+  "匀": {
+    "py": "yún",
+    "dec": "⿻勹冫",
+    "def": "equal; even, uniform",
+    "type": "ideographic",
+    "hint": "Using a spoon 勹 to measure out two equal parts 冫",
+    "sem": null,
+    "pho": null
+  },
+  "啬": {
+    "py": "sè",
+    "dec": "⿱⿻土丷回",
+    "def": "miserly, stingy, thrifty",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "刃": {
+    "py": "rèn",
+    "dec": "⿹刀丶",
+    "def": "edged tool, cutlery, knife edge",
+    "type": "ideographic",
+    "hint": "A knife 刀 sharp enough to draw blood 丶",
+    "sem": null,
+    "pho": null
+  },
+  "囟": {
+    "py": "xìn",
+    "dec": "⿱丿⿴囗乂",
+    "def": "top of the head; skull",
+    "type": "ideographic",
+    "hint": "A skull from above, with 乂 marking the fontanelle",
+    "sem": null,
+    "pho": null
+  },
+  "亶": {
+    "py": "dǎn",
+    "dec": "⿱亠⿱回旦",
+    "def": "real, sincere, true; truth",
+    "type": "pictophonetic",
+    "hint": null,
+    "sem": null,
+    "pho": "旦"
+  },
+  "龹": {
+    "py": "quǎn",
+    "dec": "⿻？丿",
+    "def": "Form of 卷 used as a phonetic component",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "疏": {
+    "py": "shū",
+    "dec": "⿰疋㐬",
+    "def": "to neglect; to dredge, to clear away; lax, careless",
+    "type": "ideographic",
+    "hint": "Walking 疋 through uncultivated land 㐬",
+    "sem": null,
+    "pho": null
+  },
+  "禹": {
+    "py": "yǔ",
+    "dec": "⿻？禸",
+    "def": "legendary Hsia dynasty founder",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "臼": {
+    "py": "jiù",
+    "dec": "？",
+    "def": "mortar; bone joint socket",
+    "type": "pictographic",
+    "hint": "A mortar used to grind out powders",
+    "sem": null,
+    "pho": null
+  },
+  "佰": {
+    "py": "bǎi",
+    "dec": "⿰亻百",
+    "def": "hundred",
+    "type": "ideographic",
+    "hint": "One hundred 百 people 亻; 百 also provides the pronunciation",
+    "sem": null,
+    "pho": null
+  },
+  "卒": {
+    "py": "zú",
+    "dec": "⿱亠⿱从十",
+    "def": "soldier; servant; at last, finally",
+    "type": "pictographic",
+    "hint": "A soldier in armor",
+    "sem": null,
+    "pho": null
+  },
+  "朱": {
+    "py": "zhū",
+    "dec": "⿻一木",
+    "def": "cinnabar, vermilion; surname",
+    "type": "ideographic",
+    "hint": "The color of the sap 一 of some trees 木",
+    "sem": null,
+    "pho": null
+  },
+  "戌": {
+    "py": "xū",
+    "dec": "⿵戊一",
+    "def": "11th terrestrial branch",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "臣": {
+    "py": "chén",
+    "dec": "⿷匚⿻⿱丨丨？",
+    "def": "minister, statesman, official, vassal",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "舀": {
+    "py": "yǎo",
+    "dec": "⿱爫臼",
+    "def": "to ladle out; to scoop",
+    "type": "ideographic",
+    "hint": "A hand 爫 fetching food from a container 臼",
+    "sem": null,
+    "pho": null
+  },
+  "亘": {
+    "py": "gèn",
+    "dec": "⿻二日",
+    "def": "to extend across, through; from",
+    "type": "ideographic",
+    "hint": "Stretching from heaven 一 to earth 一 ",
+    "sem": null,
+    "pho": null
+  },
+  "旬": {
+    "py": "xún",
+    "dec": "⿹勹日",
+    "def": "ten-day period; period of time",
+    "type": "ideographic",
+    "hint": "A cycle 勹 of ten days 日; a traditional week",
+    "sem": null,
+    "pho": null
+  },
+  "卂": {
+    "py": "xùn",
+    "dec": "⿹乙十",
+    "def": "to fly rapidly",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "㢟": {
+    "py": "chān",
+    "dec": "⿺廴止",
+    "def": "to walk slowly; to stroll; to ramble",
+    "type": "ideographic",
+    "hint": "A foot 止 strolling down the road 廴",
+    "sem": null,
+    "pho": null
+  },
+  "肀": {
+    "py": "yù",
+    "dec": "⿻彐丨",
+    "def": "pen",
+    "type": "pictographic",
+    "hint": "A hand 彐 holding a pen; compare 聿",
+    "sem": null,
+    "pho": null
+  },
+  "䍃": {
+    "py": "yóu",
+    "dec": "⿱爫缶",
+    "def": "vase, pitcher, earthenware",
+    "type": "pictographic",
+    "hint": "Pottery; compare 缶",
+    "sem": null,
+    "pho": null
+  },
+  "曹": {
+    "py": "cáo",
+    "dec": "⿱？日",
+    "def": "ministers, officials; a company; surname",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "啇": {
+    "py": "dì",
+    "dec": "⿱⿱亠丷⿵冂古",
+    "def": "stalk, stem, root, foot, base",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "⺊": {
+    "py": null,
+    "dec": "⿰丨？",
+    "def": null,
+    "type": "ideographic",
+    "hint": "A crack on an oracle bone; compare 卜",
+    "sem": null,
+    "pho": null
+  },
+  "丸": {
+    "py": "wán",
+    "dec": "⿻九丶",
+    "def": "ball, pebble, pellet, pill",
+    "type": "pictographic",
+    "hint": "A fist 九 holding a pebble 丶",
+    "sem": null,
+    "pho": null
+  },
+  "彗": {
+    "py": "huì",
+    "dec": "⿱⿰丰丰彐",
+    "def": "comet; broomstick",
+    "type": "ideographic",
+    "hint": "A hand 彐 holding a bamboo broom 丰",
+    "sem": null,
+    "pho": null
+  },
+  "㠯": {
+    "py": "yǐ",
+    "dec": "⿻己？",
+    "def": "according to, for, with; to use",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "宗": {
+    "py": "zōng",
+    "dec": "⿱宀示",
+    "def": "ancestry, clan, family, lineage; religion, sect",
+    "type": "ideographic",
+    "hint": "An altar 示 to the ancestor spirits found in one's home 宀",
+    "sem": null,
+    "pho": null
+  },
+  "苟": {
+    "py": "gǒu",
+    "dec": "⿱艹句",
+    "def": "careless, frivolous, illicit; but, if only",
+    "type": "pictophonetic",
+    "hint": "wild grass",
+    "sem": "艹",
+    "pho": "句"
+  },
+  "臱": {
+    "py": "mián",
+    "dec": "⿱自⿱穴方",
+    "def": null,
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "矦": {
+    "py": "hóu",
+    "dec": "⿸厃矢",
+    "def": "target in archery",
+    "type": "pictographic",
+    "hint": "An arrow 矢 hitting a target 厃",
+    "sem": null,
+    "pho": null
+  },
+  "咼": {
+    "py": "guō",
+    "dec": "⿵冎口",
+    "def": "to chat, to gossip, to jaw, to talk; mouth",
+    "type": "ideographic",
+    "hint": "A jaw 口 bone 冎",
+    "sem": null,
+    "pho": null
+  },
+  "耶": {
+    "py": "yé",
+    "dec": "⿰耳阝",
+    "def": "used in transliterations",
+    "type": "pictophonetic",
+    "hint": "ear",
+    "sem": "耳",
+    "pho": "阝"
+  },
+  "冃": {
+    "py": null,
+    "dec": null,
+    "def": null,
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "厤": {
+    "py": "lì",
+    "dec": "⿸厂秝",
+    "def": "to calculate; the calendar",
+    "type": "pictophonetic",
+    "hint": null,
+    "sem": null,
+    "pho": "秝"
+  },
+  "㒼": {
+    "py": "mán",
+    "dec": "⿱廿⿻巾⿰入入",
+    "def": "average; equivalent",
+    "type": "ideographic",
+    "hint": "To weights 入 balanced on a scale 巾",
+    "sem": null,
+    "pho": null
+  },
+  "睪": {
+    "py": "yì",
+    "dec": "⿱罒幸",
+    "def": "to spy on",
+    "type": "ideographic",
+    "hint": "An eye 目 on top of a tower 幸",
+    "sem": null,
+    "pho": null
+  },
+  "舉": {
+    "py": "jǔ",
+    "dec": "⿱與扌",
+    "def": "to raise; to recommend; to praise",
+    "type": "pictophonetic",
+    "hint": "hand",
+    "sem": "扌",
+    "pho": "舉"
+  },
+  "雚": {
+    "py": "guàn",
+    "dec": "⿳艹？隹",
+    "def": "heron; small cup",
+    "type": "pictophonetic",
+    "hint": "bird",
+    "sem": "隹",
+    "pho": null
+  },
+  "㥯": {
+    "py": "yǐn",
+    "dec": "⿱⿳爫工彐心",
+    "def": "careful, prudent; compassionate; grieved; worried",
+    "type": "pictophonetic",
+    "hint": "heart",
+    "sem": "心",
+    "pho": "彐"
+  },
+  "⺷": {
+    "py": null,
+    "dec": null,
+    "def": null,
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  },
+  "叀": {
+    "py": "zhuān",
+    "dec": "⿱？厶",
+    "def": "spindle; to hang",
+    "type": null,
+    "hint": null,
+    "sem": null,
+    "pho": null
+  }
+}
