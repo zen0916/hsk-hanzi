@@ -317,11 +317,16 @@ body.big .tip p { font-size: 15px; }
 .sh2 { margin: 0; font-size: 15px; }
 .sel { width: 100%; font: inherit; font-size: 15px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--text); margin-top: 6px; }
 .dday[hidden], .sel[hidden] { display: none; }
-.fbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.fic { width: 18px; height: 18px; color: var(--muted); flex: none; }
-.fpill { border: 1px solid var(--line); background: var(--surface); border-radius: 99px; padding: 7px 12px; font-size: 14px; font-weight: 600; color: var(--text); display: inline-flex; align-items: center; gap: 4px; }
-.fpill .car { color: var(--accent); font-size: 11px; }
-.fpill:active { background: var(--surface-2); }
+.fbar { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.fpill { display: flex; align-items: center; gap: 8px; text-align: left; border: 1.5px solid var(--accent); background: var(--accent-soft); border-radius: 14px; padding: 10px 12px; color: var(--text); box-shadow: 0 1px 0 rgba(17,45,78,.06); }
+.fpill .fic { width: 18px; height: 18px; color: var(--accent); flex: none; }
+.fpill .fv { display: grid; line-height: 1.25; flex: 1; min-width: 0; }
+.fpill .fv small { font-size: 11px; color: var(--muted); font-weight: 600; }
+.fpill .fv b { font-size: 16px; font-weight: 800; color: var(--accent); white-space: nowrap; }
+.fpill .car { width: 18px; height: 18px; color: var(--accent); flex: none; }
+.fpill:active { transform: scale(.98); }
+:root[data-theme="dark"] .fpill .fv b, :root[data-theme="dark"] .fpill .fic, :root[data-theme="dark"] .fpill .car { color: #9cc0ec; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .fpill .fv b, :root:not([data-theme="light"]) .fpill .fic, :root:not([data-theme="light"]) .fpill .car { color: #9cc0ec; } }
 .picks { display: grid; gap: 8px; }
 .picks button { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--line); background: var(--surface); border-radius: 14px; padding: 14px 16px; font-size: 16px; }
 .picks button span { color: var(--muted); font-size: 13px; }
