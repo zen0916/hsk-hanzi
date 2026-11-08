@@ -86,7 +86,7 @@
   }
 
   // ---------- 설정 (화면 테마, 글자 크기, 자동 발음) ----------
-  S.set = Object.assign({ theme: "auto", big: false, autoSpeak: true, perDay: 10, hide: true }, S.set || {});
+  S.set = Object.assign({ theme: "auto", big: false, autoSpeak: true, perDay: 10, hide: true, ddOn: true, examLv: "3", exam: "" }, S.set || {});
   var cardKeys = null;
   document.addEventListener("keydown", function (e) {
     if (tab === "home" && session && sheet.hidden && cardKeys && !(e.target.closest && e.target.closest("input"))) cardKeys(e);
@@ -95,6 +95,28 @@
     var root = document.documentElement;
     if (S.set.theme === "auto") root.removeAttribute("data-theme"); else root.setAttribute("data-theme", S.set.theme);
     document.body.classList.toggle("big", !!S.set.big);
+  }
+  // ---------- 시험 D-day (HSK한국사무국 발표 정기시험 일정) ----------
+  var EXAM_DATES = {
+    std: ["2026-12-13", "2027-01-09", "2027-02-21", "2027-03-14", "2027-04-10", "2027-05-16", "2027-06-26",
+          "2027-07-18", "2027-08-21", "2027-09-26", "2027-10-16", "2027-11-07", "2027-12-11"],
+    adv: ["2027-05-23", "2027-11-20"]
+  };
+  var WD = "일월화수목금토";
+  function ymd(d) { return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
+  function parseDay(v) { var p = v.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function dateKo(v, year) { var d = parseDay(v); return (year ? d.getFullYear() + "년 " : "") + (d.getMonth() + 1) + "월 " + d.getDate() + "일(" + WD[d.getDay()] + ")"; }
+  function daysLeft(v) { var t = new Date(); t = new Date(t.getFullYear(), t.getMonth(), t.getDate()); return Math.round((parseDay(v) - t) / 864e5); }
+  function lvName(l) { return l === "7-9" ? "7~9급" : l + "급"; }
+  function renderDday() {
+    var el = $("#dday"); if (!el) return;
+    if (!S.set.ddOn) { el.hidden = true; return; }
+    el.hidden = false;
+    if (!S.set.exam) { el.className = "dday empty"; el.innerHTML = "📅 시험일 설정"; return; }
+    var n = daysLeft(S.set.exam);
+    el.className = "dday" + (n >= 0 && n <= 7 ? " soon" : "") + (n < 0 ? " done" : "");
+    el.innerHTML = '<span class="dl">HSK ' + esc(lvName(S.set.examLv)) + '</span><b>' + (n > 0 ? "D-" + n : n === 0 ? "D-DAY" : "시험 끝") + '</b>';
+    el.setAttribute("aria-label", "HSK " + lvName(S.set.examLv) + " 시험 " + dateKo(S.set.exam, true) + (n > 0 ? ", " + n + "일 남음" : ""));
   }
   function openSettings() {
     var seg = function (key, opts) {
@@ -107,17 +129,49 @@
       '<div class="setrow"><span>글자 크기</span>' + seg("big", [["false", "보통"], ["true", "크게"]]) + '</div>' +
       '<div class="setrow"><span>학습 카드의 정답 가리기 (몰랐어요·헷갈려요를 누르면 공개)</span>' + seg("hide", [["true", "가리기"], ["false", "바로 보기"]]) + '</div>' +
       '<div class="setrow"><span>카드가 나올 때 발음 자동 재생</span>' + seg("autoSpeak", [["true", "켜기"], ["false", "끄기"]]) + '</div>' +
+      examSection() +
       '<p class="note">컴퓨터에서는 1·2·3 키로 평가하고, 정답이 보일 때 Enter로 다음 단어로 넘어가요.</p></div>');
+    var es = $("#exam-date"), ec = $("#exam-custom");
+    es.onchange = function () {
+      if (es.value === "custom") { ec.hidden = false; ec.focus(); return; }
+      S.set.exam = es.value; save(); renderDday(); openSettings(); scrollToExam();
+    };
+    ec.onchange = function () { if (ec.value) { S.set.exam = ec.value; save(); renderDday(); openSettings(); scrollToExam(); } };
     sheetContent.querySelectorAll(".seg.set button").forEach(function (b) {
       b.onclick = function () {
         var k = b.parentNode.dataset.k, v = b.dataset.v;
         S.set[k] = v === "true" ? true : v === "false" ? false : v;
-        save(); applySettings(); openSettings();
+        if (k === "examLv" && S.set.exam && EXAM_DATES[v === "7-9" ? "adv" : "std"].indexOf(S.set.exam) < 0 && EXAM_DATES[v === "7-9" ? "std" : "adv"].indexOf(S.set.exam) >= 0) S.set.exam = "";
+        save(); applySettings(); renderDday(); openSettings();
+        if (/^(ddOn|examLv)$/.test(k)) scrollToExam();
       };
     });
   }
+  function scrollToExam() { var e = $("#exam-sec"); if (e) e.scrollIntoView({ block: "start" }); }
+  function examSection() {
+    var adv = S.set.examLv === "7-9", today = ymd(new Date());
+    var list = EXAM_DATES[adv ? "adv" : "std"].filter(function (d) { return d >= today; });
+    var cur = S.set.exam, custom = cur && list.indexOf(cur) < 0;
+    var opts = '<option value="">시험일을 골라 주세요</option>' + list.map(function (d) {
+      return '<option value="' + d + '"' + (d === cur ? " selected" : "") + '>' + dateKo(d, true) + ' · D-' + daysLeft(d) + '</option>';
+    }).join("") + '<option value="custom"' + (custom ? " selected" : "") + '>직접 입력…</option>';
+    var lvSeg = '<div class="seg set" data-k="examLv">' + ["1", "2", "3", "4", "5", "6", "7-9"].map(function (l) {
+      return '<button data-v="' + l + '"' + (S.set.examLv === l ? ' class="on"' : '') + '>' + (l === "7-9" ? "7~9" : l) + '</button>';
+    }).join("") + '</div>';
+    var on = '<div class="seg set" data-k="ddOn"><button data-v="true"' + (S.set.ddOn ? ' class="on"' : '') + '>보이기</button><button data-v="false"' + (!S.set.ddOn ? ' class="on"' : '') + '>끄기</button></div>';
+    return '<div class="exam-sec stack" id="exam-sec"><h3 class="sh2">📅 시험 D-day</h3>' +
+      '<div class="setrow"><span>화면 맨 위에 D-day 보이기</span>' + on + '</div>' +
+      '<div class="setrow"><span>응시 급수</span>' + lvSeg + '</div>' +
+      '<div class="setrow"><span>시험일 (HSK한국사무국 정기시험)</span><select id="exam-date" class="sel">' + opts + '</select>' +
+      '<input type="date" id="exam-custom" class="sel" min="' + today + '"' + (custom ? ' value="' + esc(cur) + '"' : ' hidden') + '></div>' +
+      (cur ? '<p class="small muted" style="margin:0">HSK ' + esc(lvName(S.set.examLv)) + ' · ' + dateKo(cur, true) + (daysLeft(cur) >= 0 ? ' · ' + daysLeft(cur) + '일 남았어요' : ' · 지난 시험이에요') + '</p>' : '') +
+      '<p class="note" style="text-align:left">일정 출처: <a href="https://www.hsk.or.kr" target="_blank" rel="noopener">HSK한국사무국</a> 2027년 시험일정(HSK 3.0). 접수 기간과 고사장 사정은 사무국에서 꼭 확인하세요.</p></div>';
+  }
   applySettings();
   $("#gear").onclick = openSettings;
+  $("#dday").onclick = function () { openSettings(); scrollToExam(); };
+  renderDday();
+  setInterval(renderDday, 6e4);
 
   // ---------- 탭 ----------
   var tab = "home";
@@ -554,7 +608,7 @@
         if (!d || typeof d.cards !== "object") throw new Error("형식");
         if (!confirm("지금 기록을 불러온 파일 내용으로 바꿀까요?")) return;
         S = d; S.cards = S.cards || {}; S.hz = S.hz || {}; S.log = S.log || {}; S.lv = LEVELS.indexOf(S.lv) >= 0 ? S.lv : 1;
-        S.set = Object.assign({ theme: "auto", big: false, autoSpeak: true, perDay: 10, hide: true }, S.set || {});
+        S.set = Object.assign({ theme: "auto", big: false, autoSpeak: true, perDay: 10, hide: true, ddOn: true, examLv: "3", exam: "" }, S.set || {});
         S.saved = S.saved || {}; S.saved.ex = S.saved.ex || {}; S.saved.hz = S.saved.hz || {}; S.exCards = S.exCards || {}; S.hzCards = S.hzCards || {};
         save(); applySettings(); renderStats();
       }).catch(function () { alert("이 파일은 불러올 수 없어요."); });

@@ -1,12 +1,14 @@
 :root {
-  --bg: #f7f3ec;
+  --bg: #f9f7f7;
   --surface: #ffffff;
-  --surface-2: #f0ebe2;
-  --text: #1f1b16;
-  --muted: #6f665b;
-  --line: #e3dcd0;
-  --accent: #b23a2e;
-  --accent-soft: #f6e1dd;
+  --surface-2: #eef1f6;
+  --text: #112d4e;
+  --muted: #5b6b80;
+  --line: #dbe2ef;
+  --accent: #3f72af;
+  --accent-soft: #dbe2ef;
+  --ink: #112d4e;
+  --bad: #c2554b;
   --good: #2f7d4f;
   --warn: #b7791f;
   --shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.06);
@@ -16,14 +18,14 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #171411; --surface: #221e1a; --surface-2: #2c2722; --text: #f1ece4; --muted: #a89f93;
-    --line: #3a342d; --accent: #e0675a; --accent-soft: #3a2421; --good: #5cb27f; --warn: #d9a04a;
+    --bg: #0e1621; --surface: #16212f; --surface-2: #1e2b3c; --text: #e8eef6; --muted: #9aa8ba;
+    --line: #2a3a4f; --accent: #4a7fc1; --accent-soft: #1f3350; --ink: #2f5e99; --bad: #b9544b; --good: #5cb27f; --warn: #d9a04a;
     --shadow: none; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #171411; --surface: #221e1a; --surface-2: #2c2722; --text: #f1ece4; --muted: #a89f93;
-  --line: #3a342d; --accent: #e0675a; --accent-soft: #3a2421; --good: #5cb27f; --warn: #d9a04a;
+  --bg: #0e1621; --surface: #16212f; --surface-2: #1e2b3c; --text: #e8eef6; --muted: #9aa8ba;
+    --line: #2a3a4f; --accent: #4a7fc1; --accent-soft: #1f3350; --ink: #2f5e99; --bad: #b9544b; --good: #5cb27f; --warn: #d9a04a;
   --shadow: none; color-scheme: dark;
 }
 
@@ -94,7 +96,7 @@ main { max-width: 560px; margin: 0 auto; padding: 8px 16px 24px; }
 
 .rate { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .rate button { border: 0; border-radius: 14px; padding: 14px 4px; font-weight: 700; font-size: 15px; color: #fff; }
-.rate .r0 { background: var(--accent); }
+.rate .r0 { background: var(--bad); }
 .rate .r1 { background: var(--warn); }
 .rate .r2 { background: var(--good); }
 .rate small { display: block; font-weight: 400; font-size: 11px; opacity: .9; }
@@ -274,7 +276,7 @@ body.big .ex-py { font-size: 16px; }
 .veil { cursor: default; }
 .veil-label { font-size: 12px; font-weight: 500; border-color: var(--line); color: var(--muted); white-space: normal; text-align: center; width: max-content; max-width: 86%; }
 .rate.one { grid-template-columns: 1fr; }
-.rate .next { border: 0; border-radius: 14px; padding: 16px; font-size: 15px; color: #fff; background: var(--text); }
+.rate .next { border: 0; border-radius: 14px; padding: 16px; font-size: 15px; color: #fff; background: var(--ink); }
 .rate .next b { font-weight: 700; }
 
 /* 외우는 법 공식 · 가족 */
@@ -301,3 +303,17 @@ body.big .ex-py { font-size: 16px; }
 .tip p { margin: 0; font-size: 14px; line-height: 1.5; }
 .tip p + p { margin-top: 4px; }
 body.big .tip p { font-size: 15px; }
+.dday { margin-left: auto; margin-right: 8px; border: 0; border-radius: 99px; padding: 5px 12px; background: var(--accent-soft); color: var(--ink); font-size: 13px; display: inline-flex; gap: 6px; align-items: baseline; }
+.dday b { font-size: 15px; font-weight: 800; color: var(--accent); letter-spacing: -.01em; }
+.dday .dl { color: var(--muted); font-weight: 600; }
+.dday.soon { background: var(--accent); } .dday.soon b, .dday.soon .dl { color: #fff; }
+.dday.done b { color: var(--muted); }
+.dday.empty { color: var(--accent); font-weight: 600; }
+:root[data-theme="dark"] .dday { color: var(--text); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .dday { color: var(--text); } :root:not([data-theme="light"]) .dday b { color: #9cc0ec; } }
+:root[data-theme="dark"] .dday b { color: #9cc0ec; }
+.dday.soon b { color: #fff !important; }
+.exam-sec { border-top: 1px solid var(--line); padding-top: 14px; }
+.sh2 { margin: 0; font-size: 15px; }
+.sel { width: 100%; font: inherit; font-size: 15px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--text); margin-top: 6px; }
+.dday[hidden], .sel[hidden] { display: none; }
