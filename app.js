@@ -762,16 +762,24 @@
       (asSem.length > 12 ? '<p class="small muted" style="margin:4px 0 0">외 ' + (asSem.length - 12) + '자</p>' : '') + '</div>';
     return out;
   }
+  // 사실(유래)과 외우기용 연상(팁)을 나눠 보여 준다
+  function tipBox(m, q) {
+    if (!m && !q) return "";
+    var qq = q ? q.replace(/[.。!]\s*$/, "") : "";
+    return '<div class="tip"><h3>💡 이렇게 외우면 쉬워요!</h3>' +
+      (qq ? '<p>‘' + esc(qq) + '’라고 외우면 쉬워요.</p>' : '') +
+      (m && m !== q ? '<p>' + esc(m) + '</p>' : '') + '</div>';
+  }
   function openComp(p) {
     var cm = COMP[p] || {}, used = compUsedIn(p);
     var others = used.filter(function (c) { return H[c].f !== p && H[c].s !== p; });
     openSheet('<div class="stack"><div class="hero"><div class="stk" id="stk"><span class="z">' + esc(p) + '</span></div>' +
       '<div class="k">' + esc(G[p] || "구성 요소") + '</div><div class="small muted">한자를 이루는 부품' + (cm.y ? ' · ' + esc(cm.y) : '') + '</div>' +
       '<div class="btns">' + learnBtn(p) + '</div></div>' +
-      (cm.m ? '<div class="memo"><h3>외우는 법</h3><p>' + esc(cm.m) + '</p></div>' : '') +
       (cm.o || (cm.p || []).length ? '<div class="panel stack">' +
         ((cm.p || []).length ? '<div class="sec"><h3>구성</h3><div class="formula">' + cm.p.map(function (x) { return roleChip(x, ""); }).join('<span class="op">+</span>') + '</div></div>' : '') +
         (cm.o ? '<div class="sec"><h3>유래</h3><p>' + esc(cm.o) + '</p></div>' : '') + '</div>' : '') +
+      tipBox(cm.m, cm.q) +
       families(p, true) +
       (others.length ? '<div class="sec"><h3>' + esc(p) + ' 부품이 들어간 다른 한자 (' + others.length + ')</h3>' + famRow(others.slice(0, 16)) + '</div>' : '') +
       '</div>');
@@ -795,16 +803,16 @@
       '<div class="small muted">HSK ' + h.lv + '급 한자<span id="stkn"></span></div>' +
       '<div class="btns"><button class="speak" id="sc">🔊 발음 듣기</button><button class="speak" id="replay" hidden>✍️ 획순 다시 보기</button>' + learnBtn(c) + '</div></div>' +
       '<div class="panel stack"><div class="sec"><h3>외우는 법</h3>' + formula(c) + '</div>' +
-      (h.m ? '<div class="memo"><h3>연상법</h3><p>' + esc(h.m) + '</p></div>' : '') +
       (h.s && h.f ? '<p class="small muted" style="margin:0">💡 ' + esc(h.s) + '(' + esc(nameOf(h.s)) + ')로 <b>뜻</b>을, ' + esc(h.f) + '(' + esc(pyOf(h.f)) + ')로 <b>소리</b>를 나타내요. 중국 한자의 80% 이상이 이렇게 만들어졌어요.</p>' : '') +
       (phoTip ? '<div class="sec"><h3>소리 부분 ' + esc(h.f) + '(' + esc(nameOf(h.f)) + ')는?</h3><p>' + esc(phoTip) + '</p></div>' : '') +
       (h.o ? '<div class="sec"><h3>유래</h3><p>' + esc(h.o) + '</p></div>' : '') +
       '<dl class="kv"><dt>부수</dt><dd>' + r + '</dd></dl></div>' +
+      tipBox(h.m, h.q) +
       families(c, false) +
       '<div class="sec"><h3>이 한자가 쓰인 단어 (' + words.length + ')</h3><div class="chips">' +
       words.map(function (x) { return '<button class="chip" data-w="' + esc(x.w) + '"><span class="zh">' + esc(x.w) + '</span><span>' + esc(x.m) + ' · ' + x.lv + '급</span></button>'; }).join("") +
       '</div></div>' +
-      '<p class="note">유래와 연상법은 AI가 작성했어요. 학설이 여러 가지인 글자는 외우기 쉬운 설명을 골랐어요.</p>' +
+      '<p class="note">유래는 알려진 학설을 바탕으로 AI가 정리했어요. 💡 팁은 사실이 아니라 외우기 쉽게 만든 연상이에요.</p>' +
       '</div>');
     $("#sc").onclick = function () { speak(c); };
     bindCharTiles(sheetContent); bindLearn(sheetContent);

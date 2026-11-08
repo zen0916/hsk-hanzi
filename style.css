@@ -296,3 +296,8 @@ body.big .ex-py { font-size: 16px; }
 .fam-c .py { font-size: 12px; color: var(--accent); }
 .fam-c .k { font-size: 10px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
 .sec h3 { line-height: 1.4; }
+.tip { background: var(--accent-soft); border-radius: 12px; padding: 10px 12px; }
+.tip h3 { margin: 0 0 4px; font-size: 12px; color: var(--accent); font-weight: 700; }
+.tip p { margin: 0; font-size: 14px; line-height: 1.5; }
+.tip p + p { margin-top: 4px; }
+body.big .tip p { font-size: 15px; }

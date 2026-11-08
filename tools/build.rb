@@ -77,6 +77,26 @@ def auto_origin(d, kc)
   "뜻은 #{sem}, 소리는 #{pho}에서 온 형성자."
 end
 
+# 유래 검토 결과 (src/origin-fix.txt)
+FIX = {}
+File.foreach(src("origin-fix.txt")) do |l|
+  next if l.start_with?("#") || l.strip.empty?
+  c, o = l.chomp.split("|", 2); FIX[c] = o.to_s
+end
+def generic_origin(c, t, parts)
+  return "번체 #{t}를 간단하게 줄인 간체자예요. 정확한 유래는 학설이 나뉘어요." if t && t != c
+  glo = parts.map { |x| g = (KC[x] && KC[x]["k"]) || GL[x]; [x, g.to_s.sub(/\s*\(.*\)\z/, "")] }
+  return "정확한 유래는 학설이 나뉘는 글자예요." if glo.size < 2
+  # 받침 유무로 와/과, 를/을 고르기 (괄호 속 훈음의 마지막 글자 기준)
+  bat = ->(s) { ch = s.to_s.gsub(/[^가-힣]/, "")[-1]; ch && (ch.ord - 0xAC00) % 28 != 0 }
+  txt = +""
+  glo.each_with_index do |(x, g), i|
+    txt << (g.empty? ? x : "#{x}(#{g})")
+    txt << (i < glo.size - 1 ? (bat.(g) ? "과 " : "와 ") : (bat.(g) ? "을" : "를"))
+  end
+  "#{txt} 합친 글자예요. 정확한 유래는 학설이 나뉘어요."
+end
+
 chars = {}
 words.each { |w| w["w"].each_char { |c| chars[c] ||= w["lv"] if c.ord.between?(0x3400, 0x9FFF) } }
 need_gloss = {}
@@ -88,10 +108,16 @@ chars.each do |c, lv|
   parts = kc["p"] || d["dec"].to_s.gsub(/[⿰-⿻？]/, "").chars.uniq.reject { |x| x == c }
   t = kc["t"] || trad[c] || c
   o = kc["o"].to_s.empty? ? auto_origin(d, KC) : kc["o"]
+  q = nil
+  # 근거가 약한 유래는 '외우는 팁'(q)으로 옮기고, 유래는 사실에 가까운 설명으로 바꾼다
+  if FIX.key?(c)
+    q = kc["o"].to_s.empty? ? nil : kc["o"]
+    o = FIX[c].to_s.empty? ? (auto_origin(d, KC) || generic_origin(c, t, parts)) : FIX[c]
+  end
   r = d["r"] || c
   ([r] + parts + [d["sem"], d["pho"]].compact).each { |x| need_gloss[x] = 1 unless x == c || KC[x] || GL[x] }
   out_h[c] = { "k" => "#{t} #{kc['k']}", "r" => r, "p" => parts, "o" => o.to_s, "m" => kc["m"].to_s, "lv" => lv,
-               "s" => d["sem"], "f" => d["pho"], "y" => (d["py"] || []).first }.compact
+               "s" => d["sem"], "f" => d["pho"], "y" => (d["py"] || []).first, "q" => q }.compact
 end
 gl = {}
 out_h.each_value { |h| ([h["r"]] + h["p"]).each { |x| gl[x] = GL[x] if GL[x] && !out_h[x] } }
@@ -113,7 +139,9 @@ end
 comp = {}
 CD.each do |c, v|
   parts = v["dec"].to_s.gsub(/[⿰-⿻？]/, "").chars.uniq.reject { |x| x == c }
-  comp[c] = { "y" => v["py"], "p" => parts, "o" => (CK[c] || [])[0], "m" => (CK[c] || [])[1] }.compact
+  o = (CK[c] || [])[0]; q = nil
+  if FIX.key?(c) then q = o; o = FIX[c].to_s.empty? ? generic_origin(c, c, parts) : FIX[c] end
+  comp[c] = { "y" => v["py"], "p" => parts, "o" => o, "m" => (CK[c] || [])[1], "q" => q }.compact
 end
 missing_ck = CD.keys - CK.keys
 js << "window.COMP = #{comp.to_json};\n"
