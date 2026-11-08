@@ -494,8 +494,8 @@
       '<div class="panel stack"><div><b>HSK ' + lv + '급 한자 퀴즈</b> <span class="muted small">· 한자 ' + lvChars.length + '자</span></div>' +
       '<div class="bar"><i style="width:' + (tried / lvChars.length * 100).toFixed(1) + '%"></i></div>' +
       '<div class="stats"><div class="stat"><b>' + tried + '</b><span>풀어 본 한자</span></div>' +
-      '<div class="stat"><b>' + weak.length + '</b><span>약한 한자</span></div>' +
-      '<div class="stat"><b>' + QN + '</b><span>한 번에 문제</span></div></div></div>' +
+      '<div class="stat"><b>' + weak.length + '</b><span>헷갈리는 한자</span></div>' +
+      '<div class="stat"><b>' + QN + '</b><span>문제 수</span></div></div></div>' +
       '<button class="btn" id="qstart">퀴즈 시작</button>' +
       (weak.length ? '<div class="panel"><h3 class="h3">자주 틀린 한자</h3><div class="chips">' +
         weak.sort(function (a, b) { return weakness(b) - weakness(a); }).slice(0, 12).map(function (c) {
