@@ -216,8 +216,7 @@
     var leftAll = newList(lv).length;
     var lvChars = Object.keys(H).filter(function (c) { return H[c].lv === lv; }).length;
     view.innerHTML =
-      '<div class="stack">' + modeSeg() +
-      lvSeg(lv, false) +
+      '<div class="stack">' + filterBar(lv, perDay) + modeSeg() +
       '<div class="panel stack">' +
       '<div><b>HSK ' + lv + '급</b> <span class="muted small">· 새 단어 ' + lvWords.length + '개 · 새 한자 ' + lvChars + '자</span></div>' +
       '<div class="bar"><i style="width:' + (learned / lvWords.length * 100).toFixed(1) + '%"></i></div>' +
@@ -227,11 +226,9 @@
       '<div class="stat"><b>' + (lvWords.length - seen) + '</b><span>남은 새 단어</span></div>' +
       '</div>' +
       '<div class="goal"><div class="goal-h"><span>하루 새 단어</span><b>오늘 ' + Math.min(doneToday, perDay) + ' / ' + perDay + '개</b></div>' +
-      '<div class="seg per">' + [5, 10, 15, 20, 30].map(function (n) {
-        return '<button data-n="' + n + '"' + (n === perDay ? ' class="on"' : '') + '>' + n + '개</button>';
-      }).join("") + '</div></div></div>' +
+      '</div></div>' +
       '<button class="btn" id="start"' + (total ? "" : " disabled") + '>' +
-      (total ? "학습 시작 · " + (due ? "복습 " + Math.min(due, 50) + (fresh ? " + " : "") : "") + (fresh ? "새 단어 " + fresh : "") : "오늘 목표 완료 🎉") + '</button>' +
+      (total ? "학습 시작" : "오늘 목표 완료 🎉") + '</button>' +
       (!fresh && leftAll ? '<button class="btn ghost" id="more5">새 단어 5개 더 하기</button>' : '') +
       '<div class="panel small muted">' +
       '<b style="color:var(--text)">이렇게 공부해요</b><br>' +
@@ -242,11 +239,8 @@
       '</div>' +
       '<p class="note">HSK 3.0 (2026 개정) 기준 · 단어 목록: complete-hsk-vocabulary (MIT) · 한자 분해·획순: Make Me a Hanzi (LGPL·Arphic) · 뜻·유래·연상법은 AI가 작성</p>' +
       '</div>';
-    bindSeg(view, function (v) { S.lv = v; save(); renderHome(); });
+    bindFilter(renderHome);
     bindMode();
-    view.querySelectorAll(".seg.per button").forEach(function (b) {
-      b.onclick = function () { S.set.perDay = +b.dataset.n; save(); renderHome(); };
-    });
     var begin = function (nNew) {
       var q = dueList().slice(0, 50).concat(newList(S.lv).slice(0, nNew));
       if (!q.length) return;
@@ -257,6 +251,33 @@
     if (s) s.onclick = function () { begin(fresh); };
     var m5 = $("#more5");
     if (m5) m5.onclick = function () { begin(5); };
+  }
+  // ---------- 학습 필터 (급수 · 하루 새 단어) ----------
+  var FUNNEL = '<svg class="fic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16l-6 7.5V19l-4 1.5v-8L4 5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
+  function filterBar(lv, perDay) {
+    return '<div class="fbar">' + FUNNEL +
+      '<button class="fpill" id="f-lv" aria-label="급수 바꾸기">HSK ' + lv + '급<span class="car">▾</span></button>' +
+      '<button class="fpill" id="f-per" aria-label="하루 새 단어 수 바꾸기">하루 새 단어 ' + perDay + '개<span class="car">▾</span></button></div>';
+  }
+  function pick(title, opts, cur, fn) {
+    openSheet('<div class="stack"><h2 class="sh">' + title + '</h2><div class="picks">' + opts.map(function (o) {
+      return '<button data-v="' + o[0] + '"' + (o[0] === cur ? ' class="on"' : '') + '><b>' + o[1] + '</b>' + (o[2] ? '<span>' + o[2] + '</span>' : '') + '</button>';
+    }).join("") + '</div></div>');
+    sheetContent.querySelectorAll(".picks button").forEach(function (b) {
+      b.onclick = function () { fn(+b.dataset.v); closeSheet(); };
+    });
+  }
+  function bindFilter(rerender) {
+    $("#f-lv").onclick = function () {
+      pick("급수 선택", LEVELS.map(function (l) {
+        var n = WORDS.filter(inLv(l)).length;
+        return [l, "HSK " + l + "급", "단어 " + n + "개"];
+      }), S.lv, function (v) { S.lv = v; save(); rerender(); });
+    };
+    $("#f-per").onclick = function () {
+      pick("하루 새 단어", [5, 10, 15, 20, 30].map(function (n) { return [n, n + "개", n <= 10 ? "가볍게" : n <= 20 ? "꾸준히" : "집중"]; }),
+        S.set.perDay, function (v) { S.set.perDay = v; save(); rerender(); });
+    };
   }
   function newToday() { var e = S.log[today()]; return (e && e.n) || 0; }
 
